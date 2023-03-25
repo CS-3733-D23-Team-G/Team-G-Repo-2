@@ -5,12 +5,12 @@ import edu.wpi.teamg.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.fxml.FXML;
 
-public class ServiceRequestController {
+public class MealServiceRequestController {
 
-  @FXML MFXButton backButton;
+  @FXML MFXButton mealBackButton;
 
   @FXML
   public void initialize() {
-    backButton.setOnMouseClicked(event -> Navigation.navigate(Screen.HOME));
+    mealBackButton.setOnMouseClicked(event -> Navigation.navigate(Screen.HOME));
   }
 }

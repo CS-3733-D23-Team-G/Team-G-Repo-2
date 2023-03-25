@@ -5,9 +5,9 @@
 <?import javafx.scene.text.Font?>
 
 
-<StackPane fx:controller="edu.wpi.teamg.controllers.ServiceRequestController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane fx:controller="edu.wpi.teamg.controllers.MealServiceRequestController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <MFXButton fx:id="backButton" text="Back">
+      <MFXButton fx:id="mealBackButton" text="Back">
          <font>
             <Font name="Nunito Sans Regular" size="16.0" />
          </font>
