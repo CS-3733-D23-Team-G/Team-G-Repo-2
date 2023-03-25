@@ -13,7 +13,7 @@
             <MFXButton fx:id="mealButton" layoutX="54.0" layoutY="78.0" text="Request a Meal" />
             <MFXButton fx:id="roomButton" layoutX="208.0" layoutY="78.0" text="Request  a Conference Room" />
             <MFXButton fx:id="signagePageButton" layoutX="449.0" layoutY="78.0" text="Signage Page" />
-            <MFXButton fx:id="exitButton" layoutX="470.0" layoutY="24.0" onAction="#stop" text="Exit Application" />
+            <MFXButton fx:id="exitButton" layoutX="470.0" layoutY="24.0" onAction="#exit" text="Exit Application" />
             <Text layoutX="42.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brigham and Women's Hospital">
                <font>
                   <Font size="16.0" />
