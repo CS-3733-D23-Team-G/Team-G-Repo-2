@@ -109,7 +109,7 @@ jar {
 }
 
 def codeCoverageExcludes = [
-        'edu.wpi.teamg.App',
+        'edu.wpi.teamg.GApp',
         'edu.wpi.teamg.Main',
 ]
 
