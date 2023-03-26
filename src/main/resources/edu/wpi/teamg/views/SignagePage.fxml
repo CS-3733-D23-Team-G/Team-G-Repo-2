@@ -3,15 +3,10 @@
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamg.controllers.SignagePageController">
    <children>
       <MFXButton fx:id="signagePageBackButton" layoutX="14.0" layoutY="14.0" text="Back" />
-      <TextArea fx:id="signageText" layoutX="120.0" layoutY="99.0" prefHeight="201.0" prefWidth="359.0" text="&lt;-- Information Desk&#10;&lt;-- Emergency Room&#10;&#10;--&gt; Ear, Nose, and Throat Department&#10;--&gt; Ultrasound Labs&#10;--&gt; Restrooms&#10;">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </TextArea>
+      <TextArea editable="false" layoutX="161.0" layoutY="69.0" prefHeight="262.0" prefWidth="278.0" text="&lt;-- Information Desk&#10;&lt;-- Emergency Room&#10;&#10;--&gt; Ear, Nose, and Throat Department&#10;--&gt; Ultrasound Labs&#10;--&gt; Restrooms" />
    </children>
 </AnchorPane>
