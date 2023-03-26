@@ -28,12 +28,12 @@
             <Font name="Nunito Sans Regular" size="16.0" />
          </font>
       </MFXButton>
-      <MFXButton alignment="TOP_CENTER" opacity="0.0" rippleColor="#917d7d" text="Meal Requst" translateY="67.0" StackPane.alignment="TOP_CENTER" />
-      <MFXButton alignment="TOP_CENTER" opacity="0.0" rippleColor="#917d7d" text="Room Request" translateX="190.0" translateY="67.0" StackPane.alignment="TOP_CENTER" />
+      <MFXButton fx:id="signagePageButton" alignment="TOP_CENTER" opacity="0.0" rippleColor="#917d7d" text="signage" translateY="67.0" StackPane.alignment="TOP_CENTER" />
+      <MFXButton fx:id="roomButton" alignment="TOP_CENTER" opacity="0.0" rippleColor="#917d7d" text="Room Request" translateX="190.0" translateY="67.0" StackPane.alignment="TOP_CENTER" />
       <Line endX="100.0" rotate="90.0" scaleX="0.1" startX="-100.0" stroke="#345778" translateX="-84.0" translateY="77.0" StackPane.alignment="TOP_CENTER" />
       <Line endX="100.0" rotate="90.0" scaleX="0.1" startX="-100.0" stroke="#345778" translateX="84.0" translateY="80.0" StackPane.alignment="TOP_CENTER" />
       <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Back" translateX="-263.0" translateY="69.0" StackPane.alignment="TOP_CENTER" />
-      <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Meal Request" translateY="69.0" StackPane.alignment="TOP_CENTER" />
+      <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Signage" translateY="69.0" StackPane.alignment="TOP_CENTER" />
       <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Room Request" translateX="188.0" translateY="71.0" StackPane.alignment="TOP_CENTER" />
       <TextField scaleX="0.3" translateX="-180.0" translateY="10.0" />
       <TextField scaleX="0.3" translateX="-180.0" translateY="-40.0" />
@@ -47,7 +47,7 @@
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Notes" translateX="-255.0" translateY="135.0" />
       <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5" translateX="10.0" translateY="30.0">
          <image>
-            <Image url="@../../../../../../../../../../Desktop/2022-23/soft%20eng/green%20beans.jpg" />
+            <Image url="@../../../../../../../images/green%20beans.jpg" />
          </image>
       </ImageView>
       <Text scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Meal Options" translateX="100.0" translateY="-68.0" />
@@ -55,7 +55,7 @@
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Brown Beans " translateX="155.0" translateY="-20.0" />
       <ImageView fitHeight="150.0" fitWidth="408.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5" translateX="162.0" translateY="30.0">
          <image>
-            <Image url="@../../../../../../../../../../Desktop/2022-23/soft%20eng/rice%20and%20beans.jpg" />
+            <Image url="@../../../../../../../images/rice%20and%20beans.jpg" />
          </image>
       </ImageView>
    </children>
