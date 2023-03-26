@@ -45,9 +45,17 @@
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ordering for?" translateX="-235.0" translateY="85.0" />
       <TextField scaleX="0.3" translateX="-180.0" translateY="160.0" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Notes" translateX="-255.0" translateY="135.0" />
-      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5" translateX="10.0" translateY="30.0">
          <image>
             <Image url="@../../../../../../../../../../Desktop/2022-23/soft%20eng/green%20beans.jpg" />
+         </image>
+      </ImageView>
+      <Text scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Meal Options" translateX="100.0" translateY="-68.0" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Green beans" translateX="5.0" translateY="-20.0" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Brown Beans " translateX="155.0" translateY="-20.0" />
+      <ImageView fitHeight="150.0" fitWidth="408.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5" translateX="162.0" translateY="30.0">
+         <image>
+            <Image url="@../../../../../../../../../../Desktop/2022-23/soft%20eng/rice%20and%20beans.jpg" />
          </image>
       </ImageView>
    </children>
