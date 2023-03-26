@@ -1,16 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-
-<StackPane fx:controller="edu.wpi.teamg.controllers.MealServiceRequestController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamg.controllers.MealServiceRequestController">
    <children>
-      <MFXButton fx:id="mealBackButton" text="Back">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f1f1f1" height="400.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_LEFT">
+         <image>
+            <Image url="@../../../../../../../../../../Downloads/bwh-logo.png" />
+         </image>
+         <StackPane.margin>
+            <Insets left="10.0" top="5.0" />
+         </StackPane.margin>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#012d5a" height="50.0" stroke="BLACK" strokeType="INSIDE" translateY="55.0" width="600.0" StackPane.alignment="TOP_CENTER" />
+      <MFXButton fx:id="mealBackButton" opacity="0.0" rippleColor="#c71010" text="Back" translateX="10.0" translateY="63.0" StackPane.alignment="TOP_LEFT">
          <font>
             <Font name="Nunito Sans Regular" size="16.0" />
          </font>
       </MFXButton>
+      <MFXButton alignment="TOP_CENTER" opacity="0.0" rippleColor="#917d7d" text="Meal Requst" translateY="67.0" StackPane.alignment="TOP_CENTER" />
+      <MFXButton alignment="TOP_CENTER" opacity="0.0" rippleColor="#917d7d" text="Room Request" translateX="190.0" translateY="67.0" StackPane.alignment="TOP_CENTER" />
+      <Line endX="100.0" rotate="90.0" scaleX="0.1" startX="-100.0" stroke="#345778" translateX="-84.0" translateY="77.0" StackPane.alignment="TOP_CENTER" />
+      <Line endX="100.0" rotate="90.0" scaleX="0.1" startX="-100.0" stroke="#345778" translateX="84.0" translateY="80.0" StackPane.alignment="TOP_CENTER" />
+      <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Back" translateX="-263.0" translateY="69.0" StackPane.alignment="TOP_CENTER" />
+      <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Meal Request" translateY="69.0" StackPane.alignment="TOP_CENTER" />
+      <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Room Request" translateX="188.0" translateY="71.0" StackPane.alignment="TOP_CENTER" />
+      <TextField scaleX="0.3" translateX="-180.0" translateY="10.0" />
+      <TextField scaleX="0.3" translateX="-180.0" translateY="-40.0" />
+      <TextField scaleX="0.3" translateX="-180.0" translateY="60.0" />
+      <TextField scaleX="0.3" translateX="-180.0" translateY="110.0" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name" translateX="-255.0" translateY="-65.0" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Employee ID" translateX="-235.0" translateY="-15.0" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery Location" translateX="-224.0" translateY="35.0" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ordering for?" translateX="-235.0" translateY="85.0" />
+      <TextField scaleX="0.3" translateX="-180.0" translateY="160.0" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Notes" translateX="-255.0" translateY="135.0" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../../../Desktop/2022-23/soft%20eng/green%20beans.jpg" />
+         </image>
+      </ImageView>
    </children>
 </StackPane>
