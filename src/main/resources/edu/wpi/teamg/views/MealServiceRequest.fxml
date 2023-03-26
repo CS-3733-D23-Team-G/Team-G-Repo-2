@@ -16,7 +16,7 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f1f1f1" height="400.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
       <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_LEFT">
          <image>
-            <Image url="@../../../../../../../../../../Downloads/bwh-logo.png" />
+            <Image url="@../../../../../../../Meal%20request%20images/bwh-logo.png" />
          </image>
          <StackPane.margin>
             <Insets left="10.0" top="5.0" />
@@ -50,12 +50,12 @@
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Brown Beans " translateX="155.0" translateY="-20.0" />
       <ImageView fitHeight="150.0" fitWidth="408.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5" translateX="162.0" translateY="30.0">
          <image>
-            <Image url="@../../../../../../../images/rice%20and%20beans.jpg" />
+            <Image url="@../../../../../../../Meal%20request%20images/rice%20and%20beans.jpg" />
          </image>
       </ImageView>
       <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5" translateX="10.0" translateY="30.0">
          <image>
-            <Image url="@../../../../../../../images/green%20beans.jpg" />
+            <Image url="@../../../../../../../Meal%20request%20images/green%20beans.jpg" />
          </image>
       </ImageView>
    </children>
