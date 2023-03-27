@@ -5,7 +5,8 @@ public enum Screen {
   HOME("views/Home.fxml"),
   MEAL_REQUEST("views/MealServiceRequest.fxml"),
   ROOM_REQUEST("views/RoomServiceRequest.fxml"),
-  SIGNAGE_PAGE("views/SignagePage.fxml");
+  SIGNAGE_PAGE("views/SignagePage.fxml"),
+  MEAL_REQUEST_SUBMIT("views/MealServiceSubmission.fxml");
 
   private final String filename;
 

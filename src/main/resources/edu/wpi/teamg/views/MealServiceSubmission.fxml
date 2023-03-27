@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamg.controllers.MealServiceSubmitController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f1f1f1" height="400.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../Meal%20request%20images/bwh-logo.png" />
+         </image></ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#012d5a" height="50.0" layoutX="-2.0" layoutY="50.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
+      <MFXButton fx:id="mealBackButton" layoutX="61.0" layoutY="58.0" opacity="0.0" rippleColor="#c71010" text="Back">
+         <font>
+            <Font name="Nunito Sans Regular" size="16.0" />
+         </font>
+      </MFXButton>
+      <MFXButton fx:id="signagePageButton" alignment="TOP_CENTER" layoutX="450.0" layoutY="62.0" opacity="0.0" rippleColor="#917d7d" text="signage" />
+      <MFXButton fx:id="roomButton" alignment="TOP_CENTER" layoutX="251.0" layoutY="62.0" opacity="0.0" rippleColor="#917d7d" text="Room Request" />
+      <Line endX="100.0" layoutX="403.0" layoutY="75.0" rotate="90.0" scaleX="0.1" startX="-100.0" stroke="#345778" />
+      <Line endX="100.0" layoutX="169.0" layoutY="75.0" rotate="90.0" scaleX="0.1" startX="-100.0" stroke="#345778" />
+      <Text fill="WHITE" layoutX="59.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Back" />
+      <Text fill="WHITE" layoutX="458.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Signage" />
+      <Text fill="WHITE" layoutX="244.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Room Request" />
+      <Text layoutX="249.0" layoutY="213.0" scaleX="4.0" scaleY="4.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Food request submitted" />
+   </children>
+</AnchorPane>
