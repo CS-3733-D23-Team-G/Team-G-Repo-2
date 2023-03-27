@@ -1,9 +1,9 @@
-package edu.wpi.teamname;
+package edu.wpi.teamg;
 
 public class Main {
 
   public static void main(String[] args) {
-    App.launch(App.class, args);
+    GApp.launch(GApp.class, args);
   }
 
   // shortcut: psvm
