@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
+
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -24,13 +26,6 @@
                      </image>
                   </ImageView>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#012d5a" height="50.0" layoutY="8.0" stroke="BLACK" strokeType="INSIDE" translateY="55.0" width="600.0" />
-                  <MFXButton fx:id="mealBackButton" layoutX="38.0" layoutY="9.0" opacity="0.0" rippleColor="#c71010" text="Back" translateX="10.0" translateY="63.0">
-                     <font>
-                        <Font name="Nunito Sans Regular" size="16.0" />
-                     </font>
-                  </MFXButton>
-                  <MFXButton fx:id="signagePageButton" alignment="TOP_CENTER" layoutX="270.0" layoutY="9.0" opacity="0.0" rippleColor="#917d7d" text="signage" translateY="67.0" />
-                  <MFXButton fx:id="roomButton" alignment="TOP_CENTER" layoutX="260.0" layoutY="9.0" opacity="0.0" rippleColor="#917d7d" text="Room Request" translateX="190.0" translateY="67.0" />
                   <Line endX="100.0" layoutX="240.0" layoutY="11.0" rotate="90.0" scaleX="0.1" startX="-100.0" stroke="#345778" translateX="-84.0" translateY="77.0" />
                   <Line endX="100.0" layoutX="338.0" layoutY="9.0" rotate="90.0" scaleX="0.1" startX="-100.0" stroke="#345778" translateX="84.0" translateY="80.0" />
                   <Text fill="WHITE" layoutX="327.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Back" translateX="-263.0" translateY="69.0" />
@@ -64,6 +59,13 @@
                   <MFXTextField fx:id="mealPersonOrderingForData" layoutX="65.0" layoutY="276.0" minHeight="-Infinity" prefHeight="27.0" prefWidth="180.0" />
                   <MFXTextField fx:id="mealNotesData" layoutX="68.0" layoutY="321.0" minHeight="-Infinity" prefHeight="57.0" prefWidth="180.0" />
                   <MFXTextField fx:id="mealFoodChoice" layoutX="346.0" layoutY="290.0" minHeight="-Infinity" prefHeight="27.0" prefWidth="180.0" />
+                  <MFXButton fx:id="mealBackButton" layoutX="-5.0" opacity="0.0" prefHeight="50.0" prefWidth="149.0" rippleColor="#c71010" text="Back" translateX="10.0" translateY="63.0">
+                     <font>
+                        <Font name="Nunito Sans Regular" size="16.0" />
+                     </font>
+                  </MFXButton>
+                  <MFXButton fx:id="signagePageButton" alignment="TOP_CENTER" layoutX="160.0" layoutY="-1.0" opacity="0.0" prefHeight="44.0" prefWidth="261.0" rippleColor="#917d7d" text="signage" translateY="67.0" />
+                  <MFXButton fx:id="roomButton" alignment="TOP_CENTER" layoutX="236.0" layoutY="-1.0" opacity="0.0" prefHeight="44.0" prefWidth="171.0" rippleColor="#917d7d" text="Room Request" translateX="190.0" translateY="67.0" />
                </children>
             </AnchorPane>
          </children>

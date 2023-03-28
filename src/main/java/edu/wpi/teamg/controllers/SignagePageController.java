@@ -10,9 +10,12 @@ public class SignagePageController {
 
   @FXML MFXButton signagePageBackButton;
   @FXML TextArea signageText;
+  @FXML MFXButton mealButton;
+  @FXML MFXButton roomRequest;
 
-  @FXML
   public void initialize() {
     signagePageBackButton.setOnMouseClicked(event -> Navigation.navigate(Screen.HOME));
+    mealButton.setOnMouseClicked(event -> Navigation.navigate(Screen.MEAL_REQUEST));
+    roomRequest.setOnMouseClicked(event -> Navigation.navigate(Screen.ROOM_REQUEST));
   }
 }

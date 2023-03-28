@@ -2,11 +2,29 @@
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamg.controllers.SignagePageController">
    <children>
-      <MFXButton fx:id="signagePageBackButton" layoutX="14.0" layoutY="14.0" text="Back" />
-      <TextArea editable="false" layoutX="161.0" layoutY="69.0" prefHeight="262.0" prefWidth="278.0" text="&lt;-- Information Desk&#10;&lt;-- Emergency Room&#10;&#10;--&gt; Ear, Nose, and Throat Department&#10;--&gt; Ultrasound Labs&#10;--&gt; Restrooms" />
+      <TextArea editable="false" layoutX="162.0" layoutY="104.0" prefHeight="262.0" prefWidth="278.0" text="&lt;-- Information Desk&#10;&lt;-- Emergency Room&#10;&#10;--&gt; Ear, Nose, and Throat Department&#10;--&gt; Ultrasound Labs&#10;--&gt; Restrooms" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../Meal%20request%20images/bwh-logo.png" />
+         </image>
+      </ImageView>
+      <Rectangle fx:id="backButton" arcHeight="5.0" arcWidth="5.0" fill="#012d5a" height="50.0" layoutX="-6.0" layoutY="38.0" stroke="BLACK" strokeType="INSIDE" width="607.0" />
+      <Text fill="WHITE" layoutX="71.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Back" />
+      <Line endX="27.0" endY="-37.0" layoutX="413.0" layoutY="87.0" startX="27.0" startY="-14.0" stroke="#345778" />
+      <Line endX="27.0" endY="-37.0" layoutX="135.0" layoutY="87.0" startX="27.0" startY="-14.0" stroke="#345778" />
+      <MFXButton fx:id="roomRequest" layoutX="165.0" layoutY="39.0" opacity="0.0" prefHeight="50.0" prefWidth="271.0" text="Room Request" />
+      <Text disable="true" fill="WHITE" layoutX="261.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Room Request" />
+      <Text disable="true" fill="WHITE" layoutX="485.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Meal Request" />
+      <MFXButton fx:id="signagePageBackButton" layoutX="8.0" layoutY="39.0" opacity="0.0" prefHeight="44.0" prefWidth="154.0" text="Back" />
+      <MFXButton fx:id="mealButton" layoutX="444.0" layoutY="41.0" opacity="0.0" prefHeight="44.0" prefWidth="154.0" />
    </children>
 </AnchorPane>
