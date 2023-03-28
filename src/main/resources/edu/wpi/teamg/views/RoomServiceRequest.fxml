@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
-<?import javafx.scene.control.TextField?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
@@ -52,22 +52,22 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <TextField layoutX="24.0" layoutY="163.0" prefHeight="26.0" prefWidth="172.0" />
-      <TextField layoutX="24.0" layoutY="228.0" prefHeight="26.0" prefWidth="172.0" />
-      <TextField layoutX="24.0" layoutY="296.0" prefHeight="26.0" prefWidth="172.0" />
-      <TextField layoutX="305.0" layoutY="163.0" prefHeight="26.0" prefWidth="172.0" />
-      <TextField layoutX="305.0" layoutY="228.0" prefHeight="26.0" prefWidth="172.0" />
       <Text layoutX="305.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Room Number">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <TextField layoutX="305.0" layoutY="296.0" prefHeight="26.0" prefWidth="172.0" />
       <Rectangle arcHeight="5.0" fill="#012d5a" height="45.0" layoutX="85.0" layoutY="341.0" stroke="TRANSPARENT" strokeType="INSIDE" width="132.0" />
       <Rectangle arcHeight="5.0" fill="#012d5a" height="45.0" layoutX="305.0" layoutY="341.0" stroke="TRANSPARENT" strokeType="INSIDE" width="132.0" />
       <MFXButton fx:id="roomClearAll" layoutX="85.0" layoutY="341.0" opacity="0.0" prefHeight="45.0" prefWidth="132.0" rippleColor="#bdbdbd00" text="Clear All Fields" />
-      <MFXButton id="roomConfirm" fx:id="roomConfirm" layoutX="305.0" layoutY="341.0" opacity="0.0" prefHeight="45.0" prefWidth="132.0" rippleColor="#bdbdbd00" text="Submit" />
+      <MFXButton id="roomConfirm" fx:id="roomConfirm" layoutX="305.0" layoutY="341.0" onAction="#storeConRoomValues" opacity="0.0" prefHeight="45.0" prefWidth="132.0" rippleColor="#bdbdbd00" text="Submit" />
       <Text disable="true" fill="WHITE" layoutX="352.0" layoutY="368.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Submit" />
       <Text disable="true" fill="WHITE" layoutX="112.0" layoutY="368.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Clear All Fields" />
+      <MFXTextField fx:id="roomEmployeeNameData" layoutX="26.0" layoutY="164.0" minHeight="-Infinity" prefHeight="26.0" prefWidth="172.0" />
+      <MFXTextField fx:id="roomEmployeeIDData" layoutX="25.0" layoutY="229.0" minHeight="-Infinity" prefHeight="22.0" prefWidth="172.0" />
+      <MFXTextField fx:id="roomMeetingPurposeData" layoutX="25.0" layoutY="297.0" minHeight="-Infinity" prefHeight="22.0" prefWidth="172.0" />
+      <MFXTextField fx:id="roomDateData" layoutX="299.0" layoutY="166.0" minHeight="-Infinity" prefHeight="22.0" prefWidth="172.0" />
+      <MFXTextField fx:id="roomNumberData" layoutX="299.0" layoutY="297.0" minHeight="-Infinity" prefHeight="22.0" prefWidth="172.0" />
+      <MFXTextField fx:id="roomTimeData" layoutX="299.0" layoutY="229.0" minHeight="-Infinity" prefHeight="22.0" prefWidth="172.0" />
    </children>
 </AnchorPane>
