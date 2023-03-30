@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import io.github.palexdev.materialfx.controls.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamg.controllers.MealServiceRequestController">
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamg.controllers.MealServiceRequestController">
    <children>
       <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
          <children>
@@ -20,27 +26,15 @@
                      </image>
                   </ImageView>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#012d5a" height="50.0" layoutY="8.0" stroke="BLACK" strokeType="INSIDE" translateY="55.0" width="600.0" />
-                  <MFXButton fx:id="mealBackButton" layoutX="38.0" layoutY="9.0" opacity="0.0" rippleColor="#c71010" text="Back" translateX="10.0" translateY="63.0">
-                     <font>
-                        <Font name="Nunito Sans Regular" size="16.0" />
-                     </font>
-                  </MFXButton>
-                  <MFXButton fx:id="signagePageButton" alignment="TOP_CENTER" layoutX="270.0" layoutY="9.0" opacity="0.0" rippleColor="#917d7d" text="signage" translateY="67.0" />
-                  <MFXButton fx:id="roomButton" alignment="TOP_CENTER" layoutX="260.0" layoutY="9.0" opacity="0.0" rippleColor="#917d7d" text="Room Request" translateX="190.0" translateY="67.0" />
                   <Line endX="100.0" layoutX="240.0" layoutY="11.0" rotate="90.0" scaleX="0.1" startX="-100.0" stroke="#345778" translateX="-84.0" translateY="77.0" />
                   <Line endX="100.0" layoutX="338.0" layoutY="9.0" rotate="90.0" scaleX="0.1" startX="-100.0" stroke="#345778" translateX="84.0" translateY="80.0" />
                   <Text fill="WHITE" layoutX="327.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Back" translateX="-263.0" translateY="69.0" />
                   <Text fill="WHITE" layoutX="279.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Signage" translateY="69.0" />
                   <Text fill="WHITE" layoutX="278.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Room Request" translateX="188.0" translateY="71.0" />
-                  <TextField layoutX="245.0" layoutY="230.0" maxWidth="-Infinity" prefWidth="180.0" translateX="-180.0" translateY="10.0" />
-                  <TextField layoutX="245.0" layoutY="238.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="180.0" translateX="-180.0" translateY="-40.0" />
-                  <TextField layoutX="245.0" layoutY="219.0" maxWidth="-Infinity" prefWidth="180.0" translateX="-180.0" translateY="60.0" />
-                  <TextField layoutX="245.0" layoutY="212.0" maxWidth="-Infinity" prefWidth="180.0" translateX="-180.0" translateY="110.0" />
-                  <Text layoutX="301.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee ID" translateX="-235.0" translateY="-15.0" />
-                  <Text layoutX="288.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery Location" translateX="-224.0" translateY="35.0" />
-                  <Text layoutX="298.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ordering for?" translateX="-235.0" translateY="85.0" />
-                  <TextField layoutX="245.0" layoutY="-1.0" maxWidth="-Infinity" prefWidth="180.0" translateX="-180.0" translateY="160.0" />
-                  <Text layoutX="327.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Notes" translateX="-255.0" translateY="135.0" />
+                  <Text layoutX="301.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee ID" translateX="-235.0" translateY="-15.0" />
+                  <Text layoutX="291.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery Location" translateX="-224.0" translateY="35.0" />
+                  <Text layoutX="303.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Person Ordering For" translateX="-235.0" translateY="85.0" />
+                  <Text layoutX="327.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Notes" translateX="-255.0" translateY="135.0" />
                   <Text layoutX="300.0" layoutY="228.0" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Meal Options" translateX="100.0" translateY="-68.0" />
                   <Text layoutX="318.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Green beans" translateX="5.0" translateY="-20.0" />
                   <Text layoutX="308.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brown Beans " translateX="155.0" translateY="-20.0" />
@@ -49,16 +43,29 @@
                         <Image url="@../../../../../../../Meal%20request%20images/rice%20and%20beans.jpg" />
                      </image>
                   </ImageView>
-                  <MFXButton fx:id="mealSubmitButton" layoutX="106.0" layoutY="360.0" text="Submit" />
-                  <Text layoutX="327.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" translateX="-255.0" translateY="-65.0" />
+                  <MFXButton fx:id="mealSubmitButton" layoutX="286.0" layoutY="350.0" onAction="#storeMealValues" text="Submit" />
+                  <Text layoutX="322.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" translateX="-255.0" translateY="-65.0" />
                   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="261.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5" translateX="10.0" translateY="30.0">
                      <image>
                         <Image url="@../../../../../../../Meal%20request%20images/green%20beans.jpg" />
                      </image>
                   </ImageView>
-                  <Text layoutX="392.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="choose one" />
+                  <Text layoutX="404.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="choose one" />
                   <MFXButton layoutX="316.0" layoutY="183.0" opacity="0.0" prefHeight="105.0" prefWidth="113.0" />
                   <MFXButton layoutX="453.0" layoutY="183.0" opacity="0.0" prefHeight="115.0" prefWidth="122.0" />
+                  <MFXTextField fx:id="mealNameData" layoutX="63.0" layoutY="147.0" minHeight="-Infinity" prefHeight="27.0" prefWidth="180.0" />
+                  <MFXTextField fx:id="mealEmployeeIDData" layoutX="65.0" layoutY="190.0" minHeight="-Infinity" prefHeight="27.0" prefWidth="180.0" />
+                  <MFXTextField fx:id="mealDeliveryLocationData" layoutX="65.0" layoutY="234.0" minHeight="-Infinity" prefHeight="27.0" prefWidth="180.0" />
+                  <MFXTextField fx:id="mealPersonOrderingForData" layoutX="65.0" layoutY="276.0" minHeight="-Infinity" prefHeight="27.0" prefWidth="180.0" />
+                  <MFXTextField fx:id="mealNotesData" layoutX="68.0" layoutY="321.0" minHeight="-Infinity" prefHeight="57.0" prefWidth="180.0" />
+                  <MFXTextField fx:id="mealFoodChoice" layoutX="346.0" layoutY="290.0" minHeight="-Infinity" prefHeight="27.0" prefWidth="180.0" />
+                  <MFXButton fx:id="mealBackButton" layoutX="-5.0" opacity="0.0" prefHeight="50.0" prefWidth="149.0" rippleColor="#c71010" text="Back" translateX="10.0" translateY="63.0">
+                     <font>
+                        <Font name="Nunito Sans Regular" size="16.0" />
+                     </font>
+                  </MFXButton>
+                  <MFXButton fx:id="signagePageButton" alignment="TOP_CENTER" layoutX="160.0" layoutY="-1.0" opacity="0.0" prefHeight="44.0" prefWidth="261.0" rippleColor="#917d7d" text="signage" translateY="67.0" />
+                  <MFXButton fx:id="roomButton" alignment="TOP_CENTER" layoutX="236.0" layoutY="-1.0" opacity="0.0" prefHeight="44.0" prefWidth="171.0" rippleColor="#917d7d" text="Room Request" translateX="190.0" translateY="67.0" />
                </children>
             </AnchorPane>
          </children>
