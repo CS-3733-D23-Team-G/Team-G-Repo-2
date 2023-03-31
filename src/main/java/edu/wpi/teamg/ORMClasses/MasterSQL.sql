@@ -1,3 +1,8 @@
+drop table if exists proto2.ConferenceRoomRequest;
+drop table if exists proto2.MealRequest;
+drop table if exists proto2.Account;
+drop table if exists proto2.Employee;
+drop table if exists proto2.Request;
 drop table if exists proto2.Move;
 drop table if exists proto2.Edge;
 drop table if exists proto2.LocationName;
@@ -33,3 +38,49 @@ create table proto2.Move(
                             foreign key (nodeID) references proto2.Node(nodeID),
                             foreign key (longName) references proto2.LocationName(longName)
 );
+
+create type enum1 as enum('blank', 'processing', 'done');
+
+create table proto2.Employee(
+                    empID int primary key,
+                    firstName varchar(20),
+                    lastName varchar(20),
+                    email varchar(254),
+                    can_serve varchar(20)
+);
+
+create table proto2.Account(
+    empID int primary key,
+    password varchar(100),
+    is_admin boolean,
+    foreign key (empID) references proto2.Employee(empID)
+);
+
+create table proto2.Request(
+                               reqID int primary key,
+                               location int,
+                               serv_by int,
+                               status enum1,
+                               foreign key (location) references proto2.node(nodeID),
+                               foreign key (serv_by) references proto2.Employee(empID)
+);
+
+create table proto2.ConferenceRoomRequest(
+                               reqID int primary key,
+                               meeting_date date,
+                               meeting_time time,
+                               purpose varchar(255),
+                               foreign key (reqID) references proto2.Request(reqID)
+);
+
+create table proto2.MealRequest(
+                                 reqID int primary key,
+                                 recipient varchar(50),
+                                 order varchar(255),
+                                 note varchar(255),
+                                 foreign key (reqID) references proto2.Request(reqID)
+);
+
+
+
+
