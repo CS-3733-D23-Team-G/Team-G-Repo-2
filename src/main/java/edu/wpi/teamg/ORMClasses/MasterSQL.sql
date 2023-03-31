@@ -1,3 +1,4 @@
+drop type if exists proto2.enum1;
 drop table if exists proto2.ConferenceRoomRequest;
 drop table if exists proto2.MealRequest;
 drop table if exists proto2.Account;
@@ -39,7 +40,7 @@ create table proto2.Move(
                             foreign key (longName) references proto2.LocationName(longName)
 );
 
-create type enum1 as enum('blank', 'processing', 'done');
+create type proto2.enum1 as enum('blank', 'processing', 'done');
 
 create table proto2.Employee(
                     empID int primary key,
@@ -60,7 +61,7 @@ create table proto2.Request(
                                reqID int primary key,
                                location int,
                                serv_by int,
-                               status enum1,
+                               status proto2.enum1,
                                foreign key (location) references proto2.node(nodeID),
                                foreign key (serv_by) references proto2.Employee(empID)
 );
@@ -76,7 +77,7 @@ create table proto2.ConferenceRoomRequest(
 create table proto2.MealRequest(
                                  reqID int primary key,
                                  recipient varchar(50),
-                                 order varchar(255),
+                                 "order" varchar(255),
                                  note varchar(255),
                                  foreign key (reqID) references proto2.Request(reqID)
 );

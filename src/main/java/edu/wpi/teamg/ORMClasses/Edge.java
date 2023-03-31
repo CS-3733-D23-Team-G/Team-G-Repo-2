@@ -1,31 +1,15 @@
 package edu.wpi.teamg.ORMClasses;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class Edge {
+
+    @Getter @Setter
     private Node startNode;
+    @Getter @Setter
     private Node endNode;
+    @Getter @Setter
     private String edgeID = startNode.getNodeID()+"_"+endNode.getNodeID();
 
-    Node getStartNode() {
-        return startNode;
-    }
-
-    void setStartNode(Node startNode) {
-        this.startNode = startNode;
-    }
-
-    Node getEndNode() {
-        return endNode;
-    }
-
-    void setEndNode(Node endNode) {
-        this.endNode = endNode;
-    }
-
-    String getEdgeID() {
-        return edgeID;
-    }
-
-    void setEdgeID(String edgeID) {
-        this.edgeID = edgeID;
-    }
 }

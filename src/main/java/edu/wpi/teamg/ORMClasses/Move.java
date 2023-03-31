@@ -1,23 +1,13 @@
 package edu.wpi.teamg.ORMClasses;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class Move {
 
+    @Getter @Setter
     private Node node;
+    @Getter @Setter
     private LocationName longName;
 
-    public Node getNode() {
-        return node;
-    }
-
-    public void setNode(Node node) {
-        this.node = node;
-    }
-
-    public LocationName getLongName() {
-        return longName;
-    }
-
-    public void setLongName(LocationName longName) {
-        this.longName = longName;
-    }
 }
