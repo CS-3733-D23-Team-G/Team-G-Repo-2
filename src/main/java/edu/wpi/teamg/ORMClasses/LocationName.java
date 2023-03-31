@@ -1,31 +1,31 @@
-package edu.wpi.teamname.ORMClasses;
+package edu.wpi.teamg.ORMClasses;
 
 public class LocationName {
     private String longName;
     private String shortName;
     private String nodeType;
 
-    public String getLongName() {
+    String getLongName() {
         return longName;
     }
 
-    public void setLongName(String longName) {
+    void setLongName(String longName) {
         this.longName = longName;
     }
 
-    public String getShortName() {
+    String getShortName() {
         return shortName;
     }
 
-    public void setShortName(String shortName) {
+    void setShortName(String shortName) {
         this.shortName = shortName;
     }
 
-    public String getNodeType() {
+    String getNodeType() {
         return nodeType;
     }
 
-    public void setNodeType(String nodeType) {
+    void setNodeType(String nodeType) {
         this.nodeType = nodeType;
     }
 }

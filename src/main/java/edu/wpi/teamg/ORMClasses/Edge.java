@@ -1,31 +1,31 @@
-package edu.wpi.teamname.ORMClasses;
+package edu.wpi.teamg.ORMClasses;
 
 public class Edge {
     private Node startNode;
     private Node endNode;
     private String edgeID = startNode.getNodeID()+"_"+endNode.getNodeID();
 
-    public Node getStartNode() {
+    Node getStartNode() {
         return startNode;
     }
 
-    public void setStartNode(Node startNode) {
+    void setStartNode(Node startNode) {
         this.startNode = startNode;
     }
 
-    public Node getEndNode() {
+    Node getEndNode() {
         return endNode;
     }
 
-    public void setEndNode(Node endNode) {
+    void setEndNode(Node endNode) {
         this.endNode = endNode;
     }
 
-    public String getEdgeID() {
+    String getEdgeID() {
         return edgeID;
     }
 
-    public void setEdgeID(String edgeID) {
+    void setEdgeID(String edgeID) {
         this.edgeID = edgeID;
     }
 }

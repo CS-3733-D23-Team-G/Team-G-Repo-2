@@ -1,6 +1,6 @@
-package edu.wpi.teamname.navigation;
+package edu.wpi.teamg.navigation;
 
-import edu.wpi.teamname.App;
+import edu.wpi.teamg.App;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 
