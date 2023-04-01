@@ -2,7 +2,6 @@ package edu.wpi.teamname.controllers;
 
 import edu.wpi.teamname.navigation.Navigation;
 import edu.wpi.teamname.navigation.Screen;
-import edu.wpi.teamname.requestforms.ConRoomRequestForm;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.application.Platform;
@@ -21,7 +20,7 @@ public class ConRoomRequestController {
   @FXML MFXButton roomClearAll;
 
   // Text Fields
-  @FXML MFXTextField roomEmployeeNameData;
+
   @FXML MFXTextField roomEmployeeIDData;
   @FXML MFXTextField roomMeetingPurposeData;
   @FXML MFXTextField roomDateData;
@@ -44,7 +43,7 @@ public class ConRoomRequestController {
     exitButton.setOnMouseClicked(event -> roomExit());
     roomClearAll.setOnMouseClicked(event -> Navigation.navigate(Screen.ROOM_REQUEST));
     roomConfirm.setOnMouseClicked(event -> Navigation.navigate(Screen.ROOM_REQUEST_SUBMIT));
-    roomEmployeeNameData.getText();
+    // roomEmployeeNameData.getText();
     roomEmployeeIDData.getText();
     roomMeetingPurposeData.getText();
     roomDateData.getText();
@@ -72,58 +71,5 @@ public class ConRoomRequestController {
 
   public void roomExit() {
     Platform.exit();
-  }
-
-  public ConRoomRequestForm storeConRoomValues() {
-    String employeeName = roomEmployeeNameData.getText();
-    String employeeID = roomEmployeeIDData.getText();
-    String meetingPurpose = roomMeetingPurposeData.getText();
-    String scheduledDate = roomDateData.getText();
-    String scheduledTime = roomTimeData.getText();
-    String scheduledRoomNumber = roomNumberData.getText();
-
-    System.out.println(
-        "Answers: "
-            + employeeName
-            + " "
-            + employeeID
-            + " "
-            + meetingPurpose
-            + " "
-            + scheduledDate
-            + " "
-            + scheduledTime
-            + " "
-            + scheduledRoomNumber
-            + " ");
-
-    ConRoomRequestForm form =
-        new ConRoomRequestForm(
-            employeeName,
-            employeeID,
-            meetingPurpose,
-            scheduledDate,
-            scheduledTime,
-            scheduledRoomNumber);
-
-    printConRoomForms(form);
-
-    return form;
-  }
-
-  public void printConRoomForms(ConRoomRequestForm form) {
-
-    System.out.println(
-        form.employeeName
-            + " "
-            + form.employeeID
-            + " "
-            + form.meetingPurpose
-            + " "
-            + form.roomDate
-            + " "
-            + form.roomTime
-            + " "
-            + form.roomNumber);
   }
 }
