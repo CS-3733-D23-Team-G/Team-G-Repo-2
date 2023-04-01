@@ -1,5 +1,6 @@
 package edu.wpi.teamg;
 
+import edu.wpi.teamg.DAOs.LocationDAO;
 import edu.wpi.teamg.ORMClasses.Node;
 import java.sql.*;
 import java.util.ArrayList;
