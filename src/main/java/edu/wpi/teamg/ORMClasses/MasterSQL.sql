@@ -57,29 +57,28 @@ create table proto2.Account(
     foreign key (empID) references proto2.Employee(empID)
 );
 
-create table proto2.Request(
+create table proto2.ConferenceRoomRequest(
                                reqID int primary key,
                                location int,
                                serv_by int,
                                status proto2.enum1,
+                               meeting_date date,
+                               meeting_time time,
+                               purpose varchar(255),
                                foreign key (location) references proto2.node(nodeID),
                                foreign key (serv_by) references proto2.Employee(empID)
 );
 
-create table proto2.ConferenceRoomRequest(
-                               reqID int primary key,
-                               meeting_date date,
-                               meeting_time time,
-                               purpose varchar(255),
-                               foreign key (reqID) references proto2.Request(reqID)
-);
-
 create table proto2.MealRequest(
                                  reqID int primary key,
+                                 location int,
+                                 serv_by int,
+                                 status proto2.enum1,
                                  recipient varchar(50),
                                  "order" varchar(255),
                                  note varchar(255),
-                                 foreign key (reqID) references proto2.Request(reqID)
+                                 foreign key (location) references proto2.node(nodeID),
+                                 foreign key (serv_by) references proto2.Employee(empID)
 );
 
 
