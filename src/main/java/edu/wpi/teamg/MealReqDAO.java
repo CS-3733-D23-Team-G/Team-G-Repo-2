@@ -1,4 +1,3 @@
 package edu.wpi.teamg;
 
-public interface MealReqDAO extends RequestDAO{
-}
+public interface MealReqDAO extends RequestDAO {}

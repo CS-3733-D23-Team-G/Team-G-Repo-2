@@ -5,13 +5,9 @@ import lombok.Setter;
 
 public class Move {
 
-    @Getter @Setter
-    private Node node;
-    @Getter @Setter
-    private LocationName longName;
-    @Getter @Setter
-    private String date;
+  @Getter @Setter private Node node;
+  @Getter @Setter private LocationName longName;
+  @Getter @Setter private String date;
 
-    public Move() {
-    }
+  public Move() {}
 }

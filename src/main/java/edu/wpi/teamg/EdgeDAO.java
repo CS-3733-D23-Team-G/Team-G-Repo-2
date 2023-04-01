@@ -1,4 +1,3 @@
 package edu.wpi.teamg;
 
-public interface EdgeDAO extends LocationDAO {
-}
+public interface EdgeDAO extends LocationDAO {}
