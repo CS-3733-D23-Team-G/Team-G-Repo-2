@@ -39,4 +39,12 @@ public class DBConnection {
             return null;
         }
     }
+
+    public void closeConnection(){
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
