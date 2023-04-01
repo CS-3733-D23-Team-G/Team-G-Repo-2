@@ -50,12 +50,12 @@
                         <Image url="@../Images/01_thefirstfloor.png" />
                      </image>
                   </ImageView>
-                  <MFXTextField layoutX="28.0" layoutY="49.0" maxHeight="45.0" minHeight="30.0" prefHeight="30.0" prefWidth="167.0" />
+                  <MFXTextField fx:id="startLoc" layoutX="28.0" layoutY="49.0" maxHeight="45.0" minHeight="30.0" prefHeight="30.0" prefWidth="167.0" />
                   <Text layoutX="28.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Starting Location:" />
                     <TextArea editable="false" layoutX="28.0" layoutY="230.0" prefHeight="77.0" prefWidth="131.0" text="&lt;-- Information Desk&#10;&lt;-- Emergency Room&#10;--&gt; Ultrasound Labs&#10;--&gt; Restrooms" />
-                  <MFXTextField layoutX="28.0" layoutY="120.0" maxHeight="45.0" minHeight="30.0" prefHeight="30.0" prefWidth="167.0" />
+                  <MFXTextField fx:id="endLoc" layoutX="28.0" layoutY="120.0" maxHeight="45.0" minHeight="30.0" prefHeight="30.0" prefWidth="167.0" />
                   <Text layoutX="30.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ending Location:" />
-                  <MFXButton layoutX="28.0" layoutY="180.0" prefHeight="25.0" prefWidth="167.0" style="-fx-background-color: White;" text="Get Path" />
+                  <MFXButton fx:id="pathFindButton" layoutX="28.0" layoutY="180.0" prefHeight="25.0" prefWidth="167.0" style="-fx-background-color: White;" text="Get Path" />
                   <MFXButton layoutX="483.0" layoutY="31.0" prefHeight="25.0" prefWidth="167.0" style="-fx-background-color: White;" text="Floor 2" />
                   <MFXButton layoutX="280.0" layoutY="31.0" prefHeight="25.0" prefWidth="167.0" style="-fx-background-color: White;" text="Floor 1" />
                   <MFXButton layoutX="706.0" layoutY="31.0" prefHeight="25.0" prefWidth="167.0" style="-fx-background-color: White;" text="Floor 3" />
