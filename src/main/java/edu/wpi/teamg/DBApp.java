@@ -11,14 +11,10 @@ public class DBApp {
 
     NodeDAO nodedao = new NodeDAO();
 
-    nodedao.setConnection();
-
     List<Node> allNodes = nodedao.getAll();
 
     for (Node node : allNodes) {
       System.out.println("id = " + node.getNodeID());
     }
-
-    nodedao.closeConnection();
   }
 }

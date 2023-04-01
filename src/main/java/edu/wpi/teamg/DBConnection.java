@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import org.yaml.snakeyaml.Yaml;
 
-public class DBConnection implements DAO {
+public class DBConnection{
   static Connection connection;
 
   public void setConnection() {
@@ -46,5 +46,9 @@ public class DBConnection implements DAO {
     } catch (SQLException e) {
       throw new RuntimeException(e);
     }
+  }
+
+  public static Connection getConnection() {
+    return connection;
   }
 }
