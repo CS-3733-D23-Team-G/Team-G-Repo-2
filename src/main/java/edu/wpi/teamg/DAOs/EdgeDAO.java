@@ -2,6 +2,7 @@ package edu.wpi.teamg.DAOs;
 
 import edu.wpi.teamg.DBConnection;
 import edu.wpi.teamg.ORMClasses.Edge;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -47,10 +48,23 @@ public class EdgeDAO implements LocationDAO {
   public void update(Object obj) throws SQLException {}
 
   @Override
-  public void insert(Object obj) throws SQLException {}
+  public void insert(Object obj) throws SQLException {
+    connection.setConnection();
+    sql = "";
+    sql= "INSERT INTO teamgdb.proto2.edge (startnode, endnode)" +
+            "VALUES (?,?)";
+    PreparedStatement ps = connection.getConnection().prepareStatement(sql);
+    connection.closeConnection();
+  }
 
   @Override
-  public void delete(Object obj) throws SQLException {}
+  public void delete(Object obj) throws SQLException {
+    connection.setConnection();
+    sql = "";
+    sql = "DELETE FROM teamgdb.proto2.edge WHERE startnode = ? AND endnode = ?";
+    PreparedStatement ps = connection.getConnection().prepareStatement(sql);
+    connection.closeConnection();
+  }
 
   @Override
   public void importCSV() throws SQLException {}
