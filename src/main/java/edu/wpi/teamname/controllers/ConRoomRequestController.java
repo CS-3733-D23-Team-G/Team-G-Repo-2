@@ -6,7 +6,10 @@ import edu.wpi.teamname.requestforms.ConRoomRequestForm;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 
 public class ConRoomRequestController {
 
@@ -24,6 +27,15 @@ public class ConRoomRequestController {
   @FXML MFXTextField roomDateData;
   @FXML MFXTextField roomTimeData;
   @FXML MFXTextField roomNumberData;
+  @FXML ChoiceBox<String> serviceRequestChoiceBox;
+
+  ObservableList<String> list =
+      FXCollections.observableArrayList(
+          "Conference Room Request Form",
+          "Flowers Request Form",
+          "Furniture Request Form",
+          "Meal Request Form",
+          "Office Supplies Request Form");
 
   @FXML
   public void initialize() {
@@ -38,6 +50,24 @@ public class ConRoomRequestController {
     roomDateData.getText();
     roomTimeData.getText();
     roomNumberData.getText();
+    serviceRequestChoiceBox.setItems(list);
+    serviceRequestChoiceBox.setOnAction(event -> loadServiceRequestForm());
+  }
+
+  public void loadServiceRequestForm() {
+    if (serviceRequestChoiceBox.getValue().equals("Meal Request Form")) {
+      Navigation.navigate(Screen.MEAL_REQUEST);
+    } else if (serviceRequestChoiceBox.getValue().equals("Furniture Request Form")) {
+      Navigation.navigate(Screen.FURNITURE_REQUEST);
+    } else if (serviceRequestChoiceBox.getValue().equals("Conference Room Request Form")) {
+      Navigation.navigate(Screen.ROOM_REQUEST);
+    } else if (serviceRequestChoiceBox.getValue().equals("Flowers Request Form")) {
+      Navigation.navigate(Screen.FLOWERS_REQUEST);
+    } else if (serviceRequestChoiceBox.getValue().equals("Office Supplies Request Form")) {
+      Navigation.navigate(Screen.SUPPLIES_REQUEST);
+    } else {
+      return;
+    }
   }
 
   public void roomExit() {

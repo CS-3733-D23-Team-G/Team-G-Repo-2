@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
-<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
@@ -16,11 +15,6 @@
             <Rectangle arcHeight="5.0" fill="#f1f1f1" height="400.0" stroke="TRANSPARENT" strokeType="INSIDE" width="600.0" />
             <Rectangle arcHeight="5.0" fill="#012d5a" height="64.0" layoutY="40.0" stroke="TRANSPARENT" strokeType="INSIDE" width="600.0" />
             <MFXButton fx:id="backToHomeButton" layoutY="39.0" opacity="0.0" prefHeight="64.0" prefWidth="184.0" text="Return to Home Button" />
-            <MFXComboBox fx:id="serviceRequestComboBox" layoutX="187.0" layoutY="45.0" prefHeight="58.0" prefWidth="219.0" promptText="Service Requests">
-               <textFill>
-                  <Color red="1.0" green="1.0" blue="1.0" />
-               </textFill>
-            </MFXComboBox>
             <MFXButton fx:id="signagePageButton" layoutX="416.0" layoutY="40.0" opacity="0.0" prefHeight="64.0" prefWidth="184.0" text="Signage Page Button" />
             <MFXButton fx:id="exitButton" layoutX="476.0" layoutY="7.0" opacity="0.0" prefHeight="27.0" prefWidth="97.0" text="Exit Application" />
             <Line endX="48.0" endY="-163.5" layoutX="139.0" layoutY="215.0" startX="48.0" startY="-120.5" stroke="#345871" strokeWidth="2.0" />
@@ -39,6 +33,8 @@
             <MFXButton fx:id="homeToOffSuppConfirm" layoutX="289.0" layoutY="188.0" text="OfficeSuppliesRequestConfirmation" />
             <MFXButton fx:id="homeToFurn" layoutX="289.0" layoutY="225.0" text="FurnitureRequestPage" />
             <MFXButton fx:id="homeToFurnConfirm" layoutX="289.0" layoutY="264.0" text="FurnitureRequestPageConfirmation" />
+            <ChoiceBox fx:id="serviceRequestChoiceBox" layoutX="192.0" layoutY="40.0" opacity="0.0" prefHeight="64.0" prefWidth="214.0" />
+            <Text disable="true" fill="WHITE" layoutX="237.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service Request Forms" />
          </children>
       </AnchorPane>
    </children>
