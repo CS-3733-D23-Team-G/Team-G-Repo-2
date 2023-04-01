@@ -15,7 +15,7 @@ public class NodeDAO implements LocationDAO {
     try {
       connection =
           DriverManager.getConnection(
-              "jdbc:postgresql://database.cs.wpi.edu:5432/teamgdb", "teamg", "teamg70");
+              "jdbc:postgresql://database.cs.wpi.edu:5432/teamgdb", "teamg", "password");
       System.out.print(" Successfully connect to the database!\n");
     } catch (SQLException e) {
       //      e.printStackTrace();
