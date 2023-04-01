@@ -6,7 +6,10 @@ import edu.wpi.teamname.requestforms.MealRequestForm;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 
 public class MealRequestController {
   @FXML MFXButton mealSubmitButton;
@@ -22,6 +25,16 @@ public class MealRequestController {
   @FXML MFXTextField mealNotesData;
   @FXML MFXTextField mealFoodChoice;
 
+  @FXML ChoiceBox<String> serviceRequestChoiceBox;
+
+  ObservableList<String> list =
+      FXCollections.observableArrayList(
+          "Conference Room Request Form",
+          "Flowers Request Form",
+          "Furniture Request Form",
+          "Meal Request Form",
+          "Office Supplies Request Form");
+
   @FXML
   public void initialize() {
     mealSubmitButton.setOnMouseClicked(event -> Navigation.navigate(Screen.MEAL_REQUEST_SUBMIT));
@@ -35,10 +48,28 @@ public class MealRequestController {
     mealPersonOrderingForData.getText();
     mealNotesData.getText();
     mealFoodChoice.getText();
+    serviceRequestChoiceBox.setItems(list);
+    serviceRequestChoiceBox.setOnAction(event -> loadServiceRequestForm());
   }
 
   public void exit() {
     Platform.exit();
+  }
+
+  public void loadServiceRequestForm() {
+    if (serviceRequestChoiceBox.getValue().equals("Meal Request Form")) {
+      Navigation.navigate(Screen.MEAL_REQUEST);
+    } else if (serviceRequestChoiceBox.getValue().equals("Furniture Request Form")) {
+      Navigation.navigate(Screen.FURNITURE_REQUEST);
+    } else if (serviceRequestChoiceBox.getValue().equals("Conference Room Request Form")) {
+      Navigation.navigate(Screen.ROOM_REQUEST);
+    } else if (serviceRequestChoiceBox.getValue().equals("Flowers Request Form")) {
+      Navigation.navigate(Screen.FLOWERS_REQUEST);
+    } else if (serviceRequestChoiceBox.getValue().equals("Office Supplies Request Form")) {
+      Navigation.navigate(Screen.SUPPLIES_REQUEST);
+    } else {
+      return;
+    }
   }
 
   public MealRequestForm storeMealValues() {
