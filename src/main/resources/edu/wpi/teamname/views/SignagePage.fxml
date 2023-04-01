@@ -47,7 +47,7 @@
                 <children>
                   <ImageView fitHeight="566.0" fitWidth="940.0" layoutX="280.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../../../../../../Downloads/hospitalmaps%20(1)/01_thefirstfloor.png" />
+                        <Image url="@../Images/01_thefirstfloor.png" />
                      </image>
                   </ImageView>
                   <MFXTextField layoutX="28.0" layoutY="49.0" maxHeight="45.0" minHeight="30.0" prefHeight="30.0" prefWidth="167.0" />
