@@ -1,9 +1,11 @@
-drop type if exists proto2.enum1;
-drop table if exists proto2.ConferenceRoomRequest;
 drop table if exists proto2.MealRequest;
+
+drop table if exists proto2.ConferenceRoomRequest;
 drop table if exists proto2.Account;
-drop table if exists proto2.Employee;
+
 drop table if exists proto2.Request;
+drop table if exists proto2.Employee;
+drop type if exists proto2.enum1;
 drop table if exists proto2.Move;
 drop table if exists proto2.Edge;
 drop table if exists proto2.LocationName;
