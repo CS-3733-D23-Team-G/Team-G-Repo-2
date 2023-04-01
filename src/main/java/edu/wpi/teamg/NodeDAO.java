@@ -1,13 +1,76 @@
 package edu.wpi.teamg;
-
 import edu.wpi.teamg.ORMClasses.Node;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import java.sql.SQLException;
+public abstract class NodeDAO implements LocationDAO{
 
-public interface NodeDAO extends IEDAO{
-    DBConnection conn = DBConnection.startConnection();
-    public Node getID(int id) throws SQLException;
-    Node node = null;
+    private Connection connection;
+    private String SQL;
 
-    String sql = " SE"
+    @Override
+    public void importCSV() {
+
+    }
+
+    @Override
+    public void exportCSV() {
+
+    }
+
+    @Override
+    public List<Node> getAll() throws SQLException {
+
+        PreparedStatement ps;
+        ResultSet rs = null;
+
+        SQL = "select * from proto2.node";
+
+        try {
+            ps = connection.prepareStatement(SQL);
+            rs = ps.executeQuery();
+        } catch (SQLException e) {
+            System.err.println("SQL exception");
+            // printSQLException(e);
+        }
+
+        List<Node> allNodes= new ArrayList<Node>();
+
+        while (rs.next()) {
+            Node node = new Node();
+
+            int node_id = rs.getInt("nodeid");
+            node.setNodeID(node_id);
+
+            int xcoord = rs.getInt("xcoord");
+            node.setXcoord(xcoord);
+
+            int ycoord = rs.getInt("ycoord");
+            node.setXcoord(ycoord);
+
+            String floor = rs.getString("floor");
+            node.setFloor(floor);
+
+            String building = rs.getString("building");
+            node.setBuilding(building);
+
+            allNodes.add(node);
+
+        }
+
+        return allNodes;
+    }
+
+        public void insert(Node node) {
+
+    }
+
+        public void update(Node node) {
+
+    }
+
+        public void delete(Node node) {
+
+    }
 }

@@ -12,4 +12,6 @@ public class Edge {
     @Getter @Setter
     private String edgeID = startNode.getNodeID()+"_"+endNode.getNodeID();
 
+    public Edge() {
+    }
 }

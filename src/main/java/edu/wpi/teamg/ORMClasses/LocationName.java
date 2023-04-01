@@ -14,4 +14,6 @@ public class LocationName {
     @Getter @Setter
     private String nodeType;
 
+    public LocationName() {
+    }
 }

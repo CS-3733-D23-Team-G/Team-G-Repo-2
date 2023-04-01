@@ -13,7 +13,7 @@ public class Employee {
     @Getter @Setter
     private String can_serve;
 
-
-
+    public Employee() {
+    }
 
 }

@@ -9,5 +9,9 @@ public class Move {
     private Node node;
     @Getter @Setter
     private LocationName longName;
+    @Getter @Setter
+    private String date;
 
+    public Move() {
+    }
 }

@@ -12,9 +12,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class DBConnection {
+public class DBConnection implements DAO {
     static Connection connection;
-    public void startConnection(){
+    public void setConnection(){
         try{
             connection=
                     DriverManager.getConnection(

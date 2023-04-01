@@ -10,4 +10,7 @@ public class Account {
     private String password;
     @Getter @Setter
     private boolean is_admin;
+
+    public Account() {
+    }
 }

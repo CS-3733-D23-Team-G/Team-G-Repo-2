@@ -1,4 +1,4 @@
 package edu.wpi.teamg;
 
-public interface LocationNameDAO extends IEDAO{
+public interface LocationNameDAO extends LocationDAO {
 }

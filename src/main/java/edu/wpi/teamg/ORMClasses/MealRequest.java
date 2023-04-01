@@ -17,4 +17,7 @@ public class MealRequest {
     private String order;
     @Getter @Setter
     private String note;
+
+    public MealRequest() {
+    }
 }
