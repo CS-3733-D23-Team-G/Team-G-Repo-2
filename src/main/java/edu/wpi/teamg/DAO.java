@@ -1,6 +1,6 @@
 package edu.wpi.teamg;
 
-public interface DAO<T> {
+public interface DAO {
   public void setConnection();
 
   public void closeConnection();
