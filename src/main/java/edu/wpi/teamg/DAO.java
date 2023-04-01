@@ -1,7 +1,14 @@
 package edu.wpi.teamg;
 
-public interface DAO {
-  public void setConnection();
+import java.sql.SQLException;
+import java.util.List;
 
-  public void closeConnection();
+public interface DAO<T>{
+
+    public List<T> getAll() throws SQLException;
+    public void update(T obj) throws SQLException;
+
+    public void insert(T obj) throws SQLException;
+
+    public void delete(T obj) throws SQLException;
 }

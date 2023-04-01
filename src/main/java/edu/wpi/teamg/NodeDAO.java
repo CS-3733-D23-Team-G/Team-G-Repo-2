@@ -7,33 +7,8 @@ import java.util.List;
 
 public class NodeDAO implements LocationDAO {
 
-  private Connection connection;
+  static DBConnection db = new DBConnection();
   private String SQL;
-
-  @Override
-  public void setConnection() {
-    try {
-      connection =
-          DriverManager.getConnection(
-              "jdbc:postgresql://database.cs.wpi.edu:5432/teamgdb", "teamg", "password");
-      System.out.print(" Successfully connect to the database!\n");
-    } catch (SQLException e) {
-      //      e.printStackTrace();
-      System.err.println("SQL exception");
-      // printSQLException(e);
-    }
-  }
-
-  @Override
-  public void closeConnection() {
-    try {
-      connection.close();
-    } catch (SQLException e) {
-
-      System.err.println("SQL exception");
-      // printSQLException(e);
-    }
-  }
 
   @Override
   public void importCSV() {}
@@ -53,13 +28,15 @@ public class NodeDAO implements LocationDAO {
   @Override
   public List<Node> getAll() throws SQLException {
 
+    db.setConnection();
+
     PreparedStatement ps;
     ResultSet rs = null;
 
     SQL = "select * from proto2.node";
 
     try {
-      ps = connection.prepareStatement(SQL);
+      ps = db.getConnection().prepareStatement(SQL);
       rs = ps.executeQuery();
     } catch (SQLException e) {
       System.err.println("SQL exception");
@@ -88,6 +65,8 @@ public class NodeDAO implements LocationDAO {
 
       allNodes.add(node);
     }
+
+    db.closeConnection();
 
     return allNodes;
   }
