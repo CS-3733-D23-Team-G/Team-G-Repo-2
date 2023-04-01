@@ -3,6 +3,7 @@ package edu.wpi.teamname.controllers;
 import edu.wpi.teamname.navigation.Navigation;
 import edu.wpi.teamname.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -16,14 +17,15 @@ public class MealRequestController {
   @FXML MFXButton backToHomeButton;
   @FXML MFXButton exitButton;
 
+  @FXML MFXDatePicker mealDate;
+
   // TextFields
-  // @FXML MFXTextField mealNameData;
+  @FXML MFXTextField mealTimeOfDeliver;
   @FXML MFXTextField mealEmployeeIDData;
   @FXML MFXTextField mealDeliveryLocationData;
   @FXML MFXTextField mealPersonOrderingForData;
   @FXML MFXTextField mealNotesData;
-  @FXML MFXTextField mealFoodChoice;
-
+  @FXML ChoiceBox<String> mealFoodChoice;
   @FXML ChoiceBox<String> serviceRequestChoiceBox;
 
   ObservableList<String> list =
@@ -33,6 +35,20 @@ public class MealRequestController {
           "Furniture Request Form",
           "Meal Request Form",
           "Office Supplies Request Form");
+
+  ObservableList<String> foodList =
+      FXCollections.observableArrayList(
+          "Fenway Franks",
+          "Choco Taco",
+          "Salt-Based Steak",
+          "Bisquit",
+          "Shrimp Fried Rice",
+          "Beef Wellington",
+          "Spaghetii Taco",
+          "Mac and Cheese Pizza",
+          "Cavatappi",
+          "One Singular Oyster",
+          "CC Buritto Bowl (w/ Siracha)");
 
   @FXML
   public void initialize() {
@@ -46,9 +62,10 @@ public class MealRequestController {
     mealDeliveryLocationData.getText();
     mealPersonOrderingForData.getText();
     mealNotesData.getText();
-    mealFoodChoice.getText();
-    serviceRequestChoiceBox.setItems(list);
+    mealFoodChoice.setItems(foodList);
     serviceRequestChoiceBox.setOnAction(event -> loadServiceRequestForm());
+    mealDate.getCurrentDate();
+    mealTimeOfDeliver.getText();
   }
 
   public void exit() {
