@@ -3,7 +3,7 @@ package edu.wpi.teamg.ORMClasses;
 import lombok.Getter;
 import lombok.Setter;
 
-public class Move {
+public class Move extends Node{
 
   @Getter @Setter private Node node;
   @Getter @Setter private LocationName longName;
