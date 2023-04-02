@@ -1,11 +1,12 @@
 package edu.wpi.teamg.DAOs;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 public interface DAO<T> {
 
-  public List<T> getAll() throws SQLException;
+  public HashMap<T,T> getAll() throws SQLException;
 
   public void update(T obj) throws SQLException;
 

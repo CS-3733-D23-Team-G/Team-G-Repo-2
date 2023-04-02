@@ -6,14 +6,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class EdgeDAO implements LocationDAO {
   static DBConnection connection = new DBConnection();
   private String sql;
+  private HashMap<String,Edge> edgeHash= new HashMap<String,Edge>();
 
   @Override
-  public List<Edge> getAll() throws SQLException {
+  public HashMap<String,Edge> getAll() throws SQLException {
     connection.setConnection();
     sql = "";
     PreparedStatement ps;
@@ -26,7 +28,6 @@ public class EdgeDAO implements LocationDAO {
     } catch (SQLException e) {
       System.err.println("SQL error exception");
     }
-    List<Edge> allEdges = new ArrayList<Edge>();
 
     while (rs.next()) {
       Edge edge = new Edge();
@@ -36,11 +37,10 @@ public class EdgeDAO implements LocationDAO {
 
       int endNode = rs.getInt("endnode");
       edge.setEndNode(endNode);
-
-      allEdges.add(edge);
+      edgeHash.put(edge.getEdgeID(),edge);
     }
     connection.closeConnection();
-    return allEdges;
+    return edgeHash;
   }
 
   @Override
