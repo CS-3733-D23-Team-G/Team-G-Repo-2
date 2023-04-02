@@ -2,7 +2,6 @@ package edu.wpi.teamg.DAOs;
 
 import edu.wpi.teamg.DBConnection;
 import edu.wpi.teamg.ORMClasses.Edge;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -51,9 +50,18 @@ public class EdgeDAO implements LocationDAO {
   public void insert(Object obj) throws SQLException {
     connection.setConnection();
     sql = "";
-    sql= "INSERT INTO teamgdb.proto2.edge (startnode, endnode)" +
-            "VALUES (?,?)";
-    PreparedStatement ps = connection.getConnection().prepareStatement(sql);
+    sql = "INSERT INTO teamgdb.proto2.edge (startnode, endnode) VALUES (?,?)";
+    PreparedStatement ps;
+    try {
+      ps = connection.getConnection().prepareStatement(sql);
+      ps.setInt(1, ((Edge) obj).getStartNode());
+      ps.setInt(2, ((Edge) obj).getEndNode());
+      ps.executeUpdate();
+
+    } catch (SQLException e) {
+      System.err.println("SQL Exception");
+      e.printStackTrace();
+    }
     connection.closeConnection();
   }
 
@@ -63,6 +71,14 @@ public class EdgeDAO implements LocationDAO {
     sql = "";
     sql = "DELETE FROM teamgdb.proto2.edge WHERE startnode = ? AND endnode = ?";
     PreparedStatement ps = connection.getConnection().prepareStatement(sql);
+    try {
+      ps.setInt(1, ((Edge) obj).getStartNode());
+      ps.setInt(2, ((Edge) obj).getEndNode());
+      ps.executeUpdate();
+    } catch (SQLException e) {
+      System.err.println("SQL exception");
+      e.printStackTrace();
+    }
     connection.closeConnection();
   }
 
