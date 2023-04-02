@@ -14,7 +14,8 @@ public enum Screen {
   MEAL_REQUEST_SUBMIT("views/MealRequestConfirmationPage.fxml"),
   FLOWERS_REQUEST_SUBMIT("views/FlowersRequestConfirmationPage.fxml"),
   FURNITURE_REQUEST_SUBMIT("views/FurnitureRequestConfirmationPage.fxml"),
-  SUPPLIES_REQUEST_SUBMIT("views/OfficeSuppRequestConfirmationPage.fxml");
+  SUPPLIES_REQUEST_SUBMIT("views/OfficeSuppRequestConfirmationPage.fxml"),
+  MAP_EDITOR_PAGE("views/MapEditor.fxml");
 
   private final String filename;
 
