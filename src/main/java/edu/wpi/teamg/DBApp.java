@@ -1,5 +1,8 @@
 package edu.wpi.teamg;
 
+import edu.wpi.teamg.DAOs.MoveDAO;
+import edu.wpi.teamg.DAOs.NodeDAO;
+import edu.wpi.teamg.ORMClasses.Move;
 import edu.wpi.teamg.ORMClasses.Node;
 import java.sql.*;
 import java.sql.SQLException;
@@ -14,6 +17,13 @@ public class DBApp {
 
     for (Node node : allNodes) {
       System.out.println("id = " + node.getNodeID());
+    }
+
+    MoveDAO moveDAO = new MoveDAO();
+
+    List<Move> allMoveID = moveDAO.getAll();
+    for (Move move : allMoveID) {
+      System.out.println("id = " + move.getNodeID());
     }
   }
 }

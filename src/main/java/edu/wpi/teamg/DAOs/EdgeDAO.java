@@ -1,4 +1,3 @@
 package edu.wpi.teamg.DAOs;
 
-public interface EdgeDAO extends IEDAO {
-}
+public interface EdgeDAO extends DAO {}

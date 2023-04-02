@@ -1,5 +1,6 @@
-package edu.wpi.teamg;
+package edu.wpi.teamg.DAOs;
 
+import edu.wpi.teamg.DBConnection;
 import edu.wpi.teamg.ORMClasses.Node;
 import java.sql.*;
 import java.util.ArrayList;
