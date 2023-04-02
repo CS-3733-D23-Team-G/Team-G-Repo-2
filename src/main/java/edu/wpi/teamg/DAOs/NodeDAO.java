@@ -1,20 +1,24 @@
-package edu.wpi.teamg;
+package edu.wpi.teamg.DAOS;
 
+import edu.wpi.teamg.DAOs.LocationNameDAO;
+import edu.wpi.teamg.DBConnection;
 import edu.wpi.teamg.ORMClasses.Node;
+
+import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NodeDAO implements LocationDAO {
+public class NodeDAO implements LocationNameDAO {
 
   static DBConnection db = new DBConnection();
   private String SQL;
 
   @Override
-  public void importCSV() {}
+  public void Import(File file) {}
 
   @Override
-  public void exportCSV() {}
+  public File Export() {}
 
   @Override
   public void insert(Object obj) throws SQLException {}

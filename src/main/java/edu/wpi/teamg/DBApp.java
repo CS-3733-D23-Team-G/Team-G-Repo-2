@@ -9,12 +9,11 @@ import java.util.List;
 public class DBApp {
   public static void main(String[] args) throws SQLException {
 
-    NodeDAO nodedao = new NodeDAO();
+    //NodeDAO nodedao = new NodeDAO();
 
-    List<Node> allNodes = nodedao.getAll();
+    //List<Node> allNodes = nodedao.getAll();
 
-    for (Node node : allNodes) {
-      System.out.println("id = " + node.getNodeID());
+  //  for (Node node : allNodes) {
+    //  System.out.println("id = " + node.getNodeID());
     }
   }
-}
