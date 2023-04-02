@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MealRequestDAO implements DAO {
@@ -15,8 +16,10 @@ public class MealRequestDAO implements DAO {
   private String SQL_mealRequest;
   private String SQL_Request;
 
+  private HashMap<Integer,MealRequest> mealRequestHash = new HashMap<Integer, MealRequest>();
+
   @Override
-  public List getAll() throws SQLException {
+  public HashMap<Integer,MealRequest> getAll() throws SQLException {
     db.setConnection();
 
     PreparedStatement ps;
@@ -33,7 +36,6 @@ public class MealRequestDAO implements DAO {
       // printSQLException(e);
     }
 
-    List<MealRequest> allNodes = new ArrayList<MealRequest>();
 
     while (rs.next()) {
       MealRequest mealReq = new MealRequest();
@@ -59,12 +61,12 @@ public class MealRequestDAO implements DAO {
       String note = rs.getString("note");
       mealReq.setOrder(note);
 
-      allNodes.add(mealReq);
+      mealRequestHash.put(reqID, mealReq);
     }
 
     db.closeConnection();
 
-    return allNodes;
+    return mealRequestHash;
   }
 
   @Override

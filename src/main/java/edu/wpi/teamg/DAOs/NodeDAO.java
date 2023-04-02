@@ -4,10 +4,11 @@ import edu.wpi.teamg.DBConnection;
 import edu.wpi.teamg.ORMClasses.Node;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class NodeDAO implements LocationDAO {
-
+  private HashMap<Integer,Node> nodeHash = new HashMap<Integer,Node>();
   private static DBConnection db = new DBConnection();
   private String SQL;
 
@@ -68,7 +69,7 @@ public class NodeDAO implements LocationDAO {
   }
 
   @Override
-  public List<Node> getAll() throws SQLException {
+  public HashMap<Integer,Node> getAll() throws SQLException {
 
     db.setConnection();
 
@@ -84,8 +85,6 @@ public class NodeDAO implements LocationDAO {
       System.err.println("SQL exception");
       // printSQLException(e);
     }
-
-    List<Node> allNodes = new ArrayList<Node>();
 
     while (rs.next()) {
       Node node = new Node();
@@ -105,11 +104,11 @@ public class NodeDAO implements LocationDAO {
       String building = rs.getString("building");
       node.setBuilding(building);
 
-      allNodes.add(node);
+      nodeHash.put(node.getNodeID(),node);
     }
 
     db.closeConnection();
 
-    return allNodes;
+    return nodeHash;
   }
 }

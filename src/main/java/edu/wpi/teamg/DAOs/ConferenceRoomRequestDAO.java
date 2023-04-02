@@ -1,8 +1,10 @@
 package edu.wpi.teamg.DAOs;
 
 import edu.wpi.teamg.DBConnection;
+import edu.wpi.teamg.ORMClasses.ConferenceRoomRequest;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 public class ConferenceRoomRequestDAO implements DAO{
@@ -13,7 +15,7 @@ public class ConferenceRoomRequestDAO implements DAO{
     private String SQL_Request;
 
     @Override
-    public List getAll() throws SQLException {
+    public HashMap<String, ConferenceRoomRequest> getAll() throws SQLException {
         return null;
     }
 
