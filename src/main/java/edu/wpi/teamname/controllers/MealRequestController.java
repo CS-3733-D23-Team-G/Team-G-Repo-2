@@ -6,8 +6,8 @@ import edu.wpi.teamname.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.sql.Time;
+import java.util.Date;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -83,8 +83,15 @@ public class MealRequestController {
     mr.setLocation(Integer.parseInt(mealDeliveryLocationData.getText()));
     mr.setRecipient(mealPersonOrderingForData.getText());
     mr.setNote(mealNotesData.getText());
-    mr.setDateTime(
-        LocalDateTime.of(mealDate.getCurrentDate(), StringToTime(mealTimeOfDeliver.getText())));
+    // mr.setDateTime(LocalDateTime.of(mealDate.getCurrentDate(),
+    // StringToTime(mealTimeOfDeliver.getText())));
+    Date d =
+        new Date(
+            mealDate.getCurrentDate().getYear(),
+            mealDate.getCurrentDate().getMonthValue(),
+            mealDate.getCurrentDate().getDayOfMonth());
+    mr.setDeliveryDate(d);
+    mr.setDeliveryTime(StringToTime(mealTimeOfDeliver.getText()));
     mr.setOrder(mealFoodChoice.getValue());
     System.out.println(
         "Employee ID: "
@@ -97,15 +104,17 @@ public class MealRequestController {
             + mr.getNote()
             + "\nRecipient: "
             + mr.getRecipient()
-            + "\nDelivery DateTime: "
-            + mr.getDateTime());
+            + "\nDelivery Date: "
+            + mr.getDeliveryDate()
+            + "\nDelivery Time: "
+            + mr.getDeliveryTime());
     return mr;
   }
 
-  public LocalTime StringToTime(String s) {
+  public Time StringToTime(String s) {
 
     String[] hourMin = s.split(":", 2);
-    LocalTime t = LocalTime.of(Integer.parseInt(hourMin[0]), Integer.parseInt(hourMin[1]));
+    Time t = new Time(Integer.parseInt(hourMin[0]), Integer.parseInt(hourMin[1]), 00);
     return t;
   }
 
