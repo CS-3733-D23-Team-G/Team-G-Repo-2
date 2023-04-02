@@ -7,6 +7,7 @@ import edu.wpi.teamname.pathFinding.Graph;
 import edu.wpi.teamname.pathFinding.Node;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import java.util.ArrayList;
 import java.util.Random;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -25,6 +26,8 @@ public class SignagePageController {
   @FXML MFXTextField startLoc;
 
   @FXML MFXTextField endLoc;
+
+  @FXML MFXTextField results;
 
   ObservableList<String> list =
       FXCollections.observableArrayList(
@@ -63,8 +66,8 @@ public class SignagePageController {
     }
   }
 
-  public String processAStarAlg() {
-    String path = "Bad Path";
+  public void processAStarAlg() {
+    ArrayList<String> path = new ArrayList<>();
 
     int startNode = Integer.parseInt(startLoc.getText());
     int endNode = Integer.parseInt(endLoc.getText());
@@ -98,16 +101,21 @@ public class SignagePageController {
     int[][] Adj = G1.createWeightedAdj();
     // new int[10][10];
 
-    for (int i = 0; i < 10; i++) {
-      for (int j = 0; j < 10; j++) {
-        System.out.print(Adj[i][j] + ", ");
-      }
-      System.out.println();
+    path = G1.aStarAlg(G1.createWeightedAdj(), startNode, endNode);
+
+    setPath(path);
+  }
+
+  public void setPath(ArrayList<String> path) {
+
+    /*
+    for (int i = 0; i < path.size(); i++) {
+      results.setText(path.get(i) + " ");
     }
 
-    G1.aStarAlg(G1.createWeightedAdj(), startNode, endNode);
+     */
 
-    return path;
+    results.setText(String.valueOf(path));
   }
 
   public void exit() {

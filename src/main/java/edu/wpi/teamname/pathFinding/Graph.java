@@ -45,7 +45,7 @@ public class Graph {
     return A1;
   }
 
-  public void aStarAlg(int[][] aMatrix, int start, int end) {
+  public ArrayList<String> aStarAlg(int[][] aMatrix, int start, int end) {
     // Number of vertices in the example. For us, it will be 48
     int vertex = V.length;
     // Sets up our distances, so we can process our nodes into our dis array with "inf" values
@@ -101,7 +101,11 @@ public class Graph {
         }
       }
     }
-    printMySolution(start, parent, end);
+
+    ArrayList<String> solution = new ArrayList<>();
+    printMySolution(start, parent, end, solution);
+
+    return solution;
   }
 
   // HELPER FUNCTION FOR OUR A* alg
@@ -120,20 +124,21 @@ public class Graph {
   }
 
   // HELPER FUNCTION FOR OUR A* alg
-  public void printMySolution(int start, int[] parentNodes, int end) {
+  public void printMySolution(int start, int[] parentNodes, int end, ArrayList<String> s) {
     System.out.println(" ");
     System.out.println("The Nodes that will lead to your total min path are: ");
     if (end != start) {
-      printPath(end, parentNodes, start);
+      printPath(end, parentNodes, start, s);
     }
   }
 
   // HELPER FUNCTION FOR OUR A* alg
-  public void printPath(int current, int[] parent, int start) {
+  public void printPath(int current, int[] parent, int start, ArrayList<String> s) {
     if (current == -1) {
       return;
     }
-    printPath(parent[current], parent, start);
-    System.out.print(V[current].getNodeID() + " ");
+    printPath(parent[current], parent, start, s);
+    // System.out.print(V[current].getNodeID() + " ");
+    s.add(V[current].getNodeID());
   }
 }
