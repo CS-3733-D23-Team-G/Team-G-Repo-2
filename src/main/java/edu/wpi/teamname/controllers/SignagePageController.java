@@ -107,15 +107,8 @@ public class SignagePageController {
   }
 
   public void setPath(ArrayList<String> path) {
-
-    /*
-    for (int i = 0; i < path.size(); i++) {
-      results.setText(path.get(i) + " ");
-    }
-
-     */
-
     results.setText(String.valueOf(path));
+
   }
 
   public void exit() {
