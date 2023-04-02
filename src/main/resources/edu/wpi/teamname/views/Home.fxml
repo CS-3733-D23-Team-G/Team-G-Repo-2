@@ -2,13 +2,14 @@
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
-
 
 <VBox xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamname.controllers.HomeController">
    <children>
@@ -24,16 +25,16 @@
       </HBox>
       <HBox alignment="CENTER" maxHeight="50.0" style="-fx-background-color: #012d5a;" VBox.vgrow="ALWAYS">
          <children>
-            <AnchorPane prefHeight="100.0" prefWidth="603.0">
+            <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="600.0">
                <children>
-                  <Text disable="true" fill="WHITE" layoutX="35.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Return to Home" />
-                  <Line endX="48.0" endY="-163.5" layoutX="368.0" layoutY="176.0" startX="48.0" startY="-119.5" stroke="#345871" strokeWidth="2.0" />
-                  <Line endX="48.0" endY="-163.5" layoutX="130.0" layoutY="176.0" startX="48.0" startY="-120.5" stroke="#345871" strokeWidth="2.0" />
-                  <MFXButton fx:id="backToHomeButton" opacity="0.0" prefHeight="64.0" prefWidth="176.0" text="Return to Home Button" />
-                  <MFXButton fx:id="signagePageButton" layoutX="422.0" layoutY="3.0" opacity="0.0" prefHeight="64.0" prefWidth="176.0" text="Signage Page Button" />
-                  <Text disable="true" fill="WHITE" layoutX="234.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service Request Forms" />
-                  <Text disable="true" fill="WHITE" layoutX="470.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Signage Page" />
-                  <ChoiceBox fx:id="serviceRequestChoiceBox" layoutX="193.0" layoutY="2.0" opacity="0.0" prefHeight="64.0" prefWidth="214.0" />
+                  <Text disable="true" fill="WHITE" layoutX="35.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Return to Home" wrappingWidth="85.107421875" />
+                  <Line endX="48.0" endY="-166.0" layoutX="368.0" layoutY="176.0" startX="48.0" startY="-154.0" stroke="#345871" strokeWidth="2.0" />
+                  <Line endX="48.0" endY="-166.0" layoutX="130.0" layoutY="176.0" startX="48.0" startY="-154.0" stroke="#345871" strokeWidth="2.0" />
+                  <MFXButton fx:id="backToHomeButton" layoutY="5.0" opacity="0.0" prefHeight="30.0" prefWidth="176.0" text="Return to Home Button" />
+                  <MFXButton fx:id="signagePageButton" layoutX="422.0" layoutY="3.0" maxHeight="30.0" opacity="0.0" prefWidth="176.0" text="Signage Page Button" />
+                  <Text disable="true" fill="WHITE" layoutX="234.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service Request Forms" />
+                  <Text disable="true" fill="WHITE" layoutX="474.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Signage Page" />
+                  <ChoiceBox fx:id="serviceRequestChoiceBox" layoutX="177.0" layoutY="2.0" opacity="0.0" prefHeight="30.0" prefWidth="239.0" />
                </children>
             </AnchorPane>
          </children>
@@ -42,19 +43,13 @@
          <children>
             <StackPane minHeight="-Infinity" minWidth="-Infinity">
                <children>
-                  <AnchorPane prefHeight="260.0" prefWidth="505.0">
+                  <AnchorPane prefHeight="260.0" prefWidth="600.0">
                      <children>
-                        <Text layoutX="222.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Home Page" />
-                        <MFXButton fx:id="homeToCon" layoutX="23.0" layoutY="49.0" text="ConRoomRequestPage" />
-                        <MFXButton fx:id="homeToConConfirm" layoutX="24.0" layoutY="90.0" text="ConRoomRequestPageConfirmation" />
-                        <MFXButton fx:id="homeToFlow" layoutX="23.0" layoutY="131.0" text="FlowersRequestPage" />
-                        <MFXButton fx:id="homeToFlowConfirm" layoutX="23.0" layoutY="175.0" text="FlowersRequestPageConfirmation" />
-                        <MFXButton fx:id="homeToMeal" layoutX="23.0" layoutY="215.0" text="MealRequestPage" />
-                        <MFXButton fx:id="homeToMealConfirm" layoutX="290.0" layoutY="215.0" text="MealRequestPageConfirmation" />
-                        <MFXButton fx:id="homeToOffSupp" layoutX="289.0" layoutY="49.0" text="OfficeSuppliesRequest" />
-                        <MFXButton fx:id="homeToOffSuppConfirm" layoutX="289.0" layoutY="90.0" text="OfficeSuppliesRequestConfirmation" />
-                        <MFXButton fx:id="homeToFurn" layoutX="290.0" layoutY="131.0" text="FurnitureRequestPage" />
-                        <MFXButton fx:id="homeToFurnConfirm" layoutX="289.0" layoutY="175.0" text="FurnitureRequestPageConfirmation" />
+                        <ImageView fitHeight="260.0" fitWidth="426.0" layoutX="-1.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../../Images/international-bwh-1428x1110.jpeg" />
+                           </image>
+                        </ImageView>
                      </children>
                   </AnchorPane>
                </children>
