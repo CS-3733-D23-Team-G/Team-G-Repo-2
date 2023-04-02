@@ -1,10 +1,13 @@
 package edu.wpi.teamname.controllers;
 
+import edu.wpi.teamname.ORMClasses.MealRequest;
 import edu.wpi.teamname.navigation.Navigation;
 import edu.wpi.teamname.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -56,6 +59,7 @@ public class MealRequestController {
     signagePageButton.setOnMouseClicked(event -> Navigation.navigate(Screen.SIGNAGE_PAGE));
     backToHomeButton.setOnMouseClicked(event -> Navigation.navigate(Screen.HOME));
     exitButton.setOnMouseClicked(event -> exit());
+    mealSubmitButton.setOnMouseClicked(event -> storeMealValues());
 
     //  mealNameData.getText();
     mealEmployeeIDData.getText();
@@ -70,6 +74,39 @@ public class MealRequestController {
 
   public void exit() {
     Platform.exit();
+  }
+
+  public MealRequest storeMealValues() {
+    MealRequest mr = new MealRequest();
+    mr.setReqid(Integer.parseInt(mealEmployeeIDData.getText()));
+    // assume for now they are going to input a node number, so parseInt
+    mr.setLocation(Integer.parseInt(mealDeliveryLocationData.getText()));
+    mr.setRecipient(mealPersonOrderingForData.getText());
+    mr.setNote(mealNotesData.getText());
+    mr.setDateTime(
+        LocalDateTime.of(mealDate.getCurrentDate(), StringToTime(mealTimeOfDeliver.getText())));
+    mr.setOrder(mealFoodChoice.getValue());
+    System.out.println(
+        "Employee ID: "
+            + mr.getReqid()
+            + "\nDelivery Location: "
+            + mr.getLocation()
+            + "\nOrder: "
+            + mr.getOrder()
+            + "\nNote: "
+            + mr.getNote()
+            + "\nRecipient: "
+            + mr.getRecipient()
+            + "\nDelivery DateTime: "
+            + mr.getDateTime());
+    return mr;
+  }
+
+  public LocalTime StringToTime(String s) {
+
+    String[] hourMin = s.split(":", 2);
+    LocalTime t = LocalTime.of(Integer.parseInt(hourMin[0]), Integer.parseInt(hourMin[1]));
+    return t;
   }
 
   //
