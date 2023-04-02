@@ -52,30 +52,70 @@ public class MoveDAO implements LocationDAO {
   }
 
   @Override
-  public void update(Object obj) throws SQLException {}
+  public int update(Move move) throws SQLException {
+    db.setConnection();
+
+
+    PreparedStatement ps = db.getConnection().prepareStatement(sql);
+    int result;
+
+    sql = "UPDATE proto2.move set nodeID = ?, longName = ?, date = ?";
+
+    ps.setInt(1,move.getNodeID());
+    ps.setString(2, move.getLongName());
+    ps.setDate(3,move.getDate());
+
+    result = ps.executeUpdate(sql);
+    db.closeConnection();
+
+    return result;
+  }
 
   @Override
-  public  int  insert(Object obj) throws SQLException {
+  public  int  insert(Object move1) throws SQLException {
     db.setConnection();
+
+    Move move =(Move)move1;
 
     PreparedStatement ps = db.getConnection().prepareStatement(sql);
     int result;
 
    sql = "INSERT INTO proto2.move (nodeid, longname, date) VALUES (?,?,?)";
 
-   ps.setInt(1, Move.getNodeID());
-   ps.setString(2, Move.getLongName());
-   ps.setDate(3,Move.getDate());
+   ps.setInt(1,move.getNodeID());
+   ps.setString(2, move.getLongName());
+   ps.setDate(3,move.getDate());
 
-   return rs;
+   result = ps.executeUpdate(sql);
+   db.closeConnection();
+   return result;
 
   }
 
   @Override
-  public void delete(Object obj) throws SQLException {}
+  public int delete(Move move) throws SQLException {
+    db.setConnection();
+
+
+    PreparedStatement ps = db.getConnection().prepareStatement(sql);
+    int result;
+
+    sql = "DELETE FROM proto2.move WHERE nodeID = ?";
+
+    ps.setInt(1,move.getNodeID());
+
+
+    result = ps.executeUpdate(sql);
+    db.closeConnection();
+    return result;
+
+  }
 
   @Override
-  public void importCSV() throws SQLException {}
+  public void importCSV() throws SQLException {
+
+
+  }
 
   @Override
   public void exportCSV() throws SQLException {}
