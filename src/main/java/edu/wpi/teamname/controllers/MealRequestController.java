@@ -19,6 +19,7 @@ public class MealRequestController {
   @FXML MFXButton signagePageButton;
   @FXML MFXButton backToHomeButton;
   @FXML MFXButton exitButton;
+  @FXML MFXButton mealClearAll;
 
   @FXML MFXDatePicker mealDate;
 
@@ -60,12 +61,15 @@ public class MealRequestController {
     backToHomeButton.setOnMouseClicked(event -> Navigation.navigate(Screen.HOME));
     exitButton.setOnMouseClicked(event -> exit());
     mealSubmitButton.setOnMouseClicked(event -> storeMealValues());
+    mealClearAll.setOnAction(event -> clearAllData());
 
     //  mealNameData.getText();
     mealEmployeeIDData.getText();
     mealDeliveryLocationData.getText();
     mealPersonOrderingForData.getText();
     mealNotesData.getText();
+
+    serviceRequestChoiceBox.setItems(list);
     mealFoodChoice.setItems(foodList);
     serviceRequestChoiceBox.setOnAction(event -> loadServiceRequestForm());
     mealDate.getCurrentDate();
@@ -107,6 +111,17 @@ public class MealRequestController {
     String[] hourMin = s.split(":", 2);
     LocalTime t = LocalTime.of(Integer.parseInt(hourMin[0]), Integer.parseInt(hourMin[1]));
     return t;
+  }
+
+  public void clearAllData() {
+    mealEmployeeIDData.setText("");
+    mealDeliveryLocationData.setText("");
+    mealPersonOrderingForData.setText("");
+    mealNotesData.setText("");
+    mealDate.setText("");
+    mealTimeOfDeliver.setText("");
+    mealFoodChoice.setValue("");
+    return;
   }
 
   //

@@ -48,6 +48,7 @@
                   <Text layoutX="407.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Meal Date" />
                   <Text layoutX="406.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Meal Time" />
                   <MFXTextField fx:id="mealTimeOfDeliver" layoutX="345.0" layoutY="210.0" minHeight="-Infinity" prefHeight="27.0" prefWidth="180.0" />
+                  <MFXButton fx:id="mealClearAll" layoutX="362.0" layoutY="349.0" text="Clear All" />
                     </children>
                 </AnchorPane>
             </children>
