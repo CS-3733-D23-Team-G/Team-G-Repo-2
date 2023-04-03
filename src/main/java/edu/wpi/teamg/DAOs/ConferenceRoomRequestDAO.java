@@ -1,6 +1,5 @@
 package edu.wpi.teamg.DAOs;
 
-import com.sun.scenario.effect.impl.prism.PrReflectionPeer;
 import edu.wpi.teamg.DBConnection;
 import edu.wpi.teamg.ORMClasses.ConferenceRoomRequest;
 
@@ -10,7 +9,6 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 
 public class ConferenceRoomRequestDAO implements DAO{
 
@@ -41,10 +39,18 @@ public class ConferenceRoomRequestDAO implements DAO{
         while(rs.next()){
             ConferenceRoomRequest cReq = new ConferenceRoomRequest();
             int reqID = rs.getInt("reqid");
+            int empID = rs.getInt("empid");
+            int location = rs.getInt("location");
+            int serv_by = rs.getInt("serv_by");
+            String status = rs.getString("status");
             Date reqDate = rs.getDate("meetingdate");
             Time reqTime = rs.getTime("meetingtime");
             String confPurpose = rs.getString("purpose");
 
+            cReq.setLocation(location);
+            cReq.setEmpid(empID);
+            cReq.setServ_by(serv_by);
+            cReq.setStatus(status);
             cReq.setPurpose(confPurpose);
             cReq.setMeeting_time(reqTime);
             cReq.setMeeting_date(reqDate);
@@ -85,14 +91,15 @@ public class ConferenceRoomRequestDAO implements DAO{
         }
         SQL_confRoomRequest = "insert  into teamgdb.proto2.conferenceroomrequest(reqid,meetingdate,meetingtime,purpose) values (?,?,?,?)";
         SQL_Request =
-            "insert into teamgdb.proto2.request(reqid,location,serv_by,status) values (?,?,?,?)";
+            "insert into teamgdb.proto2.request(reqid,empid,location,serv_by,status) values (?,?,?,?,?)";
 
         try{
             ps_Req = db.getConnection().prepareStatement(SQL_Request);
             ps_Req.setInt(1,maxID);
-            ps_Req.setInt(2,((ConferenceRoomRequest)obj).getLocation());
-            ps_Req.setInt(3,((ConferenceRoomRequest)obj).getServ_by());
-            ps_Req.setObject(4,((ConferenceRoomRequest) obj).getStatus(),java.sql.Types.OTHER);
+            ps_Req.setInt(2,((ConferenceRoomRequest)obj).getEmpid());
+            ps_Req.setInt(3,((ConferenceRoomRequest)obj).getLocation());
+            ps_Req.setInt(4,((ConferenceRoomRequest)obj).getServ_by());
+            ps_Req.setObject(5,((ConferenceRoomRequest) obj).getStatus(),java.sql.Types.OTHER);
             ps_Req.executeUpdate();
 
             ps_getRoomReq = db.getConnection().prepareStatement(SQL_confRoomRequest);

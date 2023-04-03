@@ -5,9 +5,7 @@ import edu.wpi.teamg.ORMClasses.MealRequest;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class MealRequestDAO implements DAO {
 
@@ -42,6 +40,9 @@ public class MealRequestDAO implements DAO {
 
       int reqID = rs.getInt("reqID");
       mealReq.setReqid(reqID);
+
+      int empID = rs.getInt("empID");
+      mealReq.setEmpid(empID);
 
       int location = rs.getInt("location");
       mealReq.setLocation(location);
@@ -101,24 +102,27 @@ public class MealRequestDAO implements DAO {
     }
 
     SQL_mealRequest =
-        "insert into proto2.mealrequest(reqid, recipient, mealOrder, note) values (?, ?, ?, ?)";
+        "insert into proto2.mealrequest(reqid, recipient, mealOrder, note) values (?, ?, ?, ?, ?, ?)";
     SQL_Request =
-        "insert into proto2.request(reqid, location, serv_by, status) values (?, ?, ?, ?)";
+        "insert into proto2.request(reqid, empid, location, serv_by, status) values (?, ?, ?, ?, ?)";
 
     try {
 
       ps_Request = db.getConnection().prepareStatement(SQL_Request);
       ps_Request.setInt(1, maxID);
-      ps_Request.setInt(2, ((MealRequest) obj).getLocation());
-      ps_Request.setInt(3, ((MealRequest) obj).getServ_by());
-      ps_Request.setObject(4, ((MealRequest) obj).getStatus(), java.sql.Types.OTHER);
+      ps_Request.setInt(2, ((MealRequest) obj).getEmpid());
+      ps_Request.setInt(3, ((MealRequest) obj).getLocation());
+      ps_Request.setInt(4, ((MealRequest) obj).getServ_by());
+      ps_Request.setObject(5, ((MealRequest) obj).getStatus(), java.sql.Types.OTHER);
       ps_Request.executeUpdate();
 
       ps_mealRequest = db.getConnection().prepareStatement(SQL_mealRequest);
       ps_mealRequest.setInt(1, maxID);
-      ps_mealRequest.setString(2, ((MealRequest) obj).getRecipient());
-      ps_mealRequest.setString(3, ((MealRequest) obj).getOrder());
-      ps_mealRequest.setString(4, ((MealRequest) obj).getNote());
+      ps_mealRequest.setDate(2, ((MealRequest) obj).getDeliveryDate());
+      ps_mealRequest.setTime(3, ((MealRequest) obj).getDeliveryTime());
+      ps_mealRequest.setString(4, ((MealRequest) obj).getRecipient());
+      ps_mealRequest.setString(5, ((MealRequest) obj).getOrder());
+      ps_mealRequest.setString(6, ((MealRequest) obj).getNote());
       ps_mealRequest.executeUpdate();
 
     } catch (SQLException e) {
