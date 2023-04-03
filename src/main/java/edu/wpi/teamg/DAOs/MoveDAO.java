@@ -7,16 +7,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class MoveDAO implements LocationDAO {
   static DBConnection db = new DBConnection();
   private String sql;
 
-  private HashMap<Integer,Move> moves;
   @Override
-  public HashMap <Integer,Move> getAll() throws SQLException {
+  public List getAll() throws SQLException {
     db.setConnection();
 
     PreparedStatement ps;
@@ -46,7 +44,7 @@ public class MoveDAO implements LocationDAO {
       Date date = rs.getDate("date");
       move.setDate(date);
 
-      moves.put(node_id,Move);
+      moves.add(move);
     }
     db.closeConnection();
     return moves;
@@ -57,7 +55,7 @@ public class MoveDAO implements LocationDAO {
     Move move = (Move) obj;
     db.setConnection();
     PreparedStatement ps = db.getConnection().prepareStatement(sql);
-    sql = "UPDATE proto2.move set nodeID = ?, longName = ?, date = ? WHERE nodeID";
+    sql = "UPDATE proto2.move set nodeID = ?, longName = ?, date = ?";
 
     try {
       ps.setInt(1, move.getNodeID());
@@ -106,8 +104,7 @@ public class MoveDAO implements LocationDAO {
   @Override
   public void importCSV(String filePath) throws SQLException {
 
-
-
+    db.setConnection();
   }
 
   @Override
