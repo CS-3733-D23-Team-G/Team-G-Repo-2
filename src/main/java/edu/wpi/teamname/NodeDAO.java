@@ -12,25 +12,45 @@ public class NodeDAO {
   static DBConnection db = new DBConnection();
 
   public void importCSV(String filePath) throws SQLException, IOException {
-    db.setConnection();
+    try {
+      db.setConnection();
 
-    BufferedReader br = new BufferedReader(new FileReader(filePath));
-    String line = br.readLine();
-
-    while ((line = br.readLine()) != null) {
-
-      String[] data = line.split(",");
       query =
           "INSERT INTO proto2.node (nodeid, xcoord, ycoord, floor, building) VALUES (?,?,?,?,?)";
       PreparedStatement ps = db.getConnection().prepareStatement(query);
 
-      ps.setInt(1, Integer.parseInt(data[0]));
-      ps.setInt(2, Integer.parseInt(data[1]));
-      ps.setInt(3, Integer.parseInt(data[2]));
-      ps.setString(4, data[3]);
-      ps.setString(5, data[4]);
-      ps.addBatch();
+      BufferedReader br = new BufferedReader(new FileReader(filePath));
+      String line = null;
+
+      br.readLine(); // skip line
+      while ((line = br.readLine()) != null) {
+        String[] data = line.split(",");
+
+        String nodeID = data[0];
+        String xcoord = data[1];
+        String ycoord = data[2];
+        String floor = data[3];
+        String building = data[4];
+
+        int iNodeID = Integer.parseInt(nodeID);
+        ps.setInt(1, iNodeID);
+
+        int iXCoord = Integer.parseInt(xcoord);
+        ps.setInt(2, iXCoord);
+
+        int iYCoord = Integer.parseInt(ycoord);
+        ps.setInt(3, iYCoord);
+
+        ps.setString(4, floor);
+        ps.setString(5, building);
+        ps.addBatch();
+      }
+      br.close();
+      ps.executeBatch();
+    } catch (IOException e) {
+      System.err.println(e);
+    } catch (SQLException e) {
+      e.printStackTrace();
     }
-    br.close();
   }
 }
