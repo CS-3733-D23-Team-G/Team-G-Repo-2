@@ -113,6 +113,27 @@ public class ConferenceRoomRequestDAO implements DAO{
 
     @Override
     public void delete(Object obj) throws SQLException {
+        db.setConnection();
 
+        PreparedStatement ps_confReq;
+        PreparedStatement ps_Req;
+
+        String SQL_confReq = "delete from teamgdb.proto2.conferenceroomrequest where reqID = ?";
+        String SQL_Req = "delete from teamgdb.proto2.request where reqID = ?";
+        try{
+            ps_confReq = db.getConnection().prepareStatement(SQL_confReq);
+            ps_confReq.setInt(1,((ConferenceRoomRequest)obj).getReqid());
+            ps_confReq.executeUpdate();
+
+            ps_Req = db.getConnection().prepareStatement(SQL_Req);
+            ps_Req.setInt(1,((ConferenceRoomRequest)obj).getReqid());
+            ps_Req.executeUpdate();
+
+        }catch(SQLException e){
+            System.err.println("SQL Exception");
+            e.printStackTrace();
+        }
+
+        db.closeConnection();
     }
 }
