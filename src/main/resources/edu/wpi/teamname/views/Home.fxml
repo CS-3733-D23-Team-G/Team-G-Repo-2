@@ -14,7 +14,7 @@
 
 <VBox xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamname.controllers.HomeController">
    <children>
-      <HBox alignment="TOP_CENTER" styleClass="top_banner" stylesheets="@style.css" VBox.vgrow="ALWAYS">
+      <HBox alignment="CENTER" styleClass="top_banner" stylesheets="@style.css" VBox.vgrow="ALWAYS">
          <children>
             <AnchorPane maxWidth="600.0" minHeight="25.0" prefWidth="600.0">
                <children>
@@ -29,9 +29,9 @@
             </AnchorPane>
          </children>
       </HBox>
-      <HBox alignment="CENTER" maxHeight="30.0" prefHeight="30.0" styleClass="banner" stylesheets="@style.css" VBox.vgrow="ALWAYS">
+      <HBox alignment="CENTER" prefHeight="30.0" styleClass="banner" stylesheets="@style.css" VBox.vgrow="ALWAYS">
          <children>
-            <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="600.0" styleClass="anchor_pane_sizing">
+            <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="600.0" styleClass="pane_banner_sizing">
                <children>
                   <Text disable="true" fill="WHITE" layoutX="35.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Return to Home" wrappingWidth="85.107421875" />
                   <Line endX="48.0" endY="-166.0" layoutX="368.0" layoutY="176.0" startX="48.0" startY="-154.0" stroke="#345871" strokeWidth="2.0" />
