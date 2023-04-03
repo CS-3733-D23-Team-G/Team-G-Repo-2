@@ -57,6 +57,7 @@ public class EdgeDAO implements LocationDAO {
       ps.setInt(1, ((Edge) obj).getStartNode());
       ps.setInt(2, ((Edge) obj).getEndNode());
       ps.executeUpdate();
+      edgeHash.put(((Edge)obj).getEdgeID(),(Edge)obj);
 
     } catch (SQLException e) {
       System.err.println("SQL Exception");
@@ -75,6 +76,7 @@ public class EdgeDAO implements LocationDAO {
       ps.setInt(1, ((Edge) obj).getStartNode());
       ps.setInt(2, ((Edge) obj).getEndNode());
       ps.executeUpdate();
+      edgeHash.remove(((Edge)obj).getEdgeID());
     } catch (SQLException e) {
       System.err.println("SQL exception");
       e.printStackTrace();
