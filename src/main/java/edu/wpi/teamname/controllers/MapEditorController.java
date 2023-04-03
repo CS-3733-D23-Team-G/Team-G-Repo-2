@@ -1,9 +1,12 @@
 package edu.wpi.teamname.controllers;
 
+import edu.wpi.teamname.NodeDAO;
 import edu.wpi.teamname.navigation.Navigation;
 import edu.wpi.teamname.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import java.io.File;
+import java.io.IOException;
+import java.sql.SQLException;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -61,12 +64,22 @@ public class MapEditorController {
   @FXML
   void fileChooser() {
     FileChooser fc = new FileChooser();
+
+    NodeDAO nodeDAO = new NodeDAO();
+
     fc.getExtensionFilters()
         .add(new FileChooser.ExtensionFilter("Comma Separated Values", "*.csv"));
     File f = fc.showOpenDialog(null);
 
     if (f != null) {
       fileLabel.setText("Selected File::" + f.getAbsolutePath());
+      try {
+        nodeDAO.importCSV(f.getAbsolutePath());
+      } catch (SQLException e) {
+        e.printStackTrace();
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
     }
   }
 
