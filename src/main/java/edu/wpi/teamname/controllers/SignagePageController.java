@@ -1,6 +1,7 @@
 package edu.wpi.teamname.controllers;
 
 import edu.wpi.teamname.DAOs.NodeDAO;
+import edu.wpi.teamname.Main;
 import edu.wpi.teamname.navigation.Navigation;
 import edu.wpi.teamname.navigation.Screen;
 import edu.wpi.teamname.pathFinding.Edge;
@@ -8,7 +9,6 @@ import edu.wpi.teamname.pathFinding.Graph;
 import edu.wpi.teamname.pathFinding.Node;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,11 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Point2D;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import net.kurobako.gesturefx.GesturePane;
 
 public class SignagePageController {
 
@@ -32,6 +36,8 @@ public class SignagePageController {
   @FXML MFXTextField endLoc;
 
   @FXML MFXTextField results;
+
+  @FXML GesturePane pane;
 
   ObservableList<String> list =
       FXCollections.observableArrayList(
@@ -48,16 +54,25 @@ public class SignagePageController {
     backToHomeButton.setOnMouseClicked(event -> Navigation.navigate(Screen.HOME));
     exitButton.setOnMouseClicked(event -> exit());
     serviceRequestChoiceBox.setOnAction(event -> loadServiceRequestForm());
-    pathFindButton.setOnMouseClicked(event -> {
-      try {
-        processAStarAlg();
-      } catch (SQLException e) {
-        throw new RuntimeException(e);
-      }
-    });
+    pathFindButton.setOnMouseClicked(
+        event -> {
+          try {
+            processAStarAlg();
+          } catch (SQLException e) {
+            throw new RuntimeException(e);
+          }
+        });
 
     startLoc.getText();
     endLoc.getText();
+    String imgPath = Main.class.getResource("images/01_thefirstfloor.png").toString();
+    ImageView image = new ImageView(new Image(imgPath));
+    pane.setContent(image);
+    // pane.setMaxScale();
+
+    // pane.zoomTo(.01, .001, new Point2D(2500, 1700));
+    pane.zoomTo(.01, new Point2D(2500, 1700));
+    pane.setMinScale(.001);
   }
 
   public void loadServiceRequestForm() {
@@ -82,7 +97,6 @@ public class SignagePageController {
     NodeDAO nodeDAO = new NodeDAO();
 
     List<edu.wpi.teamname.ORMClass.Node> nodeList = nodeDAO.getAll();
-
 
     int startNode = Integer.parseInt(startLoc.getText());
     int endNode = Integer.parseInt(endLoc.getText());
@@ -123,7 +137,6 @@ public class SignagePageController {
 
   public void setPath(ArrayList<String> path) {
     results.setText(String.valueOf(path));
-
   }
 
   public void exit() {

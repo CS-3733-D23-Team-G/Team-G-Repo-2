@@ -3,7 +3,7 @@ package edu.wpi.teamname.ORMClass;
 import lombok.Getter;
 import lombok.Setter;
 
-public class Node extends LocationName{
+public class Node extends LocationName {
 
   @Getter @Setter private int nodeID;
   @Getter @Setter private int xcoord;
