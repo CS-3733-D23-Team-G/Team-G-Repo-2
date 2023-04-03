@@ -5,6 +5,8 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -15,19 +17,24 @@
    <children>
       <HBox maxHeight="1.7976931348623157E308" styleClass="top_banner" stylesheets="@style.css">
          <children>
-            <AnchorPane prefHeight="25.0" prefWidth="600.0">
+            <AnchorPane maxHeight="45.0" prefWidth="600.0">
                <children>
                   <MFXButton fx:id="exitButton" layoutX="496.0" maxHeight="25.0" minHeight="25.0" opacity="0.0" prefHeight="25.0" prefWidth="97.0" text="Exit Application" />
                   <Text layoutX="504.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exit Application" />
+                  <ImageView fitHeight="50.0" fitWidth="175.0" layoutX="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@bwh-logo.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
          </children>
       </HBox>
-      <HBox maxHeight="30.0" prefHeight="30.0" styleClass="banner" stylesheets="@style.css">
+      <HBox alignment="CENTER" maxHeight="30.0" prefHeight="30.0" styleClass="banner" stylesheets="@style.css">
          <children>
             <AnchorPane maxHeight="30.0" prefHeight="30.0" prefWidth="600.0">
                <children>
-                  <Text disable="true" fill="WHITE" layoutX="45.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Return to Home" wrappingWidth="85.107421875" />
+                  <Text disable="true" fill="WHITE" layoutX="35.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Return to Home" wrappingWidth="85.107421875" />
                   <Text disable="true" fill="WHITE" layoutX="240.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service Request Forms" />
                   <Text disable="true" fill="WHITE" layoutX="473.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Signage Page" />
                   <Line endX="48.0" endY="-166.0" layoutX="130.0" layoutY="176.0" startX="48.0" startY="-154.0" stroke="#345871" strokeWidth="2.0" />
@@ -57,7 +64,8 @@
                   <DatePicker fx:id="roomDateData" layoutX="404.0" layoutY="42.0" />
                   <MFXButton fx:id="roomClearAll" layoutX="315.0" layoutY="175.0" text="Clearall" />
                   <MFXButton fx:id="roomConfirm" layoutX="427.0" layoutY="179.0" text="confrim" />
-               </children></AnchorPane>
+               </children>
+            </AnchorPane>
          </children>
       </HBox>
    </children>
