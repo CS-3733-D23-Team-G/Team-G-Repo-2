@@ -1,36 +1,33 @@
-package edu.wpi.teamg.DAOS;
+package edu.wpi.teamg.DAOs;
 
-import edu.wpi.teamg.DAOs.LocationNameDAO;
 import edu.wpi.teamg.DBConnection;
 import edu.wpi.teamg.ORMClasses.Node;
-
 import java.io.File;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 public class NodeDAO implements LocationNameDAO {
 
   static DBConnection db = new DBConnection();
   private String SQL;
+  private HashMap<Integer, Node> Nodes = new HashMap<>();
 
   @Override
   public void Import(File file) {}
 
   @Override
-  public File Export() {}
+  public File Export() {
+    return null;
+  }
 
   @Override
   public void insert(Object obj) throws SQLException {}
 
   @Override
-  public void update(Object obj) throws SQLException {}
-
-  @Override
   public void delete(Object obj) throws SQLException {}
 
   @Override
-  public List<Node> getAll() throws SQLException {
+  public HashMap<Integer, Node> getAll() throws SQLException {
 
     db.setConnection();
 
@@ -46,8 +43,6 @@ public class NodeDAO implements LocationNameDAO {
       System.err.println("SQL exception");
       // printSQLException(e);
     }
-
-    List<Node> allNodes = new ArrayList<Node>();
 
     while (rs.next()) {
       Node node = new Node();
@@ -67,11 +62,12 @@ public class NodeDAO implements LocationNameDAO {
       String building = rs.getString("building");
       node.setBuilding(building);
 
-      allNodes.add(node);
+      Nodes.put(node.getNodeID(), node);
     }
-
     db.closeConnection();
-
-    return allNodes;
+    return Nodes;
   }
+
+  @Override
+  public void update(Object old, Object update) throws SQLException {}
 }

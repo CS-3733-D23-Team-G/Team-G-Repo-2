@@ -3,14 +3,13 @@ package edu.wpi.teamg.ORMClasses;
 import lombok.Getter;
 import lombok.Setter;
 
-public class MealRequest extends Request{
+public class MealRequest extends Request {
 
   @Getter @Setter private String recipient;
   @Getter @Setter private String order;
   @Getter @Setter private String note;
 
-  public MealRequest() {
-  }
+  public MealRequest() {}
 }
 
 // AL<Request>

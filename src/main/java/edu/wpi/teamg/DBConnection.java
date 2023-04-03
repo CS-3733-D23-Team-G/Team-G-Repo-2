@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import org.yaml.snakeyaml.Yaml;
 
-public class DBConnection{
+public class DBConnection {
   static Connection connection;
 
   public void setConnection() {
@@ -39,6 +39,7 @@ public class DBConnection{
       return null;
     }
   }
+
   public void closeConnection() {
     try {
       connection.close();
