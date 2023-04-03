@@ -33,6 +33,7 @@ public class NodeDAO implements LocationDAO {
       ps.setString(4, ((Node) obj).getFloor());
       ps.setString(5, ((Node) obj).getBuilding());
       ps.executeUpdate();
+      nodeHash.put(((Node)obj).getNodeID(),(Node)obj);
 
     } catch (SQLException e) {
       System.err.println("SQL exception");
@@ -58,6 +59,7 @@ public class NodeDAO implements LocationDAO {
       ps = db.getConnection().prepareStatement(SQL);
       ps.setInt(1, ((Node) obj).getNodeID());
       ps.executeUpdate();
+      nodeHash.remove(((Node)obj).getNodeID());
 
     } catch (SQLException e) {
       System.err.println("SQL exception");
