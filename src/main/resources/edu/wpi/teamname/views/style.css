@@ -3,4 +3,32 @@
     -fx-background-size: contain;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
+    -fx-background-size: 100% 100%;
+}
+.functionality_zone{
+    -fx-background-color: #F1F1F1;
+    -fx-max-height: 260;
+    -fx-pref-height: 260;
+    -fx-pref-width: 600;
+}
+.top_banner{
+    -fx-background-color: #F1F1F1;
+    -fx-max-height: 25;
+}
+.anchor_pane_sizing{
+    -fx-pref-width: 600;
+}
+.banner{
+    -fx-background-color: #012D5A;
+    -fx-max-height: 30;
+    -fx-pref-height: 30;
+
+}
+.text_box{
+    -fx-background-color: #D9D9D9;
+    -fx-text-fill: 000000;
+
+}
+.banner_text{
+    -fx-text-fill: #FFFFFF;
 }

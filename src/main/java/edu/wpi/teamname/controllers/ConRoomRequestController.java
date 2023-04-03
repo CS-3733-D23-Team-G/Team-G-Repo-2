@@ -4,12 +4,13 @@ import edu.wpi.teamname.navigation.Navigation;
 import edu.wpi.teamname.navigation.Screen;
 import edu.wpi.teamname.requestforms.ConRoomRequestForm;
 import io.github.palexdev.materialfx.controls.MFXButton;
-import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
 
 public class ConRoomRequestController {
 
@@ -21,12 +22,11 @@ public class ConRoomRequestController {
   @FXML MFXButton roomClearAll;
 
   // Text Fields
-  @FXML MFXTextField roomEmployeeNameData;
-  @FXML MFXTextField roomEmployeeIDData;
-  @FXML MFXTextField roomMeetingPurposeData;
-  @FXML MFXTextField roomDateData;
-  @FXML MFXTextField roomTimeData;
-  @FXML MFXTextField roomNumberData;
+  @FXML TextField roomEmployeeIDData;
+  @FXML TextField roomMeetingPurposeData;
+  @FXML DatePicker roomDateData;
+  @FXML ChoiceBox<String> roomTimeData;
+  @FXML ChoiceBox<String> roomNumberData;
   @FXML ChoiceBox<String> serviceRequestChoiceBox;
 
   ObservableList<String> list =
@@ -36,6 +36,12 @@ public class ConRoomRequestController {
           "Furniture Request Form",
           "Meal Request Form",
           "Office Supplies Request Form");
+  ObservableList<String> roomTimeDataList =
+      FXCollections.observableArrayList(
+          "noon", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine");
+  ObservableList<String> roomNumberDataList =
+      FXCollections.observableArrayList(
+          "noon", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine");
 
   @FXML
   public void initialize() {
@@ -44,12 +50,15 @@ public class ConRoomRequestController {
     exitButton.setOnMouseClicked(event -> roomExit());
     roomClearAll.setOnMouseClicked(event -> Navigation.navigate(Screen.ROOM_REQUEST));
     roomConfirm.setOnMouseClicked(event -> Navigation.navigate(Screen.ROOM_REQUEST_SUBMIT));
-    roomEmployeeNameData.getText();
+    //    roomEmployeeNameData.getText();
     roomEmployeeIDData.getText();
     roomMeetingPurposeData.getText();
-    roomDateData.getText();
-    roomTimeData.getText();
-    roomNumberData.getText();
+    roomNumberData.setValue("noon");
+    roomNumberData.setItems(roomNumberDataList);
+    roomTimeData.setValue("noon");
+    roomTimeData.setItems(roomTimeDataList);
+    roomTimeData.getValue();
+    roomNumberData.getValue();
     serviceRequestChoiceBox.setItems(list);
     serviceRequestChoiceBox.setOnAction(event -> loadServiceRequestForm());
   }
@@ -75,17 +84,17 @@ public class ConRoomRequestController {
   }
 
   public ConRoomRequestForm storeConRoomValues() {
-    String employeeName = roomEmployeeNameData.getText();
+    //    String employeeName = roomEmployeeNameData.getText();
     String employeeID = roomEmployeeIDData.getText();
     String meetingPurpose = roomMeetingPurposeData.getText();
-    String scheduledDate = roomDateData.getText();
-    String scheduledTime = roomTimeData.getText();
-    String scheduledRoomNumber = roomNumberData.getText();
+    String scheduledDate = roomDateData.getValue().toString();
+    String scheduledTime = roomTimeData.getValue();
+    String scheduledRoomNumber = roomNumberData.getValue();
 
     System.out.println(
         "Answers: "
-            + employeeName
-            + " "
+            //            + employeeName
+            //            + " "
             + employeeID
             + " "
             + meetingPurpose
@@ -99,7 +108,7 @@ public class ConRoomRequestController {
 
     ConRoomRequestForm form =
         new ConRoomRequestForm(
-            employeeName,
+            "employeeName",
             employeeID,
             meetingPurpose,
             scheduledDate,
@@ -114,7 +123,7 @@ public class ConRoomRequestController {
   public void printConRoomForms(ConRoomRequestForm form) {
 
     System.out.println(
-        form.employeeName
+        "form.employeeName"
             + " "
             + form.employeeID
             + " "
