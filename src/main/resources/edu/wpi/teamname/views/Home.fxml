@@ -2,8 +2,6 @@
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
@@ -16,15 +14,15 @@
    <children>
       <HBox alignment="TOP_CENTER" maxHeight="25.0" style="-fx-background-color: #f1f1f1;" VBox.vgrow="ALWAYS">
          <children>
-            <AnchorPane prefHeight="34.0" prefWidth="600.0">
+            <AnchorPane maxHeight="25.0" maxWidth="600.0" minHeight="25.0" prefHeight="25.0" prefWidth="600.0">
                <children>
-                  <MFXButton fx:id="exitButton" layoutX="504.0" layoutY="2.0" opacity="0.0" prefHeight="30.0" prefWidth="97.0" text="Exit Application" />
-                  <Text disable="true" layoutX="512.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exit Application" />
+                  <MFXButton fx:id="exitButton" layoutX="496.0" maxHeight="25.0" minHeight="25.0" opacity="0.0" prefHeight="25.0" prefWidth="97.0" text="Exit Application" />
+                  <Text disable="true" layoutX="504.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exit Application" />
                </children>
             </AnchorPane>
          </children>
       </HBox>
-      <HBox alignment="CENTER" maxHeight="50.0" style="-fx-background-color: #012d5a;" VBox.vgrow="ALWAYS">
+      <HBox alignment="CENTER" maxHeight="30.0" prefHeight="30.0" style="-fx-background-color: #012d5a;" VBox.vgrow="ALWAYS">
          <children>
             <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="600.0">
                <children>
@@ -40,17 +38,12 @@
             </AnchorPane>
          </children>
       </HBox>
-      <HBox alignment="CENTER" style="-fx-background-color: #f1f1f1;" VBox.vgrow="ALWAYS">
+      <HBox alignment="CENTER" prefHeight="260.0" prefWidth="600.0" style="-fx-background-color: #f1f1f1;" VBox.vgrow="ALWAYS">
          <children>
             <StackPane minHeight="-Infinity" minWidth="-Infinity">
                <children>
-                  <AnchorPane prefHeight="260.0" prefWidth="600.0">
+                  <AnchorPane prefHeight="260.0" prefWidth="600.0" styleClass="homepage" stylesheets="@style.css">
                      <children>
-                        <ImageView fitHeight="260.0" fitWidth="394.0" layoutX="-1.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../../../../Images/international-bwh-1428x1110.jpeg" />
-                           </image>
-                        </ImageView>
                         <Text fill="WHITE" layoutX="74.0" layoutY="163.0" stroke="BLACK" strokeLineCap="BUTT" strokeLineJoin="BEVEL" strokeType="OUTSIDE" strokeWidth="0.6" text="Welcome" wrappingWidth="143.57618713378906">
                            <font>
                               <Font size="31.0" />
