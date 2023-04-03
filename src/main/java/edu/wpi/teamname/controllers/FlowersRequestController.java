@@ -8,6 +8,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
 public class FlowersRequestController {
 
@@ -15,7 +17,15 @@ public class FlowersRequestController {
   @FXML ChoiceBox<String> serviceRequestChoiceBox;
   @FXML MFXButton signagePageButton;
   @FXML MFXButton exitButton;
-
+  @FXML ChoiceBox<String> flowerTypeChoiceBox;
+  @FXML MFXButton submit;
+  @FXML MFXButton clearAll;
+  @FXML TextField deliveryLocation;
+  @FXML TextField orderingfor;
+  @FXML TextArea notes;
+  ObservableList<String> listFlowers =
+      FXCollections.observableArrayList(
+          "Roses", "Tulips", "Daisies", "Sunflowers", "Carnations", "Orchids");
   ObservableList<String> list =
       FXCollections.observableArrayList(
           "Conference Room Request Form",
@@ -27,10 +37,14 @@ public class FlowersRequestController {
   @FXML
   public void initialize() {
     serviceRequestChoiceBox.setItems(list);
+    flowerTypeChoiceBox.setItems(listFlowers);
+
     signagePageButton.setOnMouseClicked(event -> Navigation.navigate(Screen.SIGNAGE_PAGE));
     backToHomeButton.setOnMouseClicked(event -> Navigation.navigate(Screen.HOME));
     exitButton.setOnMouseClicked(event -> exit());
     serviceRequestChoiceBox.setOnAction(event -> loadServiceRequestForm());
+    submit.setOnMouseClicked(event -> Navigation.navigate(Screen.FLOWERS_REQUEST_SUBMIT));
+    clearAll.setOnAction(event -> clearFlowers());
   }
 
   public void loadServiceRequestForm() {
@@ -48,6 +62,14 @@ public class FlowersRequestController {
       return;
     }
   }
+
+  public void clearFlowers() {
+    flowerTypeChoiceBox.setValue("");
+    deliveryLocation.setText("");
+    orderingfor.setText("");
+    notes.setText("");
+  }
+
 
   public void exit() {
     Platform.exit();
