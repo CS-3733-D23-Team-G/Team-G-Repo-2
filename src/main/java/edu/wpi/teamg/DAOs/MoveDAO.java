@@ -7,15 +7,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
 
 public class MoveDAO implements LocationDAO {
   static DBConnection db = new DBConnection();
   private String sql;
 
+  private HashMap<Integer,Move> moves;
   @Override
-  public List getAll() throws SQLException {
+  public HashMap <Integer,Move> getAll() throws SQLException {
     db.setConnection();
 
     PreparedStatement ps;
@@ -45,74 +46,66 @@ public class MoveDAO implements LocationDAO {
       Date date = rs.getDate("date");
       move.setDate(date);
 
-      moves.add(move);
+      moves.put(node_id,Move);
     }
     db.closeConnection();
     return moves;
   }
 
   @Override
-  public int update(Move move) throws SQLException {
+  public void update(Object obj) throws SQLException {
+    Move move = (Move) obj;
     db.setConnection();
-
-
     PreparedStatement ps = db.getConnection().prepareStatement(sql);
-    int result;
+    sql = "UPDATE proto2.move set nodeID = ?, longName = ?, date = ? WHERE nodeID";
 
-    sql = "UPDATE proto2.move set nodeID = ?, longName = ?, date = ?";
-
-    ps.setInt(1,move.getNodeID());
-    ps.setString(2, move.getLongName());
-    ps.setDate(3,move.getDate());
-
-    result = ps.executeUpdate(sql);
+    try {
+      ps.setInt(1, move.getNodeID());
+      ps.setString(2, move.getLongName());
+      ps.setDate(3, move.getDate());
+      ps.executeUpdate(sql);
+    } catch (SQLException e) {
+      System.err.println("SQL Exception");
+    }
     db.closeConnection();
-
-    return result;
   }
 
   @Override
-  public  int  insert(Object move1) throws SQLException {
+  public void insert(Object obj) throws SQLException {
+    Move move = (Move) obj;
     db.setConnection();
-
-    Move move =(Move)move1;
-
+    sql = "INSERT INTO proto2.move (nodeid, longname, date) VALUES (?,?,?);";
     PreparedStatement ps = db.getConnection().prepareStatement(sql);
-    int result;
 
-   sql = "INSERT INTO proto2.move (nodeid, longname, date) VALUES (?,?,?)";
-
-   ps.setInt(1,move.getNodeID());
-   ps.setString(2, move.getLongName());
-   ps.setDate(3,move.getDate());
-
-   result = ps.executeUpdate(sql);
-   db.closeConnection();
-   return result;
-
+    try {
+      ps.setInt(1, move.getNodeID());
+      ps.setString(2, move.getLongName());
+      ps.setDate(3, move.getDate());
+      ps.executeUpdate();
+    } catch (SQLException e) {
+      System.err.println("SQL Exception");
+      e.printStackTrace();
+    }
+    db.closeConnection();
   }
 
   @Override
-  public int delete(Move move) throws SQLException {
+  public void delete(Object obj) throws SQLException {
+    Move move = (Move) obj;
     db.setConnection();
-
-
     PreparedStatement ps = db.getConnection().prepareStatement(sql);
-    int result;
-
     sql = "DELETE FROM proto2.move WHERE nodeID = ?";
-
-    ps.setInt(1,move.getNodeID());
-
-
-    result = ps.executeUpdate(sql);
+    try {
+      ps.setInt(1, move.getNodeID());
+    } catch (SQLException e) {
+      System.err.println("SQL Exception");
+    }
     db.closeConnection();
-    return result;
-
   }
 
   @Override
-  public void importCSV() throws SQLException {
+  public void importCSV(String filePath) throws SQLException {
+
 
 
   }

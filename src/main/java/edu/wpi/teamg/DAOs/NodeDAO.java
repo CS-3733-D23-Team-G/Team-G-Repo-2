@@ -12,7 +12,7 @@ public class NodeDAO implements LocationDAO {
   private String SQL;
 
   @Override
-  public void importCSV() {}
+  public void importCSV(String path) throws SQLException {}
 
   @Override
   public void exportCSV() {}

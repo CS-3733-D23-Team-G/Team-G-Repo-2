@@ -10,5 +10,11 @@ public class Move {
   @Getter @Setter public String longName;
   @Getter @Setter public Date date;
 
+  public Move(int nodeID, String longName, Date date) {
+    this.nodeID = nodeID;
+    this.longName = longName;
+    this.date = date;
+  }
+
   public Move() {}
 }
