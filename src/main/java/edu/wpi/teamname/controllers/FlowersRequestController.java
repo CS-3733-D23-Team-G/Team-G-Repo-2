@@ -13,13 +13,14 @@ import javafx.scene.control.TextField;
 
 public class FlowersRequestController {
 
-  @FXML MFXButton backToHomeButton;
+  @FXML MFXButton returnHomeButton;
   @FXML ChoiceBox<String> serviceRequestChoiceBox;
   @FXML MFXButton signagePageButton;
   @FXML MFXButton exitButton;
   @FXML ChoiceBox<String> flowerTypeChoiceBox;
   @FXML MFXButton submit;
   @FXML MFXButton clearAll;
+  @FXML TextField flowerRequestEmployeeID;
   @FXML TextField deliveryLocation;
   @FXML TextField orderingfor;
   @FXML TextArea notes;
@@ -40,7 +41,7 @@ public class FlowersRequestController {
     flowerTypeChoiceBox.setItems(listFlowers);
 
     signagePageButton.setOnMouseClicked(event -> Navigation.navigate(Screen.SIGNAGE_PAGE));
-    backToHomeButton.setOnMouseClicked(event -> Navigation.navigate(Screen.HOME));
+    returnHomeButton.setOnMouseClicked(event -> Navigation.navigate(Screen.HOME));
     exitButton.setOnMouseClicked(event -> exit());
     serviceRequestChoiceBox.setOnAction(event -> loadServiceRequestForm());
     submit.setOnMouseClicked(event -> Navigation.navigate(Screen.FLOWERS_REQUEST_SUBMIT));
@@ -68,6 +69,7 @@ public class FlowersRequestController {
     deliveryLocation.setText("");
     orderingfor.setText("");
     notes.setText("");
+    flowerRequestEmployeeID.setText("");
   }
 
   public void exit() {
