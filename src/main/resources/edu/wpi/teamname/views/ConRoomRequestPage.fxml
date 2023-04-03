@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
@@ -11,7 +13,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamname.controllers.ConRoomRequestController">
     <children>
-        <Rectangle arcHeight="5.0" fill="#f1f1f1" height="400.0" stroke="TRANSPARENT" strokeType="INSIDE" width="600.0" />
+        <Rectangle accessibleRole="TEXT_FIELD" arcHeight="5.0" fill="#f1f1f1" height="400.0" pickOnBounds="true" stroke="TRANSPARENT" strokeType="INSIDE" width="600.0" />
         <Rectangle arcHeight="5.0" fill="#012d5a" height="64.0" layoutY="40.0" stroke="TRANSPARENT" strokeType="INSIDE" width="600.0" />
         <MFXButton fx:id="backToHomeButton" layoutY="39.0" opacity="0.0" prefHeight="64.0" prefWidth="184.0" text="Return to Home Button" />
         <MFXButton fx:id="signagePageButton" layoutX="416.0" layoutY="40.0" opacity="0.0" prefHeight="64.0" prefWidth="184.0" text="Signage Page Button" />
@@ -21,7 +23,7 @@
         <Text disable="true" fill="WHITE" layoutX="49.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Return to Home" />
         <Text disable="true" fill="WHITE" layoutX="474.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Signage Page" />
         <Text disable="true" layoutX="482.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exit Application" />
-        <Text layoutX="152.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Conference Room Reservation Request">
+        <Text layoutX="54.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Conference Room Reservation Request">
             <font>
                 <Font size="18.0" />
             </font>
@@ -31,22 +33,22 @@
                 <Font size="18.0" />
             </font>
         </Text>
-        <Text layoutX="54.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Meeting Purpose">
+        <Text layoutX="304.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Meeting Purpose">
             <font>
                 <Font size="18.0" />
             </font>
         </Text>
-        <Text layoutX="300.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time of Meeting">
+        <Text layoutX="57.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time of Meeting">
             <font>
                 <Font size="18.0" />
             </font>
         </Text>
-        <Text layoutX="57.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Meeting Date">
+        <Text layoutX="305.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Meeting Date">
             <font>
                 <Font size="18.0" />
             </font>
         </Text>
-        <Text layoutX="305.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Room Number">
+        <Text layoutX="58.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Room Number">
             <font>
                 <Font size="18.0" />
             </font>
@@ -58,11 +60,15 @@
         <Text disable="true" fill="WHITE" layoutX="352.0" layoutY="368.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Submit" />
         <Text disable="true" fill="WHITE" layoutX="112.0" layoutY="368.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Clear All Fields" />
         <MFXTextField fx:id="roomEmployeeIDData" layoutX="56.0" layoutY="164.0" minHeight="-Infinity" prefHeight="22.0" prefWidth="172.0" />
-        <MFXTextField fx:id="roomMeetingPurposeData" layoutX="56.0" layoutY="232.0" minHeight="-Infinity" prefHeight="22.0" prefWidth="172.0" />
-        <MFXTextField fx:id="roomDateData" layoutX="57.0" layoutY="293.0" minHeight="-Infinity" prefHeight="22.0" prefWidth="172.0" />
-        <MFXTextField fx:id="roomNumberData" layoutX="299.0" layoutY="232.0" minHeight="-Infinity" prefHeight="22.0" prefWidth="172.0" />
-        <MFXTextField fx:id="roomTimeData" layoutX="299.0" layoutY="166.0" minHeight="-Infinity" prefHeight="22.0" prefWidth="172.0" />
+        <MFXTextField fx:id="roomMeetingPurposeData" layoutX="306.0" layoutY="247.0" minHeight="-Infinity" prefHeight="64.0" prefWidth="172.0" />
+        <MFXTextField fx:id="roomNumberData" layoutX="52.0" layoutY="226.0" minHeight="-Infinity" prefHeight="22.0" prefWidth="172.0" />
+        <MFXTextField fx:id="roomTimeData" layoutX="56.0" layoutY="290.0" minHeight="-Infinity" prefHeight="22.0" prefWidth="172.0" />
         <ChoiceBox fx:id="serviceRequestChoiceBox" layoutX="192.0" layoutY="40.0" opacity="0.0" prefHeight="64.0" prefWidth="214.0" />
         <Text disable="true" fill="WHITE" layoutX="237.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service Request Forms" />
+      <MFXDatePicker fx:id="roomDatePicker" layoutX="306.0" layoutY="167.0" opacity="0.81" prefHeight="38.0" prefWidth="172.0" promptText="Choose Date">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </MFXDatePicker>
     </children>
 </AnchorPane>

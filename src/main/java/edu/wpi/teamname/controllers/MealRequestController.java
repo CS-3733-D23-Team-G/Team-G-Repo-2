@@ -1,6 +1,5 @@
 package edu.wpi.teamname.controllers;
 
-import edu.wpi.teamname.DAOs.MealRequestDAO;
 import edu.wpi.teamname.ORMClasses.MealRequest;
 import edu.wpi.teamname.navigation.Navigation;
 import edu.wpi.teamname.navigation.Screen;
@@ -101,7 +100,7 @@ public class MealRequestController {
 
     System.out.println(
         "Employee ID: "
-            + mr.getReqid()
+            + mr.getEmpid()
             + "\nDelivery Location: "
             + mr.getLocation()
             + "\nOrder: "
@@ -115,8 +114,8 @@ public class MealRequestController {
             + "\nDelivery Time: "
             + mr.getDeliveryTime());
 
-    MealRequestDAO mealRequestDAO = new MealRequestDAO();
-    mealRequestDAO.insert(mr);
+    //    MealRequestDAO mealRequestDAO = new MealRequestDAO();
+    //    mealRequestDAO.insert(mr);
   }
 
   public Time StringToTime(String s) {
