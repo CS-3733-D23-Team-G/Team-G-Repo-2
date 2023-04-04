@@ -1,6 +1,7 @@
 package edu.wpi.teamname.controllers;
 
 import edu.wpi.teamname.DAOs.NodeDAO;
+import edu.wpi.teamname.Main;
 import edu.wpi.teamname.ORMClass.Node;
 import edu.wpi.teamname.navigation.Navigation;
 import edu.wpi.teamname.navigation.Screen;
@@ -16,7 +17,11 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Point2D;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import net.kurobako.gesturefx.GesturePane;
 
 public class SignageAdminController {
 
@@ -31,6 +36,8 @@ public class SignageAdminController {
   @FXML MFXTextField endLoc;
 
   @FXML MFXTextField results;
+
+  @FXML GesturePane pane;
 
   ObservableList<String> list =
       FXCollections.observableArrayList(
@@ -58,6 +65,15 @@ public class SignageAdminController {
 
     startLoc.getText();
     endLoc.getText();
+    String imgPath = Main.class.getResource("images/00_thelowerlevel1.png").toString();
+    ImageView image = new ImageView(new Image(imgPath));
+    pane.setContent(image);
+    // pane.setMaxScale();
+
+
+    pane.setMinScale(.001);
+    pane.zoomTo(.000001, new Point2D(2500, 1700));
+    pane.zoomTo(.000001, new Point2D(2500, 1700));
   }
 
   public void loadServiceRequestForm() {

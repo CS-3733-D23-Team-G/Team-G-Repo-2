@@ -65,14 +65,13 @@ public class SignagePageController {
 
     startLoc.getText();
     endLoc.getText();
-    String imgPath = Main.class.getResource("images/01_thefirstfloor.png").toString();
+    String imgPath = Main.class.getResource("images/00_thelowerlevel1.png").toString();
     ImageView image = new ImageView(new Image(imgPath));
     pane.setContent(image);
     // pane.setMaxScale();
-
-    // pane.zoomTo(.01, .001, new Point2D(2500, 1700));
-    pane.zoomTo(.01, new Point2D(2500, 1700));
     pane.setMinScale(.001);
+    pane.zoomTo(.000001, new Point2D(2500, 1700));
+    pane.zoomTo(.000001, new Point2D(2500, 1700));
   }
 
   public void loadServiceRequestForm() {
