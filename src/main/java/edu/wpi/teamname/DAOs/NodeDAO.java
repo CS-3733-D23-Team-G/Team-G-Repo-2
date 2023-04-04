@@ -1,7 +1,11 @@
 package edu.wpi.teamname.DAOs;
 
 import edu.wpi.teamname.DBConnection;
+
+import edu.wpi.teamname.ORMClass.Node;
+
 import edu.wpi.teamname.ORMClasses.Node;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

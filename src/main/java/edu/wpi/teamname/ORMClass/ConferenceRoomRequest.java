@@ -1,11 +1,11 @@
-package edu.wpi.teamname.ORMClasses;
+package edu.wpi.teamname.ORMClass;
 
 import java.sql.Time;
 import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 
-public class ConferenceRoomRequest extends Request {
+public class ConferenceRoomRequest {
 
   @Getter @Setter private int reqid;
   @Getter @Setter private int location;

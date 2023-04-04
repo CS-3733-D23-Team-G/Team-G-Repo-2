@@ -1,14 +1,19 @@
 package edu.wpi.teamname.controllers;
 
+import edu.wpi.teamname.ORMClasses.ConferenceRoomRequest;
 import edu.wpi.teamname.navigation.Navigation;
 import edu.wpi.teamname.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import java.sql.Date;
+import java.sql.Time;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
 
 public class ConRoomRequestController {
 
@@ -20,10 +25,9 @@ public class ConRoomRequestController {
   @FXML MFXButton roomClearAll;
 
   // Text Fields
-
-  @FXML MFXTextField roomEmployeeIDData;
-  @FXML MFXTextField roomMeetingPurposeData;
-  @FXML MFXTextField roomDateData;
+  @FXML TextField roomEmployeeIDData;
+  @FXML TextField roomMeetingPurposeData;
+  @FXML MFXDatePicker datePicker;
   @FXML MFXTextField roomTimeData;
   @FXML MFXTextField roomNumberData;
   @FXML ChoiceBox<String> serviceRequestChoiceBox;
@@ -35,22 +39,39 @@ public class ConRoomRequestController {
           "Furniture Request Form",
           "Meal Request Form",
           "Office Supplies Request Form");
+  // ObservableList<String> roomTimeDataList =
+  //    FXCollections.observableArrayList(
+  //        "12:00", "12:30", "1:00", "1:30");
+  // ObservableList<String> roomNumberDataList =
+  //    FXCollections.observableArrayList(
+  //        "1", "2", "3", "4", "5", "6");
 
   @FXML
   public void initialize() {
     backToHomeButton.setOnMouseClicked(event -> Navigation.navigate(Screen.HOME));
     signagePageButton.setOnMouseClicked(event -> Navigation.navigate(Screen.SIGNAGE_PAGE));
     exitButton.setOnMouseClicked(event -> roomExit());
-    roomClearAll.setOnMouseClicked(event -> Navigation.navigate(Screen.ROOM_REQUEST));
-    roomConfirm.setOnMouseClicked(event -> Navigation.navigate(Screen.ROOM_REQUEST_SUBMIT));
-    // roomEmployeeNameData.getText();
+    roomConfirm.setOnMouseClicked(
+        event -> {
+          Navigation.navigate(Screen.ROOM_REQUEST_SUBMIT);
+          storeRoomValues();
+        });
+
+    datePicker.setText("");
+
     roomEmployeeIDData.getText();
     roomMeetingPurposeData.getText();
-    roomDateData.getText();
-    roomTimeData.getText();
     roomNumberData.getText();
+    roomTimeData.getText();
+    // roomNumberData.setValue("noon");
+    // roomNumberData.setItems(roomNumberDataList);
+    // roomTimeData.setValue("noon");
+    // roomTimeData.setItems(roomTimeDataList);
+    // roomTimeData.getValue();
+    // roomNumberData.getValue();
     serviceRequestChoiceBox.setItems(list);
     serviceRequestChoiceBox.setOnAction(event -> loadServiceRequestForm());
+    roomClearAll.setOnAction(event -> clearAllData());
   }
 
   public void loadServiceRequestForm() {
@@ -67,6 +88,53 @@ public class ConRoomRequestController {
     } else {
       return;
     }
+  }
+
+  public void storeRoomValues() {
+    ConferenceRoomRequest crr = new ConferenceRoomRequest();
+
+    crr.setEmpid(Integer.parseInt(roomEmployeeIDData.getText()));
+    crr.setServ_by(1);
+    // assume for now they are going to input a node number, so parseInt
+    crr.setLocation(Integer.parseInt(roomNumberData.getText()));
+    crr.setPurpose(roomMeetingPurposeData.getText());
+    crr.setMeeting_date(Date.valueOf(datePicker.getValue()));
+    crr.setMeeting_time(StringToTime(roomTimeData.getText()));
+
+    System.out.println(
+        "Employee ID: "
+            + crr.getEmpid()
+            + "\nMeeting Location: "
+            + crr.getLocation()
+            + "\nPurpose: "
+            + crr.getPurpose()
+            //                    + "\nNote: "
+            //                    + crr.getNote()
+            //                    + "\nRecipient: "
+            //                    + crr.getRecipient()
+            + "\nMeeting Date: "
+            + crr.getMeeting_date()
+            + "\nMeeting Time: "
+            + crr.getMeeting_time());
+
+    //    MealRequestDAO mealRequestDAO = new MealRequestDAO();
+    //    mealRequestDAO.insert(mr);
+  }
+
+  public void clearAllData() {
+    roomEmployeeIDData.setText("");
+    roomMeetingPurposeData.setText("");
+    datePicker.setText("");
+    roomTimeData.setText("");
+    roomNumberData.setText("");
+    return;
+  }
+
+  public Time StringToTime(String s) {
+
+    String[] hourMin = s.split(":", 2);
+    Time t = new Time(Integer.parseInt(hourMin[0]), Integer.parseInt(hourMin[1]), 00);
+    return t;
   }
 
   public void roomExit() {

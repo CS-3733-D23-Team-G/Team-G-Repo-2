@@ -1,6 +1,5 @@
 package edu.wpi.teamname.controllers;
 
-import edu.wpi.teamname.DAOs.MealRequestDAO;
 import edu.wpi.teamname.ORMClasses.MealRequest;
 import edu.wpi.teamname.navigation.Navigation;
 import edu.wpi.teamname.navigation.Screen;
@@ -21,6 +20,7 @@ public class MealRequestController {
   @FXML MFXButton signagePageButton;
   @FXML MFXButton backToHomeButton;
   @FXML MFXButton exitButton;
+  @FXML MFXButton mealClearAll;
 
   @FXML MFXDatePicker mealDate;
 
@@ -62,6 +62,8 @@ public class MealRequestController {
     backToHomeButton.setOnMouseClicked(event -> Navigation.navigate(Screen.HOME));
     exitButton.setOnMouseClicked(event -> exit());
 
+    mealClearAll.setOnAction(event -> clearAllData());
+
     mealSubmitButton.setOnMouseClicked(
         event -> {
           try {
@@ -76,7 +78,10 @@ public class MealRequestController {
     mealDeliveryLocationData.getText();
     mealPersonOrderingForData.getText();
     mealNotesData.getText();
+
+    serviceRequestChoiceBox.setItems(list);
     mealFoodChoice.setItems(foodList);
+    serviceRequestChoiceBox.setItems(list);
     serviceRequestChoiceBox.setOnAction(event -> loadServiceRequestForm());
     mealDate.getValue();
     mealTimeOfDeliver.getText();
@@ -115,8 +120,8 @@ public class MealRequestController {
             + "\nDelivery Time: "
             + mr.getDeliveryTime());
 
-    MealRequestDAO mealRequestDAO = new MealRequestDAO();
-    mealRequestDAO.insert(mr);
+    //    MealRequestDAO mealRequestDAO = new MealRequestDAO();
+    //    mealRequestDAO.insert(mr);
   }
 
   public Time StringToTime(String s) {
@@ -124,6 +129,17 @@ public class MealRequestController {
     String[] hourMin = s.split(":", 2);
     Time t = new Time(Integer.parseInt(hourMin[0]), Integer.parseInt(hourMin[1]), 00);
     return t;
+  }
+
+  public void clearAllData() {
+    mealEmployeeIDData.setText("");
+    mealDeliveryLocationData.setText("");
+    mealPersonOrderingForData.setText("");
+    mealNotesData.setText("");
+    mealDate.setText("");
+    mealTimeOfDeliver.setText("");
+    mealFoodChoice.setValue("");
+    return;
   }
 
   public void loadServiceRequestForm() {
