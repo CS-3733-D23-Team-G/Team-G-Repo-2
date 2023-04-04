@@ -3,6 +3,7 @@ package edu.wpi.teamg.DAOs;
 import edu.wpi.teamg.DBConnection;
 import edu.wpi.teamg.ORMClasses.Node;
 import java.io.File;
+import java.io.IOException;
 import java.sql.*;
 import java.util.HashMap;
 
@@ -13,7 +14,7 @@ public class NodeDAO implements LocationNameDAO {
   private HashMap<Integer, Node> Nodes = new HashMap<>();
 
   @Override
-  public void Import(File file) {}
+  public void Import(String filename) throws SQLException, IOException {}
 
   @Override
   public File Export() {

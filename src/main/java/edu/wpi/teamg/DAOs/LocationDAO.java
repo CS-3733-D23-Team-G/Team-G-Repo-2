@@ -2,7 +2,7 @@ package edu.wpi.teamg.DAOs;
 
 import edu.wpi.teamg.DBConnection;
 import edu.wpi.teamg.ORMClasses.LocationName;
-import java.io.File;
+import java.io.*;
 import java.sql.*;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -51,7 +51,8 @@ public class LocationDAO implements LocationNameDAO {
   public void update(Object old, Object update) throws SQLException {
     connection.setConnection();
     PreparedStatement ps;
-    SQL ="UPDATE proto2.locationname SET shortname=?, nodetype=?, longname=? Where longname=? AND shortname=? AND nodetype=? ";
+    SQL =
+        "UPDATE proto2.locationname SET shortname=?, nodetype=?, longname=? Where longname=? AND shortname=? AND nodetype=? ";
     LocationName ol = (LocationName) old;
     LocationName up = (LocationName) update;
 
@@ -114,7 +115,6 @@ public class LocationDAO implements LocationNameDAO {
     connection.closeConnection();
   }
 
-  @Override
   public void Import(File file) throws SQLException {
     connection.setConnection();
     PreparedStatement ps;
@@ -132,6 +132,26 @@ public class LocationDAO implements LocationNameDAO {
     connection.closeConnection();
   }
 
+  @Override
+  public void Import(String filename) throws SQLException, IOException {
+    LocationName l1 = new LocationName();
+    String line = "";
+    String split = ",";
+    try {
+      BufferedReader br = new BufferedReader(new FileReader(filename));
+      while ((line = br.readLine()) != null) {
+        String[] loca = line.split(split);
+        LocationName loc = new LocationName(loca[0], loca[1], loca[2]);
+        this.insert(loc);
+      }
+      br.close();
+    }catch(SQLException c){
+      System.err.println("SQL Exception");
+    }catch(IOException e){
+      System.err.println("IO exception");
+
+    }
+  }
   @Override
   public File Export() throws SQLException {
     return null;
