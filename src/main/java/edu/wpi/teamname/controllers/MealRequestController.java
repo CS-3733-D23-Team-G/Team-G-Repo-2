@@ -1,9 +1,14 @@
 package edu.wpi.teamname.controllers;
 
+import edu.wpi.teamname.ORMClasses.MealRequest;
 import edu.wpi.teamname.navigation.Navigation;
 import edu.wpi.teamname.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.sql.Time;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,15 +20,17 @@ public class MealRequestController {
   @FXML MFXButton signagePageButton;
   @FXML MFXButton backToHomeButton;
   @FXML MFXButton exitButton;
+  @FXML MFXButton mealClearAll;
+
+  @FXML MFXDatePicker mealDate;
 
   // TextFields
-  // @FXML MFXTextField mealNameData;
+  @FXML MFXTextField mealTimeOfDeliver;
   @FXML MFXTextField mealEmployeeIDData;
   @FXML MFXTextField mealDeliveryLocationData;
   @FXML MFXTextField mealPersonOrderingForData;
   @FXML MFXTextField mealNotesData;
-  @FXML MFXTextField mealFoodChoice;
-
+  @FXML ChoiceBox<String> mealFoodChoice;
   @FXML ChoiceBox<String> serviceRequestChoiceBox;
 
   ObservableList<String> list =
@@ -34,6 +41,20 @@ public class MealRequestController {
           "Meal Request Form",
           "Office Supplies Request Form");
 
+  ObservableList<String> foodList =
+      FXCollections.observableArrayList(
+          "Fenway Franks",
+          "Choco Taco",
+          "Salt-Based Steak",
+          "Bisquit",
+          "Shrimp Fried Rice",
+          "Beef Wellington",
+          "Spaghetii Taco",
+          "Mac and Cheese Pizza",
+          "Cavatappi",
+          "One Singular Oyster",
+          "CC Buritto Bowl (w/ Siracha)");
+
   @FXML
   public void initialize() {
     mealSubmitButton.setOnMouseClicked(event -> Navigation.navigate(Screen.MEAL_REQUEST_SUBMIT));
@@ -41,67 +62,85 @@ public class MealRequestController {
     backToHomeButton.setOnMouseClicked(event -> Navigation.navigate(Screen.HOME));
     exitButton.setOnMouseClicked(event -> exit());
 
+    mealClearAll.setOnAction(event -> clearAllData());
+
+    mealSubmitButton.setOnMouseClicked(
+        event -> {
+          try {
+            storeMealValues();
+          } catch (SQLException e) {
+            throw new RuntimeException(e);
+          }
+        });
+
     //  mealNameData.getText();
     mealEmployeeIDData.getText();
     mealDeliveryLocationData.getText();
     mealPersonOrderingForData.getText();
     mealNotesData.getText();
-    mealFoodChoice.getText();
+
+    serviceRequestChoiceBox.setItems(list);
+    mealFoodChoice.setItems(foodList);
     serviceRequestChoiceBox.setItems(list);
     serviceRequestChoiceBox.setOnAction(event -> loadServiceRequestForm());
+    mealDate.getValue();
+    mealTimeOfDeliver.getText();
   }
 
   public void exit() {
     Platform.exit();
   }
 
-  //
-  //  public MealRequestForm storeMealValues() {
-  //    String mealName = mealNameData.getText();
-  //    String mealEmployeeID = mealEmployeeIDData.getText();
-  //    String mealLocation = mealDeliveryLocationData.getText();
-  //    String mealOrderer = mealPersonOrderingForData.getText();
-  //    String mealNotes = mealNotesData.getText();
-  //    String foodChoice = mealFoodChoice.getText();
-  //
-  //    System.out.println(
-  //        "Answers: "
-  //            + mealName
-  //            + " "
-  //            + mealEmployeeID
-  //            + " "
-  //            + mealLocation
-  //            + " "
-  //            + mealOrderer
-  //            + " "
-  //            + mealNotes
-  //            + " "
-  //            + foodChoice
-  //            + " ");
-  //
-  //    MealRequestForm mealForm =
-  //        new MealRequestForm(
-  //            mealName, mealEmployeeID, mealLocation, mealOrderer, mealNotes, foodChoice);
-  //    printMealForms(mealForm);
-  //
-  //    return mealForm;
-  //  }
-  //
-  //  public void printMealForms(MealRequestForm form) {
-  //
-  //    System.out.println(
-  //        form.mealName
-  //            + " "
-  //            + form.mealEmployeeID
-  //            + " "
-  //            + form.mealLocation
-  //            + " "
-  //            + form.mealOrderer
-  //            + " "
-  //            + form.mealNotes
-  //            + " "
-  //            + form.mealFoodChoice);
-  //  }
+  public void storeMealValues() throws SQLException {
+    MealRequest mr = new MealRequest();
+
+    mr.setEmpid(Integer.parseInt(mealEmployeeIDData.getText()));
+    mr.setServ_by(1);
+    // assume for now they are going to input a node number, so parseInt
+    mr.setLocation(Integer.parseInt(mealDeliveryLocationData.getText()));
+    mr.setRecipient(mealPersonOrderingForData.getText());
+    mr.setNote(mealNotesData.getText());
+    mr.setDeliveryDate(Date.valueOf(mealDate.getValue()));
+    mr.setDeliveryTime(StringToTime(mealTimeOfDeliver.getText()));
+    mr.setOrder(mealFoodChoice.getValue());
+
+    System.out.println(
+        "Employee ID: "
+            + mr.getReqid()
+            + "\nDelivery Location: "
+            + mr.getLocation()
+            + "\nOrder: "
+            + mr.getOrder()
+            + "\nNote: "
+            + mr.getNote()
+            + "\nRecipient: "
+            + mr.getRecipient()
+            + "\nDelivery Date: "
+            + mr.getDeliveryDate()
+            + "\nDelivery Time: "
+            + mr.getDeliveryTime());
+
+    //    MealRequestDAO mealRequestDAO = new MealRequestDAO();
+    //    mealRequestDAO.insert(mr);
+  }
+
+  public Time StringToTime(String s) {
+
+    String[] hourMin = s.split(":", 2);
+    Time t = new Time(Integer.parseInt(hourMin[0]), Integer.parseInt(hourMin[1]), 00);
+    return t;
+  }
+
+  public void clearAllData() {
+    mealEmployeeIDData.setText("");
+    mealDeliveryLocationData.setText("");
+    mealPersonOrderingForData.setText("");
+    mealNotesData.setText("");
+    mealDate.setText("");
+    mealTimeOfDeliver.setText("");
+    mealFoodChoice.setValue("");
+    return;
+  }
 
   public void loadServiceRequestForm() {
     if (serviceRequestChoiceBox.getValue().equals("Meal Request Form")) {
