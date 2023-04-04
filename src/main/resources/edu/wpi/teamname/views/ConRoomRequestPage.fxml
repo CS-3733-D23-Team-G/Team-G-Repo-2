@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
-
 
 <VBox xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamname.controllers.ConRoomRequestController">
    <children>
@@ -56,20 +54,17 @@
                   <TextField fx:id="roomEmployeeIDData" layoutX="21.0" layoutY="42.0" styleClass="text_box" stylesheets="@style.css" />
                   <Text layoutX="21.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Purpose" />
                   <TextField fx:id="roomMeetingPurposeData" layoutX="21.0" layoutY="96.0" styleClass="text_box" stylesheets="@style.css" />
-                  <Text layoutX="21.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Notes" />
-                  <TextArea layoutX="21.0" layoutY="151.0" prefHeight="97.0" prefWidth="149.0" styleClass="text_box" stylesheets="@style.css" />
                   <Text layoutX="181.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time" />
                   <Text layoutX="300.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Room" />
                   <Text layoutX="404.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" />
-                  <ChoiceBox fx:id="roomNumberData" layoutX="299.0" layoutY="42.0" prefHeight="25.0" prefWidth="85.0" />
-                  <ChoiceBox fx:id="roomTimeData" layoutX="184.0" layoutY="42.0" prefHeight="25.0" prefWidth="85.0" />
-                  <DatePicker fx:id="roomDateData" layoutX="404.0" layoutY="42.0" />
-                  <MFXButton fx:id="roomClearAll" layoutX="315.0" layoutY="175.0" text="Clearall" />
-                  <MFXButton fx:id="roomConfirm" layoutX="427.0" layoutY="179.0" text="confrim" />
+                  <MFXButton fx:id="roomClearAll" layoutX="315.0" layoutY="175.0" text="Clear All" />
+                  <MFXButton fx:id="roomConfirm" layoutX="430.0" layoutY="175.0" text="Confirm" />
+                  <MFXDatePicker fx:id="datePicker" layoutX="404.0" layoutY="42.0" minHeight="-Infinity" prefHeight="26.0" prefWidth="168.0" />
+                  <MFXTextField fx:id="roomTimeData" layoutX="181.0" layoutY="43.0" />
+                  <MFXTextField fx:id="roomNumberData" layoutX="294.0" layoutY="43.0" />
                </children>
             </AnchorPane>
          </children>
       </HBox>
    </children>
 </VBox>
-

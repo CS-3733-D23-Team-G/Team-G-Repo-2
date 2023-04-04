@@ -64,7 +64,6 @@ public class MealRequestController {
 
     mealClearAll.setOnAction(event -> clearAllData());
 
-
     mealSubmitButton.setOnMouseClicked(
         event -> {
           try {
@@ -73,7 +72,6 @@ public class MealRequestController {
             throw new RuntimeException(e);
           }
         });
-
 
     //  mealNameData.getText();
     mealEmployeeIDData.getText();
@@ -132,7 +130,6 @@ public class MealRequestController {
     Time t = new Time(Integer.parseInt(hourMin[0]), Integer.parseInt(hourMin[1]), 00);
     return t;
   }
-
 
   public void clearAllData() {
     mealEmployeeIDData.setText("");
