@@ -1,68 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
-<?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
-<?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamname.controllers.ConRoomRequestController">
-    <children>
-        <Rectangle arcHeight="5.0" fill="#f1f1f1" height="400.0" stroke="TRANSPARENT" strokeType="INSIDE" width="600.0" />
-        <Rectangle arcHeight="5.0" fill="#012d5a" height="64.0" layoutY="40.0" stroke="TRANSPARENT" strokeType="INSIDE" width="600.0" />
-        <MFXButton fx:id="backToHomeButton" layoutY="39.0" opacity="0.0" prefHeight="64.0" prefWidth="184.0" text="Return to Home Button" />
-        <MFXButton fx:id="signagePageButton" layoutX="416.0" layoutY="40.0" opacity="0.0" prefHeight="64.0" prefWidth="184.0" text="Signage Page Button" />
-        <MFXButton fx:id="exitButton" layoutX="476.0" layoutY="7.0" opacity="0.0" prefHeight="27.0" prefWidth="97.0" text="Exit Application" />
-        <Line endX="48.0" endY="-163.5" layoutX="139.0" layoutY="215.0" startX="48.0" startY="-120.5" stroke="#345871" strokeWidth="2.0" />
-        <Line endX="48.0" endY="-163.5" layoutX="362.0" layoutY="213.0" startX="48.0" startY="-119.5" stroke="#345871" strokeWidth="2.0" />
-        <Text disable="true" fill="WHITE" layoutX="49.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Return to Home" />
-        <Text disable="true" fill="WHITE" layoutX="474.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Signage Page" />
-        <Text disable="true" layoutX="482.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exit Application" />
-        <Text layoutX="152.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Conference Room Reservation Request">
-            <font>
-                <Font size="18.0" />
-            </font>
-        </Text>
-        <Text layoutX="54.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee ID">
-            <font>
-                <Font size="18.0" />
-            </font>
-        </Text>
-        <Text layoutX="54.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Meeting Purpose">
-            <font>
-                <Font size="18.0" />
-            </font>
-        </Text>
-        <Text layoutX="300.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time of Meeting">
-            <font>
-                <Font size="18.0" />
-            </font>
-        </Text>
-        <Text layoutX="57.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Meeting Date">
-            <font>
-                <Font size="18.0" />
-            </font>
-        </Text>
-        <Text layoutX="305.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Room Number">
-            <font>
-                <Font size="18.0" />
-            </font>
-        </Text>
-        <Rectangle arcHeight="5.0" fill="#012d5a" height="45.0" layoutX="85.0" layoutY="341.0" stroke="TRANSPARENT" strokeType="INSIDE" width="132.0" />
-        <Rectangle arcHeight="5.0" fill="#012d5a" height="45.0" layoutX="305.0" layoutY="341.0" stroke="TRANSPARENT" strokeType="INSIDE" width="132.0" />
-        <MFXButton fx:id="roomClearAll" layoutX="85.0" layoutY="341.0" opacity="0.0" prefHeight="45.0" prefWidth="132.0" rippleColor="#bdbdbd00" text="Clear All Fields" />
-        <MFXButton id="roomConfirm" fx:id="roomConfirm" layoutX="305.0" layoutY="341.0" opacity="0.0" prefHeight="45.0" prefWidth="132.0" rippleColor="#bdbdbd00" text="Submit" />
-        <Text disable="true" fill="WHITE" layoutX="352.0" layoutY="368.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Submit" />
-        <Text disable="true" fill="WHITE" layoutX="112.0" layoutY="368.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Clear All Fields" />
-        <MFXTextField fx:id="roomEmployeeIDData" layoutX="56.0" layoutY="164.0" minHeight="-Infinity" prefHeight="22.0" prefWidth="172.0" />
-        <MFXTextField fx:id="roomMeetingPurposeData" layoutX="56.0" layoutY="232.0" minHeight="-Infinity" prefHeight="22.0" prefWidth="172.0" />
-        <MFXTextField fx:id="roomDateData" layoutX="57.0" layoutY="293.0" minHeight="-Infinity" prefHeight="22.0" prefWidth="172.0" />
-        <MFXTextField fx:id="roomNumberData" layoutX="299.0" layoutY="232.0" minHeight="-Infinity" prefHeight="22.0" prefWidth="172.0" />
-        <MFXTextField fx:id="roomTimeData" layoutX="299.0" layoutY="166.0" minHeight="-Infinity" prefHeight="22.0" prefWidth="172.0" />
-        <ChoiceBox fx:id="serviceRequestChoiceBox" layoutX="192.0" layoutY="40.0" opacity="0.0" prefHeight="64.0" prefWidth="214.0" />
-        <Text disable="true" fill="WHITE" layoutX="237.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service Request Forms" />
-    </children>
-</AnchorPane>
+
+<VBox xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamname.controllers.ConRoomRequestController">
+   <children>
+      <HBox maxHeight="1.7976931348623157E308" styleClass="top_banner" stylesheets="@style.css">
+         <children>
+            <AnchorPane maxHeight="45.0" prefWidth="600.0">
+               <children>
+                  <MFXButton fx:id="exitButton" layoutX="496.0" maxHeight="25.0" minHeight="25.0" opacity="0.0" prefHeight="25.0" prefWidth="97.0" text="Exit Application" />
+                  <Text layoutX="504.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exit Application" />
+                  <ImageView fitHeight="50.0" fitWidth="175.0" layoutX="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@bwh-logo.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" maxHeight="30.0" prefHeight="30.0" styleClass="banner" stylesheets="@style.css">
+         <children>
+            <AnchorPane maxHeight="30.0" prefHeight="30.0" prefWidth="600.0">
+               <children>
+                  <Text disable="true" fill="WHITE" layoutX="35.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Return to Home" wrappingWidth="85.107421875" />
+                  <Text disable="true" fill="WHITE" layoutX="240.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service Request Forms" />
+                  <Text disable="true" fill="WHITE" layoutX="473.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Signage Page" />
+                  <Line endX="48.0" endY="-166.0" layoutX="130.0" layoutY="176.0" startX="48.0" startY="-154.0" stroke="#345871" strokeWidth="2.0" />
+                  <Line endX="48.0" endY="-166.0" layoutX="368.0" layoutY="176.0" startX="48.0" startY="-154.0" stroke="#345871" strokeWidth="2.0" />
+                  <ChoiceBox fx:id="serviceRequestChoiceBox" layoutX="177.0" layoutY="2.0" opacity="0.0" prefHeight="30.0" prefWidth="239.0" />
+                  <MFXButton fx:id="backToHomeButton" opacity="0.0" prefHeight="30.0" prefWidth="176.0" text="Return to Home Button" />
+                  <MFXButton fx:id="signagePageButton" layoutX="422.0" layoutY="3.0" maxHeight="30.0" opacity="0.0" prefHeight="30.0" prefWidth="176.0" text="Signage Page Button" />
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+      <HBox maxHeight="260.0" prefHeight="260.0" prefWidth="600.0" styleClass="functionality_zone" stylesheets="@style.css">
+         <children>
+            <AnchorPane prefHeight="260.0" prefWidth="600.0">
+               <children>
+                  <Text layoutX="21.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee ID" />
+                  <TextField fx:id="roomEmployeeIDData" layoutX="21.0" layoutY="42.0" styleClass="text_box" stylesheets="@style.css" />
+                  <Text layoutX="21.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Purpose" />
+                  <TextField fx:id="roomMeetingPurposeData" layoutX="21.0" layoutY="96.0" styleClass="text_box" stylesheets="@style.css" />
+                  <Text layoutX="21.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Notes" />
+                  <TextArea layoutX="21.0" layoutY="151.0" prefHeight="97.0" prefWidth="149.0" styleClass="text_box" stylesheets="@style.css" />
+                  <Text layoutX="181.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time" />
+                  <Text layoutX="300.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Room" />
+                  <Text layoutX="404.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" />
+                  <ChoiceBox fx:id="roomNumberData" layoutX="299.0" layoutY="42.0" prefHeight="25.0" prefWidth="85.0" />
+                  <ChoiceBox fx:id="roomTimeData" layoutX="184.0" layoutY="42.0" prefHeight="25.0" prefWidth="85.0" />
+                  <DatePicker fx:id="roomDateData" layoutX="404.0" layoutY="42.0" />
+                  <MFXButton fx:id="roomClearAll" layoutX="315.0" layoutY="175.0" text="Clearall" />
+                  <MFXButton fx:id="roomConfirm" layoutX="427.0" layoutY="179.0" text="confrim" />
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+   </children>
+</VBox>
+
