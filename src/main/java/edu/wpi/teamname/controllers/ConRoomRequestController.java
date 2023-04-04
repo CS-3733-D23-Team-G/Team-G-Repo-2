@@ -48,7 +48,6 @@ public class ConRoomRequestController {
     backToHomeButton.setOnMouseClicked(event -> Navigation.navigate(Screen.HOME));
     signagePageButton.setOnMouseClicked(event -> Navigation.navigate(Screen.SIGNAGE_PAGE));
     exitButton.setOnMouseClicked(event -> roomExit());
-    roomClearAll.setOnMouseClicked(event -> Navigation.navigate(Screen.ROOM_REQUEST));
     roomConfirm.setOnMouseClicked(event -> Navigation.navigate(Screen.ROOM_REQUEST_SUBMIT));
 
     roomEmployeeIDData.getText();
@@ -61,6 +60,7 @@ public class ConRoomRequestController {
     roomNumberData.getValue();
     serviceRequestChoiceBox.setItems(list);
     serviceRequestChoiceBox.setOnAction(event -> loadServiceRequestForm());
+    roomClearAll.setOnAction(event -> clearAllData());
   }
 
   public void loadServiceRequestForm() {
@@ -77,6 +77,15 @@ public class ConRoomRequestController {
     } else {
       return;
     }
+  }
+
+  public void clearAllData() {
+    roomEmployeeIDData.setText("");
+    roomMeetingPurposeData.setText("");
+    roomDateData.setText("");
+    roomTimeData.setText("");
+    roomNumberData.setText("");
+    return;
   }
 
   public void roomExit() {
