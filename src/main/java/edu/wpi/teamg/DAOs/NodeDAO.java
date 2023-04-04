@@ -2,21 +2,25 @@ package edu.wpi.teamg.DAOs;
 
 import edu.wpi.teamg.DBConnection;
 import edu.wpi.teamg.ORMClasses.Node;
+import java.io.File;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 public class NodeDAO implements LocationDAO {
   private HashMap<Integer,Node> nodeHash = new HashMap<Integer,Node>();
   private static DBConnection db = new DBConnection();
   private String SQL;
+  private HashMap<Integer, Node> Nodes = new HashMap<>();
 
   @Override
   public void importCSV(String path) throws SQLException {}
 
   @Override
-  public void exportCSV() {}
+  public void exportCSV() {
+
+  }
 
   @Override
   public void insert(Object obj) throws SQLException {
@@ -72,45 +76,45 @@ public class NodeDAO implements LocationDAO {
 
   @Override
   public HashMap<Integer,Node> getAll() throws SQLException {
+      db.setConnection();
 
-    db.setConnection();
+      PreparedStatement ps;
+      ResultSet rs = null;
 
-    PreparedStatement ps;
-    ResultSet rs = null;
+      SQL = "select * from proto2.node";
 
-    SQL = "select * from proto2.node";
+      try {
+        ps = db.getConnection().prepareStatement(SQL);
+        rs = ps.executeQuery();
+      } catch (SQLException e) {
+        System.err.println("SQL exception");
+        // printSQLException(e);
+      }
 
-    try {
-      ps = db.getConnection().prepareStatement(SQL);
-      rs = ps.executeQuery();
-    } catch (SQLException e) {
-      System.err.println("SQL exception");
-      // printSQLException(e);
+      while (rs.next()) {
+        Node node = new Node();
+
+        int node_id = rs.getInt("nodeid");
+        node.setNodeID(node_id);
+
+        int xcoord = rs.getInt("xcoord");
+        node.setXcoord(xcoord);
+
+        int ycoord = rs.getInt("ycoord");
+        node.setXcoord(ycoord);
+
+        String floor = rs.getString("floor");
+        node.setFloor(floor);
+
+        String building = rs.getString("building");
+        node.setBuilding(building);
+
+        nodeHash.put(node.getNodeID(), node);
+
+      }
+      db.closeConnection();
+
+      return nodeHash;
+
     }
-
-    while (rs.next()) {
-      Node node = new Node();
-
-      int node_id = rs.getInt("nodeid");
-      node.setNodeID(node_id);
-
-      int xcoord = rs.getInt("xcoord");
-      node.setXcoord(xcoord);
-
-      int ycoord = rs.getInt("ycoord");
-      node.setXcoord(ycoord);
-
-      String floor = rs.getString("floor");
-      node.setFloor(floor);
-
-      String building = rs.getString("building");
-      node.setBuilding(building);
-
-      nodeHash.put(node.getNodeID(),node);
-    }
-
-    db.closeConnection();
-
-    return nodeHash;
   }
-}

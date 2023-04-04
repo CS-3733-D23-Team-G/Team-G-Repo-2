@@ -101,9 +101,9 @@ public class MealRequestDAO implements DAO {
       maxID++;
     }
     SQL_mealRequest =
-            "insert into proto2.mealrequest(reqid, recipient, mealOrder, note) values (?, ?, ?, ?, ?, ?)";
+        "insert into proto2.mealrequest(reqid, recipient, mealOrder, note) values (?, ?, ?, ?, ?, ?)";
     SQL_Request =
-            "insert into proto2.request(reqid, empid, location, serv_by, status) values (?, ?, ?, ?, ?)";
+        "insert into proto2.request(reqid, empid, location, serv_by, status) values (?, ?, ?, ?, ?)";
 
     try {
 

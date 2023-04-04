@@ -91,7 +91,7 @@ public class ConferenceRoomRequestDAO implements DAO{
         }
         SQL_confRoomRequest = "insert  into teamgdb.proto2.conferenceroomrequest(reqid,meetingdate,meetingtime,purpose) values (?,?,?,?)";
         SQL_Request =
-                "insert into teamgdb.proto2.request(reqid,empid,location,serv_by,status) values (?,?,?,?,?)";
+            "insert into teamgdb.proto2.request(reqid,empid,location,serv_by,status) values (?,?,?,?,?)";
 
         try{
             ps_Req = db.getConnection().prepareStatement(SQL_Request);

@@ -18,3 +18,4 @@ public class LocationName {
     this.nodeType = nodetype;
   }
 }
+
