@@ -2,7 +2,6 @@ package edu.wpi.teamname.controllers;
 
 import edu.wpi.teamname.navigation.Navigation;
 import edu.wpi.teamname.navigation.Screen;
-import edu.wpi.teamname.requestforms.ConRoomRequestForm;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -27,6 +26,7 @@ public class ConRoomRequestController {
   @FXML DatePicker roomDateData;
   @FXML ChoiceBox<String> roomTimeData;
   @FXML ChoiceBox<String> roomNumberData;
+
   @FXML ChoiceBox<String> serviceRequestChoiceBox;
 
   ObservableList<String> list =
@@ -50,7 +50,7 @@ public class ConRoomRequestController {
     exitButton.setOnMouseClicked(event -> roomExit());
     roomClearAll.setOnMouseClicked(event -> Navigation.navigate(Screen.ROOM_REQUEST));
     roomConfirm.setOnMouseClicked(event -> Navigation.navigate(Screen.ROOM_REQUEST_SUBMIT));
-    //    roomEmployeeNameData.getText();
+
     roomEmployeeIDData.getText();
     roomMeetingPurposeData.getText();
     roomNumberData.setValue("noon");
@@ -82,6 +82,7 @@ public class ConRoomRequestController {
   public void roomExit() {
     Platform.exit();
   }
+
 
   public ConRoomRequestForm storeConRoomValues() {
     //    String employeeName = roomEmployeeNameData.getText();
@@ -135,4 +136,5 @@ public class ConRoomRequestController {
             + " "
             + form.roomNumber);
   }
+
 }
