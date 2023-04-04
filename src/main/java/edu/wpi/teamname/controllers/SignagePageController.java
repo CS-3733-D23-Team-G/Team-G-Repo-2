@@ -12,6 +12,7 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -96,6 +97,19 @@ public class SignagePageController {
     NodeDAO nodeDAO = new NodeDAO();
 
     List<edu.wpi.teamname.ORMClass.Node> nodeList = nodeDAO.getAll();
+    ArrayList<edu.wpi.teamname.ORMClass.Node> L1 = new ArrayList<>();
+
+    System.out.println(nodeList.get(0).getNodeID());
+
+    for (int i = 0; i < nodeList.size(); i++) {
+      if (Objects.equals(nodeList.get(i).getFloor(), "L1")) {
+        L1.add(nodeList.get(i));
+      }
+    }
+
+    for (int i = 0; i < L1.size(); i++) {
+      System.out.println(L1.get(i).getFloor());
+    }
 
     int startNode = Integer.parseInt(startLoc.getText());
     int endNode = Integer.parseInt(endLoc.getText());

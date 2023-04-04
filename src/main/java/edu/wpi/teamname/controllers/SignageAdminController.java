@@ -70,7 +70,6 @@ public class SignageAdminController {
     pane.setContent(image);
     // pane.setMaxScale();
 
-
     pane.setMinScale(.001);
     pane.zoomTo(.000001, new Point2D(2500, 1700));
     pane.zoomTo(.000001, new Point2D(2500, 1700));

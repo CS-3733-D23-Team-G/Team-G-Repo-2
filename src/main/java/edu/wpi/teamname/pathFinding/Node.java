@@ -41,4 +41,8 @@ public class Node {
   public String getNodeID() {
     return NodeID;
   }
+
+  public String getFloor() {
+    return floor;
+  }
 }
