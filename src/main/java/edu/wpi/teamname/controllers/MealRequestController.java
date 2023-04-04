@@ -77,6 +77,7 @@ public class MealRequestController {
     mealPersonOrderingForData.getText();
     mealNotesData.getText();
     mealFoodChoice.setItems(foodList);
+    serviceRequestChoiceBox.setItems(list);
     serviceRequestChoiceBox.setOnAction(event -> loadServiceRequestForm());
     mealDate.getValue();
     mealTimeOfDeliver.getText();

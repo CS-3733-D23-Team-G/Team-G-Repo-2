@@ -6,14 +6,11 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
-
 
 <VBox styleClass="anchor_pane_sizing" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamname.controllers.MealRequestController">
    <children>
@@ -39,10 +36,10 @@
                         <Line endX="48.0" endY="-163.5" startX="48.0" startY="-120.5" stroke="#345871" strokeWidth="2.0" />
                         <Line endX="48.0" endY="-163.5" startX="48.0" startY="-119.5" stroke="#345871" strokeWidth="2.0" />
                         <Text disable="true" fill="WHITE" layoutX="35.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Return to Home" />
-                        <Text disable="true" fill="WHITE" layoutX="474.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Signage Page" />
                         <MFXButton fx:id="backToHomeButton" layoutY="5.0" opacity="0.0" prefHeight="64.0" prefWidth="184.0" styleClass="button_banner" text="Return to Home Button" />
                         <MFXButton fx:id="signagePageButton" layoutX="422.0" maxHeight="30.0" opacity="0.0" prefHeight="30.0" prefWidth="184.0" styleClass="button_banner" text="Signage Page Button" />
                         <ChoiceBox fx:id="serviceRequestChoiceBox" layoutX="177.0" layoutY="2.0" opacity="0.0" prefHeight="64.0" prefWidth="214.0" styleClass="button_banner" />
+                        <Text disable="true" fill="WHITE" layoutX="474.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Signage Page" />
                         <Text disable="true" fill="WHITE" layoutX="234.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service Request Forms" />
                </children>
             </AnchorPane>
@@ -61,6 +58,9 @@
                         <MFXTextField fx:id="mealDeliveryLocationData" layoutX="47.0" layoutY="68.0" minHeight="-Infinity" prefHeight="27.0" prefWidth="180.0" />
                         <MFXTextField fx:id="mealPersonOrderingForData" layoutX="47.0" layoutY="115.0" minHeight="-Infinity" prefHeight="27.0" prefWidth="180.0" />
                         <MFXTextField fx:id="mealNotesData" layoutX="50.0" layoutY="164.0" minHeight="-Infinity" prefHeight="57.0" prefWidth="180.0" />
+                  <MFXDatePicker fx:id="mealDate" layoutX="374.0" layoutY="42.0" prefHeight="25.0" prefWidth="156.0" />
+                  <ChoiceBox fx:id="mealFoodChoice" layoutX="377.0" layoutY="164.0" prefWidth="150.0" />
+                  <MFXTextField fx:id="mealTimeOfDeliver" layoutX="374.0" layoutY="92.0" prefHeight="45.0" prefWidth="156.0" />
                     </children>
                 </AnchorPane>
          </children>

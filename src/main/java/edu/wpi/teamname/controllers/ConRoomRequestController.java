@@ -82,8 +82,7 @@ public class ConRoomRequestController {
   public void roomExit() {
     Platform.exit();
   }
-
-
+  /*
   public ConRoomRequestForm storeConRoomValues() {
     //    String employeeName = roomEmployeeNameData.getText();
     String employeeID = roomEmployeeIDData.getText();
@@ -136,5 +135,5 @@ public class ConRoomRequestController {
             + " "
             + form.roomNumber);
   }
-
+  */
 }
