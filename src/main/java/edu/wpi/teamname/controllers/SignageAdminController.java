@@ -2,11 +2,11 @@ package edu.wpi.teamname.controllers;
 
 import edu.wpi.teamname.DAOs.NodeDAO;
 import edu.wpi.teamname.Main;
+import edu.wpi.teamname.ORMClass.Node;
 import edu.wpi.teamname.navigation.Navigation;
 import edu.wpi.teamname.navigation.Screen;
 import edu.wpi.teamname.pathFinding.Edge;
 import edu.wpi.teamname.pathFinding.Graph;
-import edu.wpi.teamname.pathFinding.Node;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.sql.SQLException;
@@ -23,7 +23,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import net.kurobako.gesturefx.GesturePane;
 
-public class SignagePageController {
+public class SignageAdminController {
 
   @FXML MFXButton backToHomeButton;
   @FXML ChoiceBox<String> serviceRequestChoiceBox;
@@ -69,6 +69,7 @@ public class SignagePageController {
     ImageView image = new ImageView(new Image(imgPath));
     pane.setContent(image);
     // pane.setMaxScale();
+
     pane.setMinScale(.001);
     pane.zoomTo(.000001, new Point2D(2500, 1700));
     pane.zoomTo(.000001, new Point2D(2500, 1700));
@@ -95,32 +96,16 @@ public class SignagePageController {
 
     NodeDAO nodeDAO = new NodeDAO();
 
-    List<edu.wpi.teamname.ORMClass.Node> nodeList = nodeDAO.getAll();
-    /*
-    ArrayList<edu.wpi.teamname.ORMClass.Node> L1 = new ArrayList<>();
-
-    System.out.println(nodeList.get(0).getNodeID());
-
-    for (int i = 0; i < nodeList.size(); i++) {
-      if (Objects.equals(nodeList.get(i).getFloor(), "L1")) {
-        L1.add(nodeList.get(i));
-      }
-    }
-
-    for (int i = 0; i < L1.size(); i++) {
-      System.out.println(L1.get(i).getFloor());
-    }
-
-     */
+    List<Node> nodeList = nodeDAO.getAll();
 
     int startNode = Integer.parseInt(startLoc.getText());
     int endNode = Integer.parseInt(endLoc.getText());
 
-    Node[] N1 = new Node[10];
+    edu.wpi.teamname.pathFinding.Node[] N1 = new edu.wpi.teamname.pathFinding.Node[10];
     Random r = new Random(5591);
     for (int i = 0; i < 10; i++) {
       N1[i] =
-          new Node(
+          new edu.wpi.teamname.pathFinding.Node(
               String.valueOf(i),
               (int) r.nextInt(100) + i,
               (int) r.nextInt(100) + i,
