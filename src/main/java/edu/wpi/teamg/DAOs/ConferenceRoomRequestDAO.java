@@ -108,6 +108,8 @@ public class ConferenceRoomRequestDAO implements DAO{
             ps_getRoomReq.setTime(3,((ConferenceRoomRequest)obj).getMeeting_time());
             ps_getRoomReq.setString(4,((ConferenceRoomRequest)obj).getPurpose());
             ps_getRoomReq.executeUpdate();
+
+            conferenceRequestHash.put(((ConferenceRoomRequest)obj).getReqid(),(ConferenceRoomRequest)obj);
         }catch(SQLException e){
             System.err.println("SQL Exception");
             e.printStackTrace();
@@ -135,6 +137,8 @@ public class ConferenceRoomRequestDAO implements DAO{
             ps_Req = db.getConnection().prepareStatement(SQL_Req);
             ps_Req.setInt(1,((ConferenceRoomRequest)obj).getReqid());
             ps_Req.executeUpdate();
+
+            conferenceRequestHash.remove(((ConferenceRoomRequest)obj).getReqid());
 
         }catch(SQLException e){
             System.err.println("SQL Exception");

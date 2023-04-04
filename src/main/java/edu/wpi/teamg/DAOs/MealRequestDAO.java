@@ -100,7 +100,6 @@ public class MealRequestDAO implements DAO {
       maxID = rs.getInt("reqID");
       maxID++;
     }
-
     SQL_mealRequest =
         "insert into proto2.mealrequest(reqid, recipient, mealOrder, note) values (?, ?, ?, ?, ?, ?)";
     SQL_Request =
@@ -130,6 +129,7 @@ public class MealRequestDAO implements DAO {
       e.printStackTrace();
       // printSQLException(e);
     }
+    mealRequestHash.put(((MealRequest) obj).getReqid(), (MealRequest) obj);
 
     db.closeConnection();
   }
@@ -153,6 +153,8 @@ public class MealRequestDAO implements DAO {
       ps_request = db.getConnection().prepareStatement(SQL_request);
       ps_request.setInt(1, ((MealRequest) obj).getReqid());
       ps_request.executeUpdate();
+
+      mealRequestHash.remove(((MealRequest)obj).getReqid());
 
     } catch (SQLException e) {
       System.err.println("SQL exception");
