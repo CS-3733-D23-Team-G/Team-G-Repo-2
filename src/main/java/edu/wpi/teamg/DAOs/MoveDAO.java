@@ -2,12 +2,17 @@ package edu.wpi.teamg.DAOs;
 
 import edu.wpi.teamg.DBConnection;
 import edu.wpi.teamg.ORMClasses.Move;
+import edu.wpi.teamg.ORMClasses.Node;
+
+import java.io.*;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import java.util.*;
 
 
 public class MoveDAO implements LocationDAO {
@@ -21,34 +26,34 @@ public class MoveDAO implements LocationDAO {
     PreparedStatement ps;
     ResultSet rs = null;
 
-    sql = "select * from proto2.move";
+    sql = "select * from proto2.move"; // sql statement
 
     try {
-      ps = db.getConnection().prepareStatement(sql);
-      rs = ps.executeQuery();
+      ps = db.getConnection().prepareStatement(sql); // ps = prepare statement
+      rs = ps.executeQuery(); // rs = result statement; sql query
 
     } catch (SQLException e) {
       System.err.println("SQL exception");
     }
 
-    List<Move> moves = new ArrayList<Move>();
+    List<Move> moves = new ArrayList<Move>(); // Move classes get stored in ArrayLists
 
     while (rs.next()) {
       Move move = new Move();
 
       int node_id = rs.getInt("nodeid");
-      move.setNodeID(node_id);
+      move.setNodeID(node_id); // set attribute
 
       String longname = rs.getString("longname");
-      move.setLongName(longname);
+      move.setLongName(longname); // set attribute
 
       Date date = rs.getDate("date");
-      move.setDate(date);
+      move.setDate(date); // set attribute
 
-      moves.add(move);
+      moves.add(move); // creates database table without objects by default
     }
     db.closeConnection();
-    return moves;
+    return moves; // terminate pull-up
   }
 
   @Override
@@ -111,12 +116,49 @@ public class MoveDAO implements LocationDAO {
 
   }
 
+  ArrayList<Node> nodes = new ArrayList<>();
   @Override
-  public void importCSV() throws SQLException {
+  public void importCSV(String filep) throws SQLException, FileNotFoundException {
+    Scanner scanner = new Scanner(file);
+    scanner.useDelimiter("\n");
 
 
+    while(scanner.hasNext()) {
+      String line = scanner.next();
+      String[] lines = line.split(",");
+      int nodeID = Integer.parseInt(lines[0]);
+      int nodeX = Integer.parseInt(lines[1]);
+      int nodeY = Integer.parseInt(lines[2]);
+      String floor = lines[3];
+      String building = lines[4];
+
+      Node listedNode = new Node(nodeID, nodeX, nodeY, floor, building);
+      nodes.add(listedNode);
+    }
+    scanner.close();
   }
 
   @Override
-  public void exportCSV() throws SQLException {}
+  public void exportCSV(File file) throws SQLException, IOException {
+
+    sql = "SELECT * FROM proto2.move";
+    PreparedStatement ps = db.getConnection().prepareStatement(sql);
+    ResultSet result = ps.executeQuery(sql);
+    BufferedWriter fileWriter = new BufferedWriter(new FileWriter(file));
+
+    fileWriter.write("node, longname, date");
+    while(result.next()) {
+        int nodeID = result.getInt("nodeid");
+        String longName =result.getString("longname");
+        Date date  = result.getDate("date");
+
+        String line = String.format("\"%d\",%s,%t",
+                nodeID,longName,date);
+        fileWriter.newLine();
+        fileWriter.write(line);
+
+      ps.close();
+      fileWriter.close();
+      }
+  }
 }
