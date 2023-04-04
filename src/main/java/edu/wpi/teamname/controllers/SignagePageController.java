@@ -27,6 +27,7 @@ public class SignagePageController {
   @FXML ChoiceBox<String> serviceRequestChoiceBox;
   @FXML MFXButton signagePageButton;
   @FXML MFXButton exitButton;
+
   @FXML MFXButton pathFindButton;
 
   @FXML MFXTextField startLoc;
