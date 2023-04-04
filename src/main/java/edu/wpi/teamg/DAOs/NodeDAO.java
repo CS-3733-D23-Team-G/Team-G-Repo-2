@@ -12,7 +12,7 @@ public class NodeDAO implements LocationDAO {
   private static DBConnection db = new DBConnection();
   private String SQL;
 
-2  @Override
+  @Override
   public void importCSV(String path) throws SQLException {}
 
   @Override
@@ -45,7 +45,7 @@ public class NodeDAO implements LocationDAO {
   }
 
   @Override
-  public void update(Object obj) throws SQLException {}
+  public void update(Object obj, Object update) throws SQLException {}
 
   @Override
   public void delete(Object obj) throws SQLException {
