@@ -85,6 +85,7 @@ public class NodeDAO implements LocationDAO {
   }
 
   @Override
+
   public void update(Object obj, Object update) throws SQLException {}
 
   @Override

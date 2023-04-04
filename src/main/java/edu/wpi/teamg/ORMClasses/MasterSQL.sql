@@ -128,4 +128,3 @@ VALUES
     (2, '2023-04-15', '13:00:00','Jane Doe', 'Vegetarian pizza', 'Extra cheese'),
     (3, '2023-04-15', '13:00:00','Bob Smith', 'Fish and chips', 'Tartar sauce on the side'),
     (4, '2023-04-15', '13:00:00', 'Alice Johnson', 'Caesar salad', 'No croutons');
-

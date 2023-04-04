@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class LocationName {
+
   @Getter @Setter private String longName;
 
   @Getter @Setter private String shortName;
@@ -18,4 +19,3 @@ public class LocationName {
     this.nodeType = nodetype;
   }
 }
-

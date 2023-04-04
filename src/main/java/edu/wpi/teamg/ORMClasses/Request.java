@@ -11,3 +11,4 @@ public class Request {
   @Getter @Setter private int serv_by;
   @Getter @Setter private String status;
 }
+

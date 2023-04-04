@@ -2,10 +2,12 @@ package edu.wpi.teamg.DAOs;
 
 import edu.wpi.teamg.DBConnection;
 import edu.wpi.teamg.ORMClasses.MealRequest;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+
 
 public class MealRequestDAO implements DAO {
 
@@ -14,10 +16,12 @@ public class MealRequestDAO implements DAO {
   private String SQL_mealRequest;
   private String SQL_Request;
 
+
   private HashMap<Integer,MealRequest> mealRequestHash = new HashMap<Integer, MealRequest>();
 
   @Override
   public HashMap<Integer,MealRequest> getAll() throws SQLException {
+
     db.setConnection();
 
     PreparedStatement ps;
@@ -56,6 +60,11 @@ public class MealRequestDAO implements DAO {
       String recipient = rs.getString("recipient");
       mealReq.setRecipient(recipient);
 
+      Date deliveryDate = rs.getDate("deliveryDate");
+      mealReq.setDeliveryDate(deliveryDate);
+
+      Time deliveryTime = rs.getTime("deliveryTime");
+      mealReq.setDeliveryTime(deliveryTime);
       String order = rs.getString("mealOrder");
       mealReq.setOrder(order);
 
@@ -100,6 +109,7 @@ public class MealRequestDAO implements DAO {
       maxID = rs.getInt("reqID");
       maxID++;
     }
+
     SQL_mealRequest =
         "insert into proto2.mealrequest(reqid, recipient, mealOrder, note) values (?, ?, ?, ?, ?, ?)";
     SQL_Request =
