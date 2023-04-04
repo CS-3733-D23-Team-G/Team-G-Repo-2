@@ -23,7 +23,7 @@ public class NodeDAO implements LocationDAO {
   }
 
   @Override
-  public void exportCSV() throws SQLException, IOException{
+  public void exportCSV() throws SQLException {
     String csvFilePath = "Node.csv";
 
     try{
