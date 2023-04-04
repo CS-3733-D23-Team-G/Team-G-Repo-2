@@ -2,9 +2,12 @@ package edu.wpi.teamg.DAOs;
 
 import edu.wpi.teamg.DBConnection;
 import edu.wpi.teamg.ORMClasses.MealRequest;
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+
 
 public class MealRequestDAO implements DAO {
 
@@ -13,15 +16,19 @@ public class MealRequestDAO implements DAO {
   private String SQL_mealRequest;
   private String SQL_Request;
 
+
+  private HashMap<Integer,MealRequest> mealRequestHash = new HashMap<Integer, MealRequest>();
+
   @Override
-  public List getAll() throws SQLException {
+  public HashMap<Integer,MealRequest> getAll() throws SQLException {
+
     db.setConnection();
 
     PreparedStatement ps;
     ResultSet rs = null;
 
     SQL_mealRequest =
-        "select * from proto2.request join proto2.mealrequest on proto2.request.reqid = proto2.mealrequest.reqid";
+            "select * from proto2.request join proto2.mealrequest on proto2.request.reqid = proto2.mealrequest.reqid";
 
     try {
       ps = db.getConnection().prepareStatement(SQL_mealRequest);
@@ -31,13 +38,15 @@ public class MealRequestDAO implements DAO {
       // printSQLException(e);
     }
 
-    List<MealRequest> allNodes = new ArrayList<MealRequest>();
 
     while (rs.next()) {
       MealRequest mealReq = new MealRequest();
 
       int reqID = rs.getInt("reqID");
       mealReq.setReqid(reqID);
+
+      int empID = rs.getInt("empID");
+      mealReq.setEmpid(empID);
 
       int location = rs.getInt("location");
       mealReq.setLocation(location);
@@ -56,23 +65,22 @@ public class MealRequestDAO implements DAO {
 
       Time deliveryTime = rs.getTime("deliveryTime");
       mealReq.setDeliveryTime(deliveryTime);
-
       String order = rs.getString("mealOrder");
       mealReq.setOrder(order);
 
       String note = rs.getString("note");
       mealReq.setOrder(note);
 
-      allNodes.add(mealReq);
+      mealRequestHash.put(reqID, mealReq);
     }
 
     db.closeConnection();
 
-    return allNodes;
+    return mealRequestHash;
   }
 
   @Override
-  public void update(Object obj) throws SQLException {}
+  public void update(Object obj, Object update) throws SQLException {}
 
   @Override
   public void insert(Object obj) throws SQLException {
@@ -103,7 +111,7 @@ public class MealRequestDAO implements DAO {
     }
 
     SQL_mealRequest =
-        "insert into proto2.mealrequest(reqid, recipient, mealOrder, note, deliverydate, deliverytime) values (?, ?, ?, ?, ?, ?)";
+        "insert into proto2.mealrequest(reqid, recipient, mealOrder, note) values (?, ?, ?, ?, ?, ?)";
     SQL_Request =
         "insert into proto2.request(reqid, empid, location, serv_by, status) values (?, ?, ?, ?, ?)";
 
@@ -119,11 +127,11 @@ public class MealRequestDAO implements DAO {
 
       ps_mealRequest = db.getConnection().prepareStatement(SQL_mealRequest);
       ps_mealRequest.setInt(1, maxID);
-      ps_mealRequest.setString(2, ((MealRequest) obj).getRecipient());
-      ps_mealRequest.setString(3, ((MealRequest) obj).getOrder());
-      ps_mealRequest.setString(4, ((MealRequest) obj).getNote());
-      ps_mealRequest.setDate(5, ((MealRequest) obj).getDeliveryDate());
-      ps_mealRequest.setTime(6, ((MealRequest) obj).getDeliveryTime());
+      ps_mealRequest.setDate(2, ((MealRequest) obj).getDeliveryDate());
+      ps_mealRequest.setTime(3, ((MealRequest) obj).getDeliveryTime());
+      ps_mealRequest.setString(4, ((MealRequest) obj).getRecipient());
+      ps_mealRequest.setString(5, ((MealRequest) obj).getOrder());
+      ps_mealRequest.setString(6, ((MealRequest) obj).getNote());
       ps_mealRequest.executeUpdate();
 
     } catch (SQLException e) {
@@ -131,6 +139,7 @@ public class MealRequestDAO implements DAO {
       e.printStackTrace();
       // printSQLException(e);
     }
+    mealRequestHash.put(((MealRequest) obj).getReqid(), (MealRequest) obj);
 
     db.closeConnection();
   }
@@ -154,6 +163,8 @@ public class MealRequestDAO implements DAO {
       ps_request = db.getConnection().prepareStatement(SQL_request);
       ps_request.setInt(1, ((MealRequest) obj).getReqid());
       ps_request.executeUpdate();
+
+      mealRequestHash.remove(((MealRequest)obj).getReqid());
 
     } catch (SQLException e) {
       System.err.println("SQL exception");

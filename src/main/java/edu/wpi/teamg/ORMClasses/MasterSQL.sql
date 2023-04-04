@@ -59,30 +59,31 @@ create table proto2.Account(
 
 create table proto2.Request (
     reqID int primary key,
+    empID int,
     location int,
     serv_by int,
     status proto2.enum1,
+    foreign key (empID) references proto2.Employee(empID),
     foreign key (location) references proto2.node(nodeID),
     foreign key (serv_by) references proto2.Employee(empID)
 );
 
 create table proto2.ConferenceRoomRequest(
                                reqID int primary key,
-                               meetingDate date,
-                               meetingTime time,
+                               meeting_date date,
+                               meeting_time time,
                                purpose varchar(255),
                                foreign key (reqID) references proto2.Request(reqID)
 );
 
 create table proto2.MealRequest(
                                  reqID int primary key,
+                                 deliveryDate date,
+                                 deliveryTime time,
                                  recipient varchar(50),
                                  mealOrder varchar(255),
                                  note varchar(255),
-                                 deliveryTime time,
-                                 deliveryDate date,
                                  foreign key (reqID) references proto2.Request(reqID)
-
 );
 
 INSERT INTO proto2.Employee (empID, firstName, lastName, email, can_serve)
@@ -101,33 +102,29 @@ VALUES
     (4, '456password', true);
 
 -- Table: proto2.Request
-INSERT INTO proto2.Request (reqID, location, serv_by, status)
+INSERT INTO proto2.Request (reqID, empID, location, serv_by, status)
 VALUES
-    (1, 105, 1, 'blank'),
-    (2, 110, 2, 'processing'),
-    (3, 115, 3, 'done'),
-    (4, 120, 4, 'blank'),
-    (5, 105, 1, 'blank'),
-    (6, 110, 2, 'processing'),
-    (7, 115, 3, 'done'),
-    (8, 120, 4, 'blank');
+    (1, 1, 105, 1, 'blank'),
+    (2, 2, 110, 2, 'processing'),
+    (3, 3, 115, 3, 'done'),
+    (4, 4, 120, 4, 'blank'),
+    (5, 5, 105, 1, 'blank'),
+    (6, 6, 110, 2, 'processing'),
+    (7, 7, 115, 3, 'done'),
+    (8, 8, 120, 4, 'blank');
 
 -- Table: proto2.ConferenceRoomRequest
-INSERT INTO proto2.ConferenceRoomRequest (reqID, meetingDate, meetingTime, purpose)
+INSERT INTO proto2.ConferenceRoomRequest (reqID, meeting_date, meeting_time, purpose)
 VALUES
-    (5, '2023-04-15', '02:30', 'Team meeting'),
+    (5, '2023-04-15', '13:00:00', 'Team meeting'),
     (6, '2023-04-16', '14:30:00', 'Client presentation'),
     (7, '2023-04-17', '10:00:00', 'Interview'),
     (8, '2023-04-18', '15:00:00', 'Training session');
 
 -- Table: proto2.MealRequest
-INSERT INTO proto2.MealRequest (reqID, recipient, mealOrder, deliveryTime, deliveryDate, note)
+INSERT INTO proto2.MealRequest (reqID, deliveryDate, deliveryTime, recipient, mealOrder, note)
 VALUES
-    (1, 'John Doe', 'Grilled chicken sandwich', '13:00:00', '2023-04-15', 'No onions'),
-    (2, 'Jane Doe', 'Vegetarian pizza', '13:00:00', '2023-04-16', 'Extra cheese'),
-    (3, 'Bob Smith', 'Fish and chips', '13:00:00', '2023-04-17', 'Tartar sauce on the side'),
-    (4, 'Alice Johnson', 'Caesar salad', '13:00:00', '2023-04-19', 'No croutons');
-
-select reqID from proto2.request order by reqid desc limit 1;
-
-select * from proto2.request join proto2.mealrequest on proto2.request.reqid = proto2.mealrequest.reqid
+    (1, '2023-04-15', '13:00:00','John Doe', 'Grilled chicken sandwich', 'No onions'),
+    (2, '2023-04-15', '13:00:00','Jane Doe', 'Vegetarian pizza', 'Extra cheese'),
+    (3, '2023-04-15', '13:00:00','Bob Smith', 'Fish and chips', 'Tartar sauce on the side'),
+    (4, '2023-04-15', '13:00:00', 'Alice Johnson', 'Caesar salad', 'No croutons');
