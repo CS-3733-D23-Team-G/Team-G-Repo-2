@@ -1,8 +1,6 @@
 package edu.wpi.teamname.controllers;
 
-import edu.wpi.teamname.DAOs.NodeDAO;
 import edu.wpi.teamname.Main;
-import edu.wpi.teamname.ORMClass.Node;
 import edu.wpi.teamname.navigation.Navigation;
 import edu.wpi.teamname.navigation.Screen;
 import edu.wpi.teamname.pathFinding.Edge;
@@ -11,7 +9,6 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -94,9 +91,9 @@ public class SignageAdminController {
   public void processAStarAlg() throws SQLException {
     ArrayList<String> path = new ArrayList<>();
 
-    NodeDAO nodeDAO = new NodeDAO();
+    //    NodeDAO nodeDAO = new NodeDAO();
 
-    List<Node> nodeList = nodeDAO.getAll();
+    //    List<Node> nodeList = nodeDAO.getAll();
 
     int startNode = Integer.parseInt(startLoc.getText());
     int endNode = Integer.parseInt(endLoc.getText());
