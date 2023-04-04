@@ -15,7 +15,7 @@ public class NodeDAO implements LocationDAO {
   private HashMap<Integer, Node> Nodes = new HashMap<>();
 
   @Override
-  public void importCSV(String filename) throws SQLException {}
+  public void importCSV(String path) throws SQLException {}
 
   @Override
   public void exportCSV() {

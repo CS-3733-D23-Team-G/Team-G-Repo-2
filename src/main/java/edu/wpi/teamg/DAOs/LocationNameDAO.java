@@ -55,7 +55,6 @@ public class LocationNameDAO implements LocationDAO {
         "UPDATE proto2.locationname SET shortname=?, nodetype=?, longname=? Where longname=? AND shortname=? AND nodetype=? ";
     LocationName ol = (LocationName) old;
     LocationName up = (LocationName) update;
-
     try {
       ps = connection.getConnection().prepareStatement(SQL);
       ps.setString(1, up.getShortName());
@@ -67,11 +66,11 @@ public class LocationNameDAO implements LocationDAO {
       ps.executeQuery();
       Location.remove(ol.getLongName());
       Location.put(up.getLongName(), up);
-
     } catch (SQLException e) {
       System.err.println("SQL exeption");
     }
     connection.closeConnection();*/
+<
   }
 
   @Override
