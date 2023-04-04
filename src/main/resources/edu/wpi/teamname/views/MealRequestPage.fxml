@@ -4,18 +4,50 @@
 <?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.paint.Color?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamname.controllers.MealRequestController">
-    <children>
-        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
-            <children>
-                <AnchorPane>
+<VBox styleClass="anchor_pane_sizing" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamname.controllers.MealRequestController">
+   <children>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="top_banner" stylesheets="@style.css">
+         <children>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="anchor_pane_sizing">
+               <children>
+                        <MFXButton fx:id="exitButton" layoutX="496.0" opacity="0.0" prefHeight="27.0" prefWidth="97.0" text="Exit Application" />
+                        <Text disable="true" layoutX="504.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exit Application" />
+                  <ImageView fitHeight="48.0" fitWidth="194.0" layoutX="14.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@bwh-logo.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="banner" stylesheets="@style.css" VBox.vgrow="ALWAYS">
+         <children>
+            <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="200.0" styleClass="pane_banner_sizing">
+               <children>
+                        <Line endX="48.0" endY="-163.5" startX="48.0" startY="-120.5" stroke="#345871" strokeWidth="2.0" />
+                        <Line endX="48.0" endY="-163.5" startX="48.0" startY="-119.5" stroke="#345871" strokeWidth="2.0" />
+                        <Text disable="true" fill="WHITE" layoutX="35.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Return to Home" />
+                        <MFXButton fx:id="backToHomeButton" layoutY="5.0" opacity="0.0" prefHeight="64.0" prefWidth="184.0" styleClass="button_banner" text="Return to Home Button" />
+                        <MFXButton fx:id="signagePageButton" layoutX="422.0" maxHeight="30.0" opacity="0.0" prefHeight="30.0" prefWidth="184.0" styleClass="button_banner" text="Signage Page Button" />
+                        <ChoiceBox fx:id="serviceRequestChoiceBox" layoutX="177.0" layoutY="2.0" opacity="0.0" prefHeight="64.0" prefWidth="214.0" styleClass="button_banner" />
+                        <Text disable="true" fill="WHITE" layoutX="474.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Signage Page" />
+                        <Text disable="true" fill="WHITE" layoutX="234.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service Request Forms" />
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+      <HBox styleClass="functionality_zone">
+         <children>
+                <AnchorPane styleClass="anchor_pane_sizing">
                     <children>
                         <Rectangle arcHeight="5.0" fill="#f1f1f1" height="400.0" stroke="TRANSPARENT" strokeType="INSIDE" width="600.0" />
                         <Rectangle arcHeight="5.0" fill="#012d5a" height="64.0" layoutY="40.0" stroke="TRANSPARENT" strokeType="INSIDE" width="600.0" />
@@ -51,7 +83,7 @@
                   <MFXButton fx:id="mealClearAll" layoutX="362.0" layoutY="349.0" text="Clear All" />
                     </children>
                 </AnchorPane>
-            </children>
-        </StackPane>
-    </children>
-</AnchorPane>
+         </children>
+      </HBox>
+   </children>
+</VBox>
