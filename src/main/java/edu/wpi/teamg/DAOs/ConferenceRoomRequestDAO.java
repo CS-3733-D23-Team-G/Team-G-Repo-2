@@ -62,7 +62,7 @@ public class ConferenceRoomRequestDAO implements DAO{
     }
 
     @Override
-    public void update(Object obj) throws SQLException {
+    public void update(Object obj, Object update) throws SQLException {
 
     }
 
