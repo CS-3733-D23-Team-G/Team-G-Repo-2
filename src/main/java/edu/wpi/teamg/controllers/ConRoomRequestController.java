@@ -13,7 +13,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
 
 public class ConRoomRequestController {
 
@@ -25,11 +24,10 @@ public class ConRoomRequestController {
   @FXML MFXButton roomClearAll;
 
   // Text Fields
-  @FXML TextField roomEmployeeIDData;
-  @FXML TextField roomMeetingPurposeData;
+  @FXML MFXTextField roomMeetingPurpose;
   @FXML MFXDatePicker datePicker;
   @FXML MFXTextField roomTimeData;
-  @FXML MFXTextField roomNumberData;
+  @FXML MFXTextField roomNumber;
   @FXML ChoiceBox<String> serviceRequestChoiceBox;
 
   ObservableList<String> list =
@@ -59,9 +57,8 @@ public class ConRoomRequestController {
 
     datePicker.setText("");
 
-    roomEmployeeIDData.getText();
-    roomMeetingPurposeData.getText();
-    roomNumberData.getText();
+    roomMeetingPurpose.getText();
+    roomNumber.getText();
     roomTimeData.getText();
     // roomNumberData.setValue("noon");
     // roomNumberData.setItems(roomNumberDataList);
@@ -93,11 +90,11 @@ public class ConRoomRequestController {
   public void storeRoomValues() {
     ConferenceRoomRequest crr = new ConferenceRoomRequest();
 
-    crr.setEmpid(Integer.parseInt(roomEmployeeIDData.getText()));
+    //  crr.setEmpid(1);
     crr.setServ_by(1);
     // assume for now they are going to input a node number, so parseInt
-    crr.setLocation(Integer.parseInt(roomNumberData.getText()));
-    crr.setPurpose(roomMeetingPurposeData.getText());
+    crr.setLocation(Integer.parseInt(roomNumber.getText()));
+    crr.setPurpose(roomMeetingPurpose.getText());
     crr.setMeeting_date(Date.valueOf(datePicker.getValue()));
     crr.setMeeting_time(StringToTime(roomTimeData.getText()));
 
@@ -122,11 +119,10 @@ public class ConRoomRequestController {
   }
 
   public void clearAllData() {
-    roomEmployeeIDData.setText("");
-    roomMeetingPurposeData.setText("");
+    roomMeetingPurpose.setText("");
     datePicker.setText("");
     roomTimeData.setText("");
-    roomNumberData.setText("");
+    roomNumber.setText("");
     return;
   }
 
