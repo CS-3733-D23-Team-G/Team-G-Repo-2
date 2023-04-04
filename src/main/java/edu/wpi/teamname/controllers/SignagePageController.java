@@ -15,6 +15,8 @@ public class SignagePageController {
   @FXML ChoiceBox<String> serviceRequestChoiceBox;
   @FXML MFXButton signagePageButton;
   @FXML MFXButton exitButton;
+
+  @FXML MFXButton goToStatusPage;
   ObservableList<String> list =
       FXCollections.observableArrayList(
           "Conference Room Request Form",
@@ -30,6 +32,7 @@ public class SignagePageController {
     backToHomeButton.setOnMouseClicked(event -> Navigation.navigate(Screen.HOME));
     exitButton.setOnMouseClicked(event -> exit());
     serviceRequestChoiceBox.setOnAction(event -> loadServiceRequestForm());
+    goToStatusPage.setOnMouseClicked(event -> Navigation.navigate(Screen.STATUS_PAGE));
   }
 
   public void loadServiceRequestForm() {
