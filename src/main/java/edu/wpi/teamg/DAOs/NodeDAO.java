@@ -23,11 +23,11 @@ public class NodeDAO implements LocationDAO {
   }
 
   @Override
-  public void exportCSV() throws SQLException, IOException{
+  public void exportCSV() throws SQLException{
     String csvFilePath = "Node.csv";
 
     try{
-      SQL = "SELECT * FROM node";
+      SQL = "SELECT * FROM proto2.node";
       PreparedStatement ps = db.getConnection().prepareStatement(SQL);
       ResultSet rs = ps.executeQuery(SQL);
 
