@@ -1,6 +1,5 @@
 package edu.wpi.teamg.DAOs;
 
-
 import edu.wpi.teamg.DBConnection;
 import edu.wpi.teamg.ORMClasses.LocationName;
 import java.io.*;
@@ -49,7 +48,8 @@ public class LocationNameDAO implements LocationDAO {
   }
 
   @Override
-  public void update(Object old, Object update) throws SQLException {/*
+  public void update(Object old, Object update) throws SQLException {
+    /*
     connection.setConnection();
     PreparedStatement ps;
     SQL =
@@ -71,7 +71,6 @@ public class LocationNameDAO implements LocationDAO {
       System.err.println("SQL exeption");
     }
     connection.closeConnection();*/
-<
   }
 
   @Override
@@ -115,9 +114,8 @@ public class LocationNameDAO implements LocationDAO {
     connection.closeConnection();
   }
 
-
   @Override
-  public void importCSV(String filename) throws SQLException{
+  public void importCSV(String filename) throws SQLException {
     LocationName l1 = new LocationName();
     String line = "";
     String split = ",";
@@ -129,15 +127,13 @@ public class LocationNameDAO implements LocationDAO {
         this.insert(loc);
       }
       br.close();
-    }catch(SQLException c){
+    } catch (SQLException c) {
       System.err.println("SQL Exception");
-    }catch(IOException e){
+    } catch (IOException e) {
       System.err.println("IO exception");
-
     }
   }
-  @Override
-  public void exportCSV() throws SQLException {
 
-  }
+  @Override
+  public void exportCSV() throws SQLException {}
 }

@@ -2,12 +2,8 @@ package edu.wpi.teamg.DAOs;
 
 import edu.wpi.teamg.DBConnection;
 import edu.wpi.teamg.ORMClasses.MealRequest;
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.HashMap;
-
 
 public class MealRequestDAO implements DAO {
 
@@ -16,11 +12,10 @@ public class MealRequestDAO implements DAO {
   private String SQL_mealRequest;
   private String SQL_Request;
 
-
-  private HashMap<Integer,MealRequest> mealRequestHash = new HashMap<Integer, MealRequest>();
+  private HashMap<Integer, MealRequest> mealRequestHash = new HashMap<Integer, MealRequest>();
 
   @Override
-  public HashMap<Integer,MealRequest> getAll() throws SQLException {
+  public HashMap<Integer, MealRequest> getAll() throws SQLException {
 
     db.setConnection();
 
@@ -28,7 +23,7 @@ public class MealRequestDAO implements DAO {
     ResultSet rs = null;
 
     SQL_mealRequest =
-            "select * from proto2.request join proto2.mealrequest on proto2.request.reqid = proto2.mealrequest.reqid";
+        "select * from proto2.request join proto2.mealrequest on proto2.request.reqid = proto2.mealrequest.reqid";
 
     try {
       ps = db.getConnection().prepareStatement(SQL_mealRequest);
@@ -37,7 +32,6 @@ public class MealRequestDAO implements DAO {
       System.err.println("SQL exception");
       // printSQLException(e);
     }
-
 
     while (rs.next()) {
       MealRequest mealReq = new MealRequest();
@@ -164,7 +158,7 @@ public class MealRequestDAO implements DAO {
       ps_request.setInt(1, ((MealRequest) obj).getReqid());
       ps_request.executeUpdate();
 
-      mealRequestHash.remove(((MealRequest)obj).getReqid());
+      mealRequestHash.remove(((MealRequest) obj).getReqid());
 
     } catch (SQLException e) {
       System.err.println("SQL exception");

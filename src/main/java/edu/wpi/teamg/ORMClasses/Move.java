@@ -4,9 +4,7 @@ import java.sql.Date;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.Date;
-
-public class Move extends Node{
+public class Move extends Node {
   @Getter @Setter public int nodeID;
   @Getter @Setter public String longName;
   @Getter @Setter public Date date;

@@ -1,6 +1,5 @@
 package edu.wpi.teamg.DAOs;
 
-
 import edu.wpi.teamg.DBConnection;
 import edu.wpi.teamg.ORMClasses.Move;
 import java.sql.Date;
@@ -52,7 +51,7 @@ public class MoveDAO implements LocationMoveDao {
   }
 
   @Override
-  public void update(Object obj,Object update) throws SQLException {
+  public void update(Object obj, Object update) throws SQLException {
     Move move = (Move) obj;
     db.setConnection();
     PreparedStatement ps = db.getConnection().prepareStatement(sql);

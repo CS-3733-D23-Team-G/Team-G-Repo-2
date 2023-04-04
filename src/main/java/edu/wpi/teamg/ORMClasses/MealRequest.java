@@ -1,9 +1,9 @@
 package edu.wpi.teamg.ORMClasses;
 
-import lombok.Getter;
-import lombok.Setter;
 import java.sql.Date;
 import java.sql.Time;
+import lombok.Getter;
+import lombok.Setter;
 
 public class MealRequest extends Request {
 

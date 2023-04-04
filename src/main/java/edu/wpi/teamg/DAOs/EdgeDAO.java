@@ -1,20 +1,19 @@
 package edu.wpi.teamg.DAOs;
+
 import edu.wpi.teamg.DBConnection;
 import edu.wpi.teamg.ORMClasses.Edge;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class EdgeDAO implements LocationDAO {
   static DBConnection connection = new DBConnection();
   private String sql;
-  private HashMap<String,Edge> edgeHash= new HashMap<String,Edge>();
+  private HashMap<String, Edge> edgeHash = new HashMap<String, Edge>();
 
   @Override
-  public HashMap<String,Edge> getAll() throws SQLException {
+  public HashMap<String, Edge> getAll() throws SQLException {
     connection.setConnection();
     sql = "";
     PreparedStatement ps;
@@ -36,7 +35,7 @@ public class EdgeDAO implements LocationDAO {
 
       int endNode = rs.getInt("endnode");
       edge.setEndNode(endNode);
-      edgeHash.put(edge.getEdgeID(),edge);
+      edgeHash.put(edge.getEdgeID(), edge);
     }
     connection.closeConnection();
     return edgeHash;
@@ -56,7 +55,7 @@ public class EdgeDAO implements LocationDAO {
       ps.setInt(1, ((Edge) obj).getStartNode());
       ps.setInt(2, ((Edge) obj).getEndNode());
       ps.executeUpdate();
-      edgeHash.put(((Edge)obj).getEdgeID(),(Edge)obj);
+      edgeHash.put(((Edge) obj).getEdgeID(), (Edge) obj);
 
     } catch (SQLException e) {
       System.err.println("SQL Exception");
@@ -75,7 +74,7 @@ public class EdgeDAO implements LocationDAO {
       ps.setInt(1, ((Edge) obj).getStartNode());
       ps.setInt(2, ((Edge) obj).getEndNode());
       ps.executeUpdate();
-      edgeHash.remove(((Edge)obj).getEdgeID());
+      edgeHash.remove(((Edge) obj).getEdgeID());
     } catch (SQLException e) {
       System.err.println("SQL exception");
       e.printStackTrace();
