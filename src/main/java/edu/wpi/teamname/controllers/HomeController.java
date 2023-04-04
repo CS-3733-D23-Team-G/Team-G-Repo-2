@@ -14,6 +14,7 @@ public class HomeController {
   @FXML MFXButton signagePageButton;
   @FXML MFXButton exitButton;
 
+  @FXML MFXButton statusButton;
   @FXML ChoiceBox<String> serviceRequestChoiceBox;
 
   ObservableList<String> list =
@@ -28,6 +29,7 @@ public class HomeController {
   public void initialize() {
     signagePageButton.setOnMouseClicked(event -> Navigation.navigate(Screen.SIGNAGE_PAGE));
     exitButton.setOnMouseClicked(event -> exit());
+    statusButton.setOnMouseClicked(event -> Navigation.navigate(Screen.STATUS_PAGE));
 
     serviceRequestChoiceBox.setItems(list);
     serviceRequestChoiceBox.setOnAction(event -> loadServiceRequestForm());

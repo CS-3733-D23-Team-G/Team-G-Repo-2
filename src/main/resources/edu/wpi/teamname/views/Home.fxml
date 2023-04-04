@@ -33,10 +33,10 @@
          <children>
             <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="600.0" styleClass="pane_banner_sizing">
                <children>
-                  <Text disable="true" fill="WHITE" layoutX="35.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Return to Home" wrappingWidth="85.107421875" />
+                  <Text disable="true" fill="WHITE" layoutX="35.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Request Status" wrappingWidth="85.107421875" />
                   <Line endX="48.0" endY="-166.0" layoutX="368.0" layoutY="176.0" startX="48.0" startY="-154.0" stroke="#345871" strokeWidth="2.0" />
                   <Line endX="48.0" endY="-166.0" layoutX="130.0" layoutY="176.0" startX="48.0" startY="-154.0" stroke="#345871" strokeWidth="2.0" />
-                  <MFXButton fx:id="backToHomeButton" layoutY="5.0" opacity="0.0" prefHeight="30.0" prefWidth="176.0" styleClass="button_banner" text="Return to Home Button" />
+                  <MFXButton fx:id="statusButton" layoutY="5.0" opacity="0.0" prefHeight="30.0" prefWidth="176.0" styleClass="button_banner" text="Return to Home Button" />
                   <MFXButton fx:id="signagePageButton" layoutX="422.0" maxHeight="30.0" opacity="0.0" prefWidth="176.0" styleClass="button_banner" text="Signage Page Button" />
                   <Text disable="true" fill="WHITE" layoutX="234.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service Request Forms" />
                   <Text disable="true" fill="WHITE" layoutX="474.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Signage Page" />
