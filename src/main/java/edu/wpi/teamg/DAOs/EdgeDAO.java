@@ -43,7 +43,7 @@ public class EdgeDAO implements LocationDAO {
   }
 
   @Override
-  public void update(Object obj) throws SQLException {}
+  public void update(Object obj, Object update) throws SQLException {}
 
   @Override
   public void insert(Object obj) throws SQLException {
@@ -84,7 +84,7 @@ public class EdgeDAO implements LocationDAO {
   }
 
   @Override
-  public void importCSV() throws SQLException {}
+  public void importCSV(String filename) throws SQLException {}
 
   @Override
   public void exportCSV() throws SQLException {}

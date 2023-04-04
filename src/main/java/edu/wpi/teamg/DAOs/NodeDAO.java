@@ -12,8 +12,8 @@ public class NodeDAO implements LocationDAO {
   private static DBConnection db = new DBConnection();
   private String SQL;
 
-  @Override
-  public void importCSV() {}
+2  @Override
+  public void importCSV(String path) throws SQLException {}
 
   @Override
   public void exportCSV() {}
