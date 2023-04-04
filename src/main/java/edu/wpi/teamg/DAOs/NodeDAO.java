@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.HashMap;
 
-public class NodeDAO implements LocationNameDAO {
+public class NodeDAO implements LocationDAO {
 
   static DBConnection db = new DBConnection();
   private String SQL;
