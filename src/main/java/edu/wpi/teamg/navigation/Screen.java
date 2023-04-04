@@ -10,6 +10,7 @@ public enum Screen {
   SUPPLIES_REQUEST("views/OfficeSuppRequestPage.fxml"),
 
   SIGNAGE_PAGE("views/SignagePage.fxml"),
+  ADMIN_SIGNAGE_PAGE("views/SignageAdmin.fxml"),
   ROOM_REQUEST_SUBMIT("views/ConRoomRequestConfirmationPage.fxml"),
   MEAL_REQUEST_SUBMIT("views/MealRequestConfirmationPage.fxml"),
   FLOWERS_REQUEST_SUBMIT("views/FlowersRequestConfirmationPage.fxml"),

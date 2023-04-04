@@ -1,5 +1,6 @@
 package edu.wpi.teamg.controllers;
 
+import edu.wpi.teamg.DAOs.NodeDAO;
 import edu.wpi.teamg.Main;
 import edu.wpi.teamg.navigation.Navigation;
 import edu.wpi.teamg.navigation.Screen;
@@ -7,6 +8,7 @@ import edu.wpi.teamg.pathFinding.Edge;
 import edu.wpi.teamg.pathFinding.Graph;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Random;
@@ -16,8 +18,10 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import net.kurobako.gesturefx.GesturePane;
 
 public class SignageAdminController {
@@ -27,6 +31,8 @@ public class SignageAdminController {
   @FXML MFXButton signagePageButton;
   @FXML MFXButton exitButton;
   @FXML MFXButton pathFindButton;
+  @FXML MFXButton importButton;
+  @FXML Label fileLabel;
 
   @FXML MFXTextField startLoc;
 
@@ -50,6 +56,8 @@ public class SignageAdminController {
     signagePageButton.setOnMouseClicked(event -> Navigation.navigate(Screen.SIGNAGE_PAGE));
     backToHomeButton.setOnMouseClicked(event -> Navigation.navigate(Screen.HOME));
     exitButton.setOnMouseClicked(event -> exit());
+    importButton.setOnAction(event -> fileChooser());
+    fileLabel.getText();
     serviceRequestChoiceBox.setOnAction(event -> loadServiceRequestForm());
     pathFindButton.setOnMouseClicked(
         event -> {
@@ -130,6 +138,26 @@ public class SignageAdminController {
     path = G1.aStarAlg(G1.createWeightedAdj(), startNode, endNode);
 
     setPath(path);
+  }
+
+  @FXML
+  void fileChooser() {
+    FileChooser fc = new FileChooser();
+
+    NodeDAO nodeDAO = new NodeDAO();
+
+    fc.getExtensionFilters()
+        .add(new FileChooser.ExtensionFilter("Comma Separated Values", "*.csv"));
+    File f = fc.showOpenDialog(null);
+
+    if (f != null) {
+      fileLabel.setText("Selected File::" + f.getAbsolutePath());
+      try {
+        nodeDAO.importCSV(f.getAbsolutePath());
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    }
   }
 
   public void setPath(ArrayList<String> path) {

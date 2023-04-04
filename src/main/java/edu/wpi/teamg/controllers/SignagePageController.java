@@ -27,6 +27,7 @@ public class SignagePageController {
   @FXML ChoiceBox<String> serviceRequestChoiceBox;
   @FXML MFXButton signagePageButton;
   @FXML MFXButton exitButton;
+  @FXML MFXButton goToAdminSign;
 
   @FXML MFXButton pathFindButton;
 
@@ -51,6 +52,7 @@ public class SignagePageController {
     serviceRequestChoiceBox.setItems(list);
     signagePageButton.setOnMouseClicked(event -> Navigation.navigate(Screen.SIGNAGE_PAGE));
     backToHomeButton.setOnMouseClicked(event -> Navigation.navigate(Screen.HOME));
+    goToAdminSign.setOnMouseClicked(event -> Navigation.navigate(Screen.ADMIN_SIGNAGE_PAGE));
     exitButton.setOnMouseClicked(event -> exit());
     serviceRequestChoiceBox.setOnAction(event -> loadServiceRequestForm());
     pathFindButton.setOnMouseClicked(

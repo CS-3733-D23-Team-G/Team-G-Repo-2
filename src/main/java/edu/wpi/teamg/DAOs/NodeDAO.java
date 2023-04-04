@@ -2,9 +2,7 @@ package edu.wpi.teamg.DAOs;
 
 import edu.wpi.teamg.DBConnection;
 import edu.wpi.teamg.ORMClasses.Node;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.sql.*;
 import java.util.HashMap;
 
@@ -15,7 +13,47 @@ public class NodeDAO implements LocationDAO {
   private HashMap<Integer, Node> Nodes = new HashMap<>();
 
   @Override
-  public void importCSV(String path) throws SQLException {}
+  public void importCSV(String path) throws SQLException {
+    try {
+      db.setConnection();
+
+      SQL = "INSERT INTO proto2.node (nodeid, xcoord, ycoord, floor, building) VALUES (?,?,?,?,?)";
+      PreparedStatement ps = db.getConnection().prepareStatement(SQL);
+
+      BufferedReader br = new BufferedReader(new FileReader(path));
+      String line = null;
+
+      br.readLine(); // skip line
+      while ((line = br.readLine()) != null) {
+        String[] data = line.split(",");
+
+        String nodeID = data[0];
+        String xcoord = data[1];
+        String ycoord = data[2];
+        String floor = data[3];
+        String building = data[4];
+
+        int iNodeID = Integer.parseInt(nodeID);
+        ps.setInt(1, iNodeID);
+
+        int iXCoord = Integer.parseInt(xcoord);
+        ps.setInt(2, iXCoord);
+
+        int iYCoord = Integer.parseInt(ycoord);
+        ps.setInt(3, iYCoord);
+
+        ps.setString(4, floor);
+        ps.setString(5, building);
+        ps.addBatch();
+      }
+      br.close();
+      ps.executeBatch();
+    } catch (IOException e) {
+      System.err.println(e);
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
 
   @Override
   public void exportCSV() throws SQLException {
