@@ -29,10 +29,10 @@ public class Graph {
       int vertice_numE = 0;
       // then we will find where the nodes are in the Node[] array and save the int value
       for (int j = 0; j < V.length; j++) {
-        if (V[j].equals(start)) {
+        if ((Integer.parseInt(V[j].getNodeID())) == (Integer.parseInt(start.getNodeID()))) {
           vertice_numS = j;
         }
-        if (V[j].equals(end)) {
+        if ((Integer.parseInt(V[j].getNodeID())) == (Integer.parseInt(end.getNodeID()))) {
           vertice_numE = j;
         }
       }
