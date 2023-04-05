@@ -1,12 +1,15 @@
 package edu.wpi.teamg.controllers;
 
+import edu.wpi.teamg.DAOs.ConferenceRoomRequestDAO;
 import edu.wpi.teamg.ORMClasses.ConferenceRoomRequest;
+import edu.wpi.teamg.ORMClasses.StatusTypeEnum;
 import edu.wpi.teamg.navigation.Navigation;
 import edu.wpi.teamg.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.sql.Time;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -97,6 +100,24 @@ public class ConRoomRequestController {
     crr.setPurpose(roomMeetingPurpose.getText());
     crr.setMeeting_date(Date.valueOf(datePicker.getValue()));
     crr.setMeeting_time(StringToTime(roomTimeData.getText()));
+
+    ConferenceRoomRequestDAO conRoomDao = new ConferenceRoomRequestDAO();
+    ConferenceRoomRequest conRoom = new ConferenceRoomRequest();
+
+    conRoom.setEmpid(1);
+    conRoom.setLocation(crr.getLocation());
+    conRoom.setServ_by(1);
+    conRoom.setStatus(StatusTypeEnum.blank);
+    conRoom.setMeeting_date(crr.getMeeting_date());
+    conRoom.setMeeting_time(crr.getMeeting_time());
+    conRoom.setPurpose(crr.getPurpose());
+
+    try {
+      conRoomDao.insert(conRoom);
+    } catch (SQLException e) {
+      System.err.println("SQL Exception");
+      e.printStackTrace();
+    }
 
     System.out.println(
         "Employee ID: "
