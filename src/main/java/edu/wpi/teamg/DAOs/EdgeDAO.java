@@ -111,7 +111,7 @@ public class EdgeDAO implements LocationDAO {
         ps.addBatch();
       }
       br.close();
-      ps.executeUpdate();
+      ps.executeBatch();
 
     } catch (FileNotFoundException e) {
       System.err.println("File Not Found Exception");

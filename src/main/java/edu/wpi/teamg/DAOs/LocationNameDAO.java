@@ -117,9 +117,11 @@ public class LocationNameDAO implements LocationDAO {
   @Override
   public void importCSV(String filename) throws SQLException {
     connection.setConnection();
-    SQL = "insert into teamgdb.proto2.locationname (longname,shortname,nodetype) values (?,?,?)";
-    PreparedStatement ps = connection.getConnection().prepareStatement(SQL);
+
     try {
+      SQL = "insert into teamgdb.proto2.locationname (longname,shortname,nodetype) values (?,?,?)";
+      PreparedStatement ps = connection.getConnection().prepareStatement(SQL);
+
       BufferedReader br = new BufferedReader(new FileReader(filename));
       String line = null;
       br.readLine();
@@ -138,7 +140,7 @@ public class LocationNameDAO implements LocationDAO {
         ps.addBatch();
       }
       br.close();
-      ps.executeUpdate();
+      ps.executeBatch();
 
     } catch (FileNotFoundException e) {
       System.err.println("File Not Found Exception");
