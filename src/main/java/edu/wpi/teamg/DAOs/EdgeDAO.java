@@ -2,12 +2,11 @@ package edu.wpi.teamg.DAOs;
 
 import edu.wpi.teamg.DBConnection;
 import edu.wpi.teamg.ORMClasses.Edge;
-
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -92,22 +91,22 @@ public class EdgeDAO implements LocationDAO {
   @Override
   public void importCSV(String filename) throws SQLException {
     connection.setConnection();
-    sql="";
-    sql="insert into teamgdb.proto2.edge (startnode, endnode) values (?,?)";
+    sql = "";
+    sql = "insert into teamgdb.proto2.edge (startnode, endnode) values (?,?)";
     PreparedStatement ps = connection.getConnection().prepareStatement(sql);
-    try{
+    try {
       BufferedReader br = new BufferedReader(new FileReader(filename));
       String line = null;
       br.readLine();
 
-      while((line= br.readLine())!=null){
+      while ((line = br.readLine()) != null) {
         String data[] = line.split(",");
 
         int sNode = Integer.parseInt(data[0]);
         int eNode = Integer.parseInt(data[1]);
 
-        ps.setInt(1,sNode);
-        ps.setInt(2,eNode);
+        ps.setInt(1, sNode);
+        ps.setInt(2, eNode);
 
         ps.addBatch();
       }
@@ -120,7 +119,7 @@ public class EdgeDAO implements LocationDAO {
     } catch (IOException e) {
       System.err.println("IO Exception");
       e.printStackTrace();
-    }catch (SQLException e){
+    } catch (SQLException e) {
       System.err.println("SQL Exception");
       e.printStackTrace();
     }
@@ -142,9 +141,7 @@ public class EdgeDAO implements LocationDAO {
         String startNode = rs.getString("startnode");
         String endNode = rs.getString("endnode");
 
-        String line =
-                String.format("\"%s\", %s",
-                        startNode,endNode);
+        String line = String.format("\"%s\", %s", startNode, endNode);
 
         fileWriter.newLine();
         fileWriter.write(line);
