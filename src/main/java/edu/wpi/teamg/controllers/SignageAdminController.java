@@ -1,10 +1,11 @@
 package edu.wpi.teamg.controllers;
 
+import edu.wpi.teamg.DAOs.EdgeDAO;
+import edu.wpi.teamg.DAOs.LocationNameDAO;
+import edu.wpi.teamg.DAOs.MoveDAO;
 import edu.wpi.teamg.DAOs.NodeDAO;
 import edu.wpi.teamg.Main;
-import edu.wpi.teamg.ORMClasses.LocationName;
-import edu.wpi.teamg.ORMClasses.Move;
-import edu.wpi.teamg.ORMClasses.Node;
+import edu.wpi.teamg.ORMClasses.*;
 import edu.wpi.teamg.navigation.Navigation;
 import edu.wpi.teamg.navigation.Screen;
 import edu.wpi.teamg.pathFinding.Edge;
@@ -13,17 +14,13 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.io.File;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.*;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -43,17 +40,17 @@ public class SignageAdminController {
   @FXML MFXTextField results;
   @FXML GesturePane pane;
 
-  @FXML MFXButton imp;
+  @FXML Button imp;
   // @FXML MFXButton export;
 
-  @FXML MFXButton nodes;
-  @FXML MFXButton edges;
+  @FXML Button nodes;
+  @FXML Button edges;
 
-  @FXML MFXButton nodeLoc;
-  @FXML MFXButton move;
+  @FXML Button nodeLoc;
+  @FXML Button move;
 
   @FXML TableView<Node> nodeTable;
-  @FXML TableView<Edge> edgeTable;
+  @FXML TableView<edu.wpi.teamg.ORMClasses.Edge> edgeTable;
   @FXML TableView<Move> moveTable;
   @FXML TableView<LocationName> nodeLocTable;
 
@@ -65,14 +62,14 @@ public class SignageAdminController {
   @FXML TableColumn<Node, String> nodeBuilding;
 
   // Edges
-  @FXML TableColumn<Edge, String> edgeEdgeID;
-  @FXML TableColumn<Edge, Integer> edgeEndNode;
-  @FXML TableColumn<Edge, Integer> edgeStartNode;
+  @FXML TableColumn<edu.wpi.teamg.ORMClasses.Edge, String> edgeEdgeID;
+  @FXML TableColumn<edu.wpi.teamg.ORMClasses.Edge, Integer> edgeEndNode;
+  @FXML TableColumn<edu.wpi.teamg.ORMClasses.Edge, Integer> edgeStartNode;
 
   // Move
 
   @FXML TableColumn<Move, String> moveNodeID;
-  @FXML TableColumn<Move, Integer> moveDate;
+  @FXML TableColumn<Move, Date> moveDate;
   @FXML TableColumn<Move, Integer> moveLongName;
 
   // NodeLoc
@@ -90,7 +87,7 @@ public class SignageAdminController {
           "Office Supplies Request Form");
 
   @FXML
-  public void initialize() {
+  public void initialize() throws SQLException {
     serviceRequestChoiceBox.setItems(list);
     signagePageButton.setOnMouseClicked(event -> Navigation.navigate(Screen.SIGNAGE_PAGE));
     backToHomeButton.setOnMouseClicked(event -> Navigation.navigate(Screen.HOME));
@@ -112,15 +109,35 @@ public class SignageAdminController {
     String imgPath = Main.class.getResource("images/00_thelowerlevel1.png").toString();
     ImageView image = new ImageView(new Image(imgPath));
     pane.setContent(image);
+    nodes.setOnMouseClicked(event -> loadMoveTable());
+    edges.setOnMouseClicked(event -> loadLocTable());
+    move.setOnMouseClicked(event -> loadMoveTable());
+    nodeLoc.setOnMouseClicked(event -> loadLocTable());
     // pane.setMaxScale();
 
     pane.setMinScale(.001);
     pane.zoomTo(.000001, new Point2D(2500, 1700));
     pane.zoomTo(.000001, new Point2D(2500, 1700));
 
+    ObservableList<Node> nodeList;
+    ObservableList<edu.wpi.teamg.ORMClasses.Edge> edgeList;
+    ObservableList<Move> moveList;
+    ObservableList<LocationName> locList;
 
-    move.setOnMouseClicked(event -> loadMoveTable());
-    nodeLoc.setOnMouseClicked(event -> loadLocTable());
+    ArrayList<Node> nodes1 = getNodes();
+    ArrayList<edu.wpi.teamg.ORMClasses.Edge> edges1 = getEdge();
+    ArrayList<Move> move1 = getMove();
+    ArrayList<LocationName> loc1 = getLoc();
+
+    nodeList = FXCollections.observableArrayList(nodes1);
+    edgeList = FXCollections.observableArrayList(edges1);
+    moveList = FXCollections.observableArrayList(move1);
+    locList = FXCollections.observableArrayList(loc1);
+
+    nodeTable.setItems(nodeList);
+    edgeTable.setItems(edgeList);
+    moveTable.setItems(moveList);
+    nodeLocTable.setItems(locList);
 
     nodeNodeID.setCellValueFactory(new PropertyValueFactory<>("Node ID"));
     nodeXcoord.setCellValueFactory(new PropertyValueFactory<>("X-Coord"));
@@ -247,6 +264,47 @@ public class SignageAdminController {
     edgeTable.setVisible(false);
     moveTable.setVisible(false);
     nodeLocTable.setVisible(true);
+  }
+
+  public ArrayList<Node> getNodes() throws SQLException {
+    NodeDAO nodeDAO = new NodeDAO();
+    HashMap<Integer, Node> nodes = nodeDAO.getAll();
+
+    ArrayList<Node> nodesList = new ArrayList<>();
+
+    nodesList = (ArrayList<Node>) nodes.values();
+
+    return nodesList;
+  }
+
+  public ArrayList<edu.wpi.teamg.ORMClasses.Edge> getEdge() throws SQLException {
+    EdgeDAO edgeDAO = new EdgeDAO();
+    HashMap<String, edu.wpi.teamg.ORMClasses.Edge> edge = edgeDAO.getAll();
+
+    ArrayList<edu.wpi.teamg.ORMClasses.Edge> edgeList = new ArrayList<>();
+    edgeList = (ArrayList<edu.wpi.teamg.ORMClasses.Edge>) edge.values();
+
+    return edgeList;
+  }
+
+  public ArrayList<Move> getMove() throws SQLException {
+    MoveDAO moveDAO = new MoveDAO();
+    List<Move> moveL = moveDAO.getAll();
+
+    ArrayList<Move> moveAl = (ArrayList<Move>) moveL;
+
+    return moveAl;
+  }
+
+  public ArrayList<LocationName> getLoc() throws SQLException {
+    LocationNameDAO locationNameDAO = new LocationNameDAO();
+    HashMap<String, LocationName> locNames = locationNameDAO.getAll();
+
+    ArrayList<LocationName> locList = new ArrayList<>();
+
+    locList = (ArrayList<LocationName>) locNames.values();
+
+    return locList;
   }
 
   public void setPath(ArrayList<String> path) {
