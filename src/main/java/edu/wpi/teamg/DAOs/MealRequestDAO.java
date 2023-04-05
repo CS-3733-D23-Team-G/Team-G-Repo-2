@@ -59,11 +59,12 @@ public class MealRequestDAO implements DAO {
 
       Time deliveryTime = rs.getTime("deliveryTime");
       mealReq.setDeliveryTime(deliveryTime);
+
       String order = rs.getString("mealOrder");
       mealReq.setOrder(order);
 
       String note = rs.getString("note");
-      mealReq.setOrder(note);
+      mealReq.setNote(note); // check when merge
 
       mealRequestHash.put(reqID, mealReq);
     }

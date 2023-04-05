@@ -106,7 +106,7 @@ VALUES
     (4, '456password', true);
 
 -- Table: proto2.Request
-INSERT INTO proto2.Request (reqID, empID, location, serv_by, status)
+INSERT INTO proto2.request (reqID, empID, location, serv_by, status)
 VALUES
     (1, 1, 105, 1, 'blank'),
     (2, 2, 110, 2, 'processing'),
@@ -126,9 +126,10 @@ VALUES
     (8, '2023-04-18', '15:00:00', 'Training session');
 
 -- Table: proto2.MealRequest
-INSERT INTO proto2.MealRequest (reqID, deliveryDate, deliveryTime, recipient, mealOrder, note)
+INSERT INTO proto2.mealrequest (reqID, deliveryDate, deliveryTime, recipient, mealOrder, note)
 VALUES
     (1, '2023-04-15', '13:00:00','John Doe', 'Grilled chicken sandwich', 'No onions'),
     (2, '2023-04-15', '13:00:00','Jane Doe', 'Vegetarian pizza', 'Extra cheese'),
     (3, '2023-04-15', '13:00:00','Bob Smith', 'Fish and chips', 'Tartar sauce on the side'),
     (4, '2023-04-15', '13:00:00', 'Alice Johnson', 'Caesar salad', 'No croutons');
+
