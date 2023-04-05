@@ -51,7 +51,7 @@ public class ConferenceRoomRequestDAO implements DAO {
       cReq.setLocation(location);
       cReq.setEmpid(empID);
       cReq.setServ_by(serv_by);
-      cReq.setStatus(status);
+      cReq.setStatus(StatusTypeEnum.done);
       cReq.setPurpose(confPurpose);
       cReq.setMeeting_time(reqTime);
       cReq.setMeeting_date(reqDate);

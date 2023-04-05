@@ -1,6 +1,8 @@
 package edu.wpi.teamg.controllers;
 
+import edu.wpi.teamg.DAOs.MealRequestDAO;
 import edu.wpi.teamg.ORMClasses.MealRequest;
+import edu.wpi.teamg.ORMClasses.StatusTypeEnum;
 import edu.wpi.teamg.navigation.Navigation;
 import edu.wpi.teamg.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
@@ -26,7 +28,6 @@ public class MealRequestController {
 
   // TextFields
   @FXML MFXTextField mealTimeOfDeliver;
-  @FXML MFXTextField mealEmployeeIDData;
   @FXML MFXTextField mealDeliveryLocationData;
   @FXML MFXTextField mealPersonOrderingForData;
   @FXML MFXTextField mealNotesData;
@@ -71,10 +72,10 @@ public class MealRequestController {
           } catch (SQLException e) {
             throw new RuntimeException(e);
           }
+          Navigation.navigate(Screen.MEAL_REQUEST_SUBMIT);
         });
 
     //  mealNameData.getText();
-    mealEmployeeIDData.getText();
     mealDeliveryLocationData.getText();
     mealPersonOrderingForData.getText();
     mealNotesData.getText();
@@ -94,8 +95,9 @@ public class MealRequestController {
   public void storeMealValues() throws SQLException {
     MealRequest mr = new MealRequest();
 
-    mr.setEmpid(Integer.parseInt(mealEmployeeIDData.getText()));
+    mr.setEmpid(1);
     mr.setServ_by(1);
+    mr.setStatus(StatusTypeEnum.blank);
     // assume for now they are going to input a node number, so parseInt
     mr.setLocation(Integer.parseInt(mealDeliveryLocationData.getText()));
     mr.setRecipient(mealPersonOrderingForData.getText());
@@ -106,7 +108,7 @@ public class MealRequestController {
 
     System.out.println(
         "Employee ID: "
-            + mr.getReqid()
+            + mr.getEmpid()
             + "\nDelivery Location: "
             + mr.getLocation()
             + "\nOrder: "
@@ -118,10 +120,12 @@ public class MealRequestController {
             + "\nDelivery Date: "
             + mr.getDeliveryDate()
             + "\nDelivery Time: "
-            + mr.getDeliveryTime());
+            + mr.getDeliveryTime()
+            + "\nStatus: "
+            + mr.getStatus());
 
-    //    MealRequestDAO mealRequestDAO = new MealRequestDAO();
-    //    mealRequestDAO.insert(mr);
+    MealRequestDAO mealRequestDAO = new MealRequestDAO();
+    mealRequestDAO.insert(mr);
   }
 
   public Time StringToTime(String s) {
@@ -132,7 +136,6 @@ public class MealRequestController {
   }
 
   public void clearAllData() {
-    mealEmployeeIDData.setText("");
     mealDeliveryLocationData.setText("");
     mealPersonOrderingForData.setText("");
     mealNotesData.setText("");
