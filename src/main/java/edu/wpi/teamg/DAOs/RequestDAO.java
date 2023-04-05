@@ -12,17 +12,6 @@ public class RequestDAO implements DAO {
   private String sql;
   private HashMap<Integer, Request> requestHash = new HashMap<Integer, Request>();
 
-  public static <E extends Enum<E>> E getEnum(Class<E> enumClass, ResultSet rs, String columnName)
-      throws SQLException {
-    String value = rs.getString(columnName);
-    if (value == null) {
-      return null;
-    } else {
-      /*from ww w.  j  av  a 2s  . c  o m*/
-      return Enum.valueOf(enumClass, value);
-    }
-  }
-
   @Override
   public HashMap<Integer, Request> getAll() throws SQLException {
     db.setConnection();

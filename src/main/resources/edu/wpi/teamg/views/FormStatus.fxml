@@ -14,7 +14,6 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
 
-
 <VBox stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamg.controllers.FormStatusController">
    <children>
       <HBox prefHeight="100.0" prefWidth="200.0" styleClass="top_banner">
@@ -54,10 +53,10 @@
                 <children>
                     <Button fx:id="allRequestTableButton" layoutY="10.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="97.0" text="All Requests" />
                     <Button fx:id="mealTableButton" layoutY="36.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="97.0" text="Meal Requests" />
-                    <Button fx:id="roomTableButton" layoutY="141.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="97.0" text="Room Requests" />
-                    <Button layoutY="62.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="97.0" text="WIP" />
+                    <Button fx:id="roomTableButton" layoutY="62.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="97.0" text="Room Requests" />
+                    <Button layoutY="141.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="97.0" text="WIP" />
                     <Button layoutY="88.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="97.0" text="WIP" />
-                    <Button layoutY="115.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="97.0" text="WIP" />
+                    <Button layoutY="116.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="97.0" text="WIP" />
                   <TextArea fx:id="areaInfo" layoutY="167.0" prefHeight="87.0" prefWidth="134.0" />
                     <TableView fx:id="mealTable" layoutX="139.0" layoutY="3.0" prefHeight="253.0" prefWidth="455.0">
                         <columns>
@@ -66,22 +65,17 @@
                         <TableColumn fx:id="mealLocation1" prefWidth="60.0" text="Location" />
                             <TableColumn fx:id="mealServeBy" prefWidth="50.0" text="Serve-By" />
                             <TableColumn fx:id="mealStatus" prefWidth="55.0" text="Status" />
-                        <TableColumn fx:id="mealRecipient" prefWidth="60.0" text="recipient" />
-                        <TableColumn fx:id="mealOrder" prefWidth="75.0" text="order" />
-                        <TableColumn fx:id="mealTime" prefWidth="50.0" text="time" />
-                        <TableColumn fx:id="mealDate" minWidth="0.0" prefWidth="50.0" text="date" />
-                        <TableColumn fx:id="mealNote" minWidth="0.0" prefWidth="100.0" text="note" />
+                        <TableColumn prefWidth="75.0" text="Meal Request">
+                           <columns>
+                              <TableColumn fx:id="mealDate" minWidth="0.0" prefWidth="50.0" text="date" />
+                              <TableColumn fx:id="mealTime" prefWidth="50.0" text="time" />
+                              <TableColumn fx:id="mealOrder" prefWidth="75.0" text="order" />
+                              <TableColumn fx:id="mealRecipient" prefWidth="60.0" text="recipient" />
+                              <TableColumn fx:id="mealNote" minWidth="0.0" prefWidth="100.0" text="note" />
+                           </columns>
+                        </TableColumn>
                         </columns>
                     </TableView>
-                  <TableView fx:id="mainTable" layoutX="139.0" layoutY="2.0" prefHeight="253.0" prefWidth="455.0">
-                     <columns>
-                        <TableColumn fx:id="reqID" prefWidth="55.0" text="Req. ID" />
-                        <TableColumn fx:id="empID" prefWidth="55.0" text="Emp. ID" />
-                        <TableColumn fx:id="location1" prefWidth="60.0" text="Location" />
-                        <TableColumn fx:id="serveBy" prefWidth="50.0" text="Serve-By" />
-                        <TableColumn fx:id="status" prefWidth="55.0" text="Status" />
-                     </columns>
-                  </TableView>
                   <TableView fx:id="roomTable" layoutX="140.0" layoutY="2.0" prefHeight="253.0" prefWidth="455.0">
                      <columns>
                         <TableColumn fx:id="roomReqID" prefWidth="55.0" text="Req. ID" />
@@ -96,6 +90,15 @@
                               <TableColumn fx:id="roomPurpose" prefWidth="75.0" text="Purpose" />
                            </columns>
                         </TableColumn>
+                     </columns>
+                  </TableView>
+                  <TableView fx:id="mainTable" layoutX="139.0" layoutY="2.0" prefHeight="253.0" prefWidth="455.0">
+                     <columns>
+                        <TableColumn fx:id="reqID" prefWidth="55.0" text="Req. ID" />
+                        <TableColumn fx:id="empID" prefWidth="55.0" text="Emp. ID" />
+                        <TableColumn fx:id="location1" prefWidth="60.0" text="Location" />
+                        <TableColumn fx:id="serveBy" prefWidth="50.0" text="Serve-By" />
+                        <TableColumn fx:id="status" prefWidth="55.0" text="Status" />
                      </columns>
                   </TableView>
                 </children>
