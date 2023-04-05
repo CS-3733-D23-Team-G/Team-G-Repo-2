@@ -64,7 +64,26 @@ public class RequestDAO implements DAO {
   }
 
   @Override
-  public void update(Object obj, Object update) throws SQLException {}
+  public void update(Object obj, Object update) throws SQLException {
+   /* db.setConnection();
+
+    PreparedStatement ps;
+    Request r1= (Request) update;
+
+    sql = "update proto2.request SET 'location'=?, 'serv_by'=? where 'reqid'=? ";
+
+    try {
+      ps = db.getConnection().prepareStatement(sql);
+      ps.setInt(1,r1.getLocation());
+      ps.setInt(2, r1.getServ_by());
+      ps.setInt(3,r1.getReqid());
+      ps.executeQuery();
+    } catch (SQLException e) {
+      e.printStackTrace();
+      System.err.println("SQL Exception");
+    }
+*/
+  }
 
   @Override
   public void insert(Object obj) throws SQLException {}

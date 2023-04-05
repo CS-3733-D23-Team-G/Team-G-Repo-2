@@ -49,7 +49,7 @@ public class LocationNameDAO implements LocationDAO {
 
   @Override
   public void update(Object old, Object update) throws SQLException {
-    /*
+
     connection.setConnection();
     PreparedStatement ps;
     SQL =
@@ -70,7 +70,7 @@ public class LocationNameDAO implements LocationDAO {
     } catch (SQLException e) {
       System.err.println("SQL exeption");
     }
-    connection.closeConnection();*/
+    connection.closeConnection();
   }
 
   @Override
