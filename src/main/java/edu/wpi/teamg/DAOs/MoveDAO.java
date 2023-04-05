@@ -2,12 +2,11 @@ package edu.wpi.teamg.DAOs;
 
 import edu.wpi.teamg.DBConnection;
 import edu.wpi.teamg.ORMClasses.Move;
-
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -111,14 +110,14 @@ public class MoveDAO implements LocationMoveDao {
   @Override
   public void importCSV(String filePath) throws SQLException {
     db.setConnection();
-    sql="insert into teamgdb.proto2.move (nodeid, longname, date) values (?,?,?)";
+    sql = "insert into teamgdb.proto2.move (nodeid, longname, date) values (?,?,?)";
     PreparedStatement ps = db.getConnection().prepareStatement(sql);
     try {
       BufferedReader br = new BufferedReader(new FileReader(filePath));
       String line = null;
 
       br.readLine();
-      while((line= br.readLine())!=null){
+      while ((line = br.readLine()) != null) {
         String[] data = line.split(",");
 
         String nodeID = data[0];
@@ -126,14 +125,13 @@ public class MoveDAO implements LocationMoveDao {
         String dateString = data[2];
 
         int inodeid = Integer.parseInt(nodeID);
-        ps.setInt(1,inodeid);
+        ps.setInt(1, inodeid);
 
-        ps.setString(2,longname);
+        ps.setString(2, longname);
 
-        ps.setDate(3,stringToDate(dateString));
+        ps.setDate(3, stringToDate(dateString));
 
         ps.addBatch();
-
       }
       br.close();
       ps.executeBatch();
@@ -144,16 +142,17 @@ public class MoveDAO implements LocationMoveDao {
     } catch (IOException e) {
       System.err.println("Input output exception");
       e.printStackTrace();
-    }catch(SQLException e){
+    } catch (SQLException e) {
       System.err.println("SQL exception");
       e.printStackTrace();
     }
     db.closeConnection();
   }
 
-  public Date stringToDate(String input){
+  public Date stringToDate(String input) {
     String[] data = input.split("/");
-    Date returnDate = new Date(Integer.parseInt(data[2]),Integer.parseInt(data[1]),Integer.parseInt(data[0]));
+    Date returnDate =
+        new Date(Integer.parseInt(data[2]), Integer.parseInt(data[1]), Integer.parseInt(data[0]));
     return returnDate;
   }
 
@@ -172,9 +171,7 @@ public class MoveDAO implements LocationMoveDao {
         int nodeID = rs.getInt("nodeid");
         String longName = rs.getString("longname");
         Date date = rs.getDate("date");
-        String line =
-                String.format("\"%d\", %s, %t",
-                        nodeID,longName,date);
+        String line = String.format("\"%d\", %s, %t", nodeID, longName, date);
 
         fileWriter.newLine();
         fileWriter.write(line);
