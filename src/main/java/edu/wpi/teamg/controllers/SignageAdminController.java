@@ -4,12 +4,9 @@ import edu.wpi.teamg.DAOs.EdgeDAO;
 import edu.wpi.teamg.DAOs.LocationNameDAO;
 import edu.wpi.teamg.DAOs.MoveDAO;
 import edu.wpi.teamg.DAOs.NodeDAO;
-import edu.wpi.teamg.Main;
 import edu.wpi.teamg.ORMClasses.*;
 import edu.wpi.teamg.navigation.Navigation;
 import edu.wpi.teamg.navigation.Screen;
-import edu.wpi.teamg.pathFinding.Edge;
-import edu.wpi.teamg.pathFinding.Graph;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.io.File;
@@ -19,13 +16,9 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.geometry.Point2D;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
-import net.kurobako.gesturefx.GesturePane;
 
 public class SignageAdminController {
 
@@ -33,12 +26,12 @@ public class SignageAdminController {
   @FXML ChoiceBox<String> serviceRequestChoiceBox;
   @FXML MFXButton signagePageButton;
   @FXML MFXButton exitButton;
-  @FXML MFXButton pathFindButton;
+  // @FXML MFXButton pathFindButton;
   @FXML Label fileLabel;
-  @FXML MFXTextField startLoc;
-  @FXML MFXTextField endLoc;
+  // @FXML MFXTextField startLoc;
+  // @FXML MFXTextField endLoc;
   @FXML MFXTextField results;
-  @FXML GesturePane pane;
+  //  @FXML GesturePane pane;
 
   @FXML Button imp;
   // @FXML MFXButton export;
@@ -95,6 +88,8 @@ public class SignageAdminController {
     imp.setOnAction(event -> fileChooser());
     fileLabel.getText();
     serviceRequestChoiceBox.setOnAction(event -> loadServiceRequestForm());
+
+    /*
     pathFindButton.setOnMouseClicked(
         event -> {
           try {
@@ -104,20 +99,22 @@ public class SignageAdminController {
           }
         });
 
-    startLoc.getText();
-    endLoc.getText();
-    String imgPath = Main.class.getResource("images/00_thelowerlevel1.png").toString();
-    ImageView image = new ImageView(new Image(imgPath));
-    pane.setContent(image);
+     */
+
+    // startLoc.getText();
+    // endLoc.getText();
+    //  String imgPath = Main.class.getResource("images/00_thelowerlevel1.png").toString();
+    //  ImageView image = new ImageView(new Image(imgPath));
+    //  pane.setContent(image);
     nodes.setOnMouseClicked(event -> loadMoveTable());
     edges.setOnMouseClicked(event -> loadLocTable());
     move.setOnMouseClicked(event -> loadMoveTable());
     nodeLoc.setOnMouseClicked(event -> loadLocTable());
     // pane.setMaxScale();
 
-    pane.setMinScale(.001);
-    pane.zoomTo(.000001, new Point2D(2500, 1700));
-    pane.zoomTo(.000001, new Point2D(2500, 1700));
+    //  pane.setMinScale(.001);
+    //  pane.zoomTo(.000001, new Point2D(2500, 1700));
+    //  pane.zoomTo(.000001, new Point2D(2500, 1700));
 
     ObservableList<Node> nodeList;
     ObservableList<edu.wpi.teamg.ORMClasses.Edge> edgeList;
@@ -174,6 +171,8 @@ public class SignageAdminController {
     }
   }
 
+  /*
+
   public void processAStarAlg() throws SQLException {
     ArrayList<String> path = new ArrayList<>();
 
@@ -217,6 +216,8 @@ public class SignageAdminController {
 
     setPath(path);
   }
+
+   */
 
   @FXML
   void fileChooser() {
@@ -270,9 +271,7 @@ public class SignageAdminController {
     NodeDAO nodeDAO = new NodeDAO();
     HashMap<Integer, Node> nodes = nodeDAO.getAll();
 
-    ArrayList<Node> nodesList = new ArrayList<>();
-
-    nodesList = (ArrayList<Node>) nodes.values();
+    ArrayList<Node> nodesList = new ArrayList<>(nodes.values());
 
     return nodesList;
   }
@@ -281,8 +280,7 @@ public class SignageAdminController {
     EdgeDAO edgeDAO = new EdgeDAO();
     HashMap<String, edu.wpi.teamg.ORMClasses.Edge> edge = edgeDAO.getAll();
 
-    ArrayList<edu.wpi.teamg.ORMClasses.Edge> edgeList = new ArrayList<>();
-    edgeList = (ArrayList<edu.wpi.teamg.ORMClasses.Edge>) edge.values();
+    ArrayList<edu.wpi.teamg.ORMClasses.Edge> edgeList = new ArrayList<>(edge.values());
 
     return edgeList;
   }
@@ -300,16 +298,17 @@ public class SignageAdminController {
     LocationNameDAO locationNameDAO = new LocationNameDAO();
     HashMap<String, LocationName> locNames = locationNameDAO.getAll();
 
-    ArrayList<LocationName> locList = new ArrayList<>();
-
-    locList = (ArrayList<LocationName>) locNames.values();
+    ArrayList<LocationName> locList = new ArrayList<>(locNames.values());
 
     return locList;
   }
 
+  /*
   public void setPath(ArrayList<String> path) {
     results.setText(String.valueOf(path));
   }
+
+   */
 
   public void exit() {
     Platform.exit();
