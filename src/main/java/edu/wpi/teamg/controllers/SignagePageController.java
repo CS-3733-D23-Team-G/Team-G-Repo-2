@@ -1,5 +1,7 @@
 package edu.wpi.teamg.controllers;
 
+import edu.wpi.teamg.DAOs.EdgeDAO;
+import edu.wpi.teamg.DAOs.NodeDAO;
 import edu.wpi.teamg.Main;
 import edu.wpi.teamg.navigation.Navigation;
 import edu.wpi.teamg.navigation.Screen;
@@ -10,6 +12,8 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Objects;
 import java.util.Random;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -93,12 +97,57 @@ public class SignagePageController {
 
   public void processAStarAlg() throws SQLException {
     ArrayList<String> path = new ArrayList<>();
-    //
-    //    NodeDAO nodeDAO = new NodeDAO();
-    //
-    //    List<edu.wpi.teamname.ORMClasses.Node> nodeList = nodeDAO.getAll();
+
+    // ArrayList<edu.wpi.teamg.ORMClasses.Node> L1nodeKeys = new ArrayList<>();
+    // ArrayList<edu.wpi.teamg.ORMClasses.Node> L1edgeKeys = new ArrayList<>();
+
+    NodeDAO nodeDAO = new NodeDAO();
+    EdgeDAO edgeDAO = new EdgeDAO();
+
+    HashMap<Integer, edu.wpi.teamg.ORMClasses.Node> nodeMap = nodeDAO.getAll();
+    HashMap<String, edu.wpi.teamg.ORMClasses.Edge> edgeMap = edgeDAO.getAll();
+
+    ArrayList<edu.wpi.teamg.ORMClasses.Node> L1nodes = new ArrayList<>(nodeMap.values());
+    ArrayList<edu.wpi.teamg.ORMClasses.Edge> L1edges = new ArrayList<>(edgeMap.values());
+
+    ArrayList<edu.wpi.teamg.ORMClasses.Node> L1NodeFinal = new ArrayList<>();
+    ArrayList<edu.wpi.teamg.ORMClasses.Edge> L1EdgeFinal = new ArrayList<>();
+
+    // L1nodes = (ArrayList<edu.wpi.teamg.ORMClasses.Node>) nodeMap.values();
+
+    for (int i = 0; i < L1nodes.size(); i++) {
+      if (L1nodes.get(i).getFloor().equals("L1")) {
+        L1NodeFinal.add(L1nodes.get(i));
+      }
+    }
+
+
+    for (int i = 0; i < L1edges.size(); i++) {
+      // For each edge
+      // If the start and end node are both on floor 1
+      // Add edge to final edge array
+      // If only start and end node are on floor 1
+      // print out "error"
+      System.out.println(L1edges.get(i));
+
+      if ((nodeMap.get(L1edges.get(i).getStartNode()).getFloor()).equals("L1")
+          && (nodeMap.get(L1edges.get(i).getEndNode()).getFloor()).equals("L1")) {
+        L1EdgeFinal.add(L1edges.get(i));
+        System.out.println("Success");
+      }
+      if (!Objects.equals(nodeMap.get(L1edges.get(i).getStartNode()).getFloor(), "L1")
+          && (nodeMap.get(L1edges.get(i).getEndNode()).getFloor()).equals("L1")) {
+        System.out.println("ERROR1234");
+      }
+      if ((nodeMap.get(L1edges.get(i).getStartNode()).getFloor()).equals("L1")
+          && !Objects.equals(nodeMap.get(L1edges.get(i).getEndNode()).getFloor(), "L1")) {
+        System.out.println("ERROR1234");
+      }
+    }
+
     /*
     ArrayList<edu.wpi.teamname.ORMClass.Node> L1 = new ArrayList<>();
+
 
     System.out.println(nodeList.get(0).getNodeID());
 

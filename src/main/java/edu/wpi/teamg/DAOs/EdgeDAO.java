@@ -15,7 +15,6 @@ public class EdgeDAO implements LocationDAO {
   @Override
   public HashMap<String, Edge> getAll() throws SQLException {
     connection.setConnection();
-    sql = "";
     PreparedStatement ps;
     ResultSet rs = null;
     sql = "Select * from teamgdb.proto2.edge";
