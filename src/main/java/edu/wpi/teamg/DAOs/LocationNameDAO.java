@@ -135,5 +135,34 @@ public class LocationNameDAO implements LocationDAO {
   }
 
   @Override
-  public void exportCSV() throws SQLException {}
-}
+  public void exportCSV() throws SQLException {
+    String csvFilePath = "locationname.csv";
+    try {
+      SQL = "SELECT * FROM locationname";
+      PreparedStatement ps = connection.getConnection().prepareStatement(SQL);
+      ResultSet rs = ps.executeQuery(SQL);
+
+      BufferedWriter fileWriter = new BufferedWriter(new FileWriter(csvFilePath));
+      fileWriter.write("longname, shortname, nodetype");
+      while (rs.next()) {
+        String longname= rs.getString("longname");
+        String shortname = rs.getString("shortname");
+        String nodetype = rs.getString("nodetype");
+        //textron
+        String line = String.format( "%s, %s, %s", longname, shortname, nodetype);
+        fileWriter.newLine();
+        fileWriter.write(line);
+      }
+      connection.closeConnection();
+      fileWriter.close();
+
+    } catch (SQLException e) {
+      System.err.println("Database error");
+    } catch (IOException e) {
+      System.err.println("File IO error");
+    }
+  }
+
+
+  }
+
