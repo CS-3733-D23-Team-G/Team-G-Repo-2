@@ -135,5 +135,37 @@ public class LocationNameDAO implements LocationDAO {
   }
 
   @Override
-  public void exportCSV() throws SQLException {}
+  public void exportCSV() throws SQLException {
+    String csvFilePath = "LocationName.csv";
+
+    try {
+      SQL = "SELECT * FROM teamgdb.proto2.locationname";
+      PreparedStatement ps = connection.getConnection().prepareStatement(SQL);
+      ResultSet rs = ps.executeQuery(SQL);
+
+      BufferedWriter fileWriter = new BufferedWriter(new FileWriter(csvFilePath));
+      fileWriter.write("nodeid, xcoord, ycoord, floor, building");
+      while (rs.next()) {
+        int nodeID = rs.getInt("nodeid");
+        int xCoord = rs.getInt("xcoord");
+        int yCoord = rs.getInt("ycoord");
+        String floor = rs.getString("floor");
+        String building = rs.getString("building");
+
+        String line =
+                String.format("\"%d\", %d, %d, %s, %s", nodeID, xCoord, yCoord, floor, building);
+
+        fileWriter.newLine();
+        fileWriter.write(line);
+      }
+      connection.closeConnection();
+      fileWriter.close();
+
+    } catch (SQLException e) {
+      System.err.println("Database error");
+    } catch (IOException e) {
+      System.err.println("File IO error");
+    }
+  }
+  }
 }

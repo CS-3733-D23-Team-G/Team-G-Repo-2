@@ -60,7 +60,7 @@ public class NodeDAO implements LocationDAO {
     String csvFilePath = "Node.csv";
 
     try {
-      SQL = "SELECT * FROM node";
+      SQL = "SELECT * FROM teamgdb.proto2.node";
       PreparedStatement ps = db.getConnection().prepareStatement(SQL);
       ResultSet rs = ps.executeQuery(SQL);
 

@@ -32,6 +32,7 @@ public class SignageAdminController {
   @FXML MFXButton exitButton;
   @FXML MFXButton pathFindButton;
   @FXML MFXButton importButton;
+
   @FXML Label fileLabel;
 
   @FXML MFXTextField startLoc;
