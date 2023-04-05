@@ -31,31 +31,31 @@
       <Button fx:id="nodeLoc" layoutY="164.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="97.0" text="NodeLoc" />
       <Button fx:id="move" layoutY="187.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="97.0" text="Move" />
       <Button fx:id="imp" layoutY="213.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="97.0" text="Import" />
-      <Label fx:id="fileLabel" layoutX="106.0" layoutY="218.0" text="Label" />
+      <Label fx:id="fileLabel" layoutX="106.0" layoutY="218.0" text="file" />
       <Button fx:id="export" layoutX="1.0" layoutY="240.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="97.0" text="Export" />
       <TextArea fx:id="areaInfo" layoutX="5.0" layoutY="305.0" prefHeight="87.0" prefWidth="134.0" />
-      <TableView fx:id="moveTable" layoutX="155.0" layoutY="114.0" prefHeight="297.0" prefWidth="455.0">
+      <TableView fx:id="moveTable" layoutX="163.0" layoutY="107.0" prefHeight="291.0" prefWidth="437.0">
          <columns>
             <TableColumn fx:id="moveNodeID" prefWidth="55.0" text="NodeID" />
             <TableColumn fx:id="moveDate" prefWidth="55.0" text="Date" />
             <TableColumn fx:id="moveLongName" prefWidth="55.0" text="LongName" />
          </columns>
       </TableView>
-      <TableView fx:id="edgeTable" layoutX="145.0" layoutY="104.0" prefHeight="297.0" prefWidth="455.0">
+      <TableView fx:id="edgeTable" layoutX="163.0" layoutY="107.0" prefHeight="291.0" prefWidth="437.0">
          <columns>
             <TableColumn fx:id="edgeEdgeID" prefWidth="55.0" text="EdgeID" />
             <TableColumn fx:id="edgeEndNode" prefWidth="55.0" text="EndNode" />
             <TableColumn fx:id="edgeStartNode" prefWidth="55.0" text="StartNode" />
          </columns>
       </TableView>
-      <TableView fx:id="nodeLocTable" layoutX="146.0" layoutY="104.0" prefHeight="297.0" prefWidth="455.0">
+      <TableView fx:id="nodeLocTable" layoutX="163.0" layoutY="108.0" prefHeight="291.0" prefWidth="437.0">
          <columns>
             <TableColumn fx:id="locLongName" prefWidth="55.0" text="LongName" />
             <TableColumn fx:id="locShortName" prefWidth="55.0" text="ShortName" />
             <TableColumn fx:id="locNodeType" prefWidth="60.0" text="NodeType" />
          </columns>
       </TableView>
-      <TableView fx:id="nodeTable" layoutX="145.0" layoutY="105.0" prefHeight="297.0" prefWidth="455.0">
+      <TableView fx:id="nodeTable" layoutX="163.0" layoutY="107.0" prefHeight="291.0" prefWidth="437.0">
          <columns>
             <TableColumn fx:id="nodeNodeID" prefWidth="55.0" text="NodeID" />
             <TableColumn fx:id="nodeXcoord" prefWidth="55.0" text="x-coord" />

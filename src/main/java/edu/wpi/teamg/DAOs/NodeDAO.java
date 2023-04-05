@@ -168,7 +168,7 @@ public class NodeDAO implements LocationDAO {
       node.setXcoord(xcoord);
 
       int ycoord = rs.getInt("ycoord");
-      node.setXcoord(ycoord);
+      node.setYcoord(ycoord);
 
       String floor = rs.getString("floor");
       node.setFloor(floor);

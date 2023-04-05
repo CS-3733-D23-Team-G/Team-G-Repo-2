@@ -10,7 +10,7 @@ import java.util.HashMap;
 public class LocationNameDAO implements LocationDAO {
   private static DBConnection connection = new DBConnection();
   private String SQL;
-  private HashMap<String, LocationName> Location;
+  private HashMap<String, LocationName> Location = new HashMap<String, LocationName>();
 
   public LocationNameDAO() {}
 

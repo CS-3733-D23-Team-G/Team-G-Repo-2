@@ -35,8 +35,22 @@ public class EdgeDAO implements LocationDAO {
 
       int endNode = rs.getInt("endnode");
       edge.setEndNode(endNode);
+
+      String edgeID = startNode + "_" + endNode;
+
+      edge.setEdgeID(edgeID);
+
       edgeHash.put(edge.getEdgeID(), edge);
     }
+
+    edgeHash.forEach(
+        (i, m) -> {
+          System.out.println("Request ID:" + m.getEdgeID());
+          System.out.println("Employee ID:" + m.getStartNode());
+          System.out.println("meal:" + m.getEndNode());
+          System.out.println();
+        });
+
     connection.closeConnection();
     return edgeHash;
   }

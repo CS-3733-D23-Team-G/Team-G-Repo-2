@@ -43,7 +43,7 @@ public class SignageAdminController {
   @FXML Button move;
 
   @FXML TableView<Node> nodeTable;
-  @FXML TableView<edu.wpi.teamg.ORMClasses.Edge> edgeTable;
+  @FXML TableView<Edge> edgeTable;
   @FXML TableView<Move> moveTable;
   @FXML TableView<LocationName> nodeLocTable;
 
@@ -55,9 +55,9 @@ public class SignageAdminController {
   @FXML TableColumn<Node, String> nodeBuilding;
 
   // Edges
-  @FXML TableColumn<edu.wpi.teamg.ORMClasses.Edge, String> edgeEdgeID;
-  @FXML TableColumn<edu.wpi.teamg.ORMClasses.Edge, Integer> edgeEndNode;
-  @FXML TableColumn<edu.wpi.teamg.ORMClasses.Edge, Integer> edgeStartNode;
+  @FXML TableColumn<Edge, String> edgeEdgeID;
+  @FXML TableColumn<Edge, Integer> edgeEndNode;
+  @FXML TableColumn<Edge, Integer> edgeStartNode;
 
   // Move
 
@@ -106,8 +106,8 @@ public class SignageAdminController {
     //  String imgPath = Main.class.getResource("images/00_thelowerlevel1.png").toString();
     //  ImageView image = new ImageView(new Image(imgPath));
     //  pane.setContent(image);
-    nodes.setOnMouseClicked(event -> loadMoveTable());
-    edges.setOnMouseClicked(event -> loadLocTable());
+    nodes.setOnMouseClicked(event -> loadNodeTable());
+    edges.setOnMouseClicked(event -> loadEdgeTable());
     move.setOnMouseClicked(event -> loadMoveTable());
     nodeLoc.setOnMouseClicked(event -> loadLocTable());
     // pane.setMaxScale();
@@ -117,12 +117,12 @@ public class SignageAdminController {
     //  pane.zoomTo(.000001, new Point2D(2500, 1700));
 
     ObservableList<Node> nodeList;
-    ObservableList<edu.wpi.teamg.ORMClasses.Edge> edgeList;
+    ObservableList<Edge> edgeList;
     ObservableList<Move> moveList;
     ObservableList<LocationName> locList;
 
     ArrayList<Node> nodes1 = getNodes();
-    ArrayList<edu.wpi.teamg.ORMClasses.Edge> edges1 = getEdge();
+    ArrayList<Edge> edges1 = getEdge();
     ArrayList<Move> move1 = getMove();
     ArrayList<LocationName> loc1 = getLoc();
 
@@ -136,23 +136,23 @@ public class SignageAdminController {
     moveTable.setItems(moveList);
     nodeLocTable.setItems(locList);
 
-    nodeNodeID.setCellValueFactory(new PropertyValueFactory<>("Node ID"));
-    nodeXcoord.setCellValueFactory(new PropertyValueFactory<>("X-Coord"));
-    nodeYcoord.setCellValueFactory(new PropertyValueFactory<>("Y-Coord"));
-    nodeFloor.setCellValueFactory(new PropertyValueFactory<>("Floor"));
-    nodeBuilding.setCellValueFactory(new PropertyValueFactory<>("Building"));
+    nodeNodeID.setCellValueFactory(new PropertyValueFactory<>("NodeID"));
+    nodeXcoord.setCellValueFactory(new PropertyValueFactory<>("xcoord"));
+    nodeYcoord.setCellValueFactory(new PropertyValueFactory<>("ycoord"));
+    nodeFloor.setCellValueFactory(new PropertyValueFactory<>("floor"));
+    nodeBuilding.setCellValueFactory(new PropertyValueFactory<>("building"));
 
-    edgeEdgeID.setCellValueFactory(new PropertyValueFactory<>("Edge ID"));
-    edgeStartNode.setCellValueFactory(new PropertyValueFactory<>("Start Loc"));
-    edgeEndNode.setCellValueFactory(new PropertyValueFactory<>("End Loc"));
+    edgeEdgeID.setCellValueFactory(new PropertyValueFactory<>("EdgeID"));
+    edgeStartNode.setCellValueFactory(new PropertyValueFactory<>("startNode"));
+    edgeEndNode.setCellValueFactory(new PropertyValueFactory<>("endNode"));
 
-    moveNodeID.setCellValueFactory(new PropertyValueFactory<>("Node ID"));
+    moveNodeID.setCellValueFactory(new PropertyValueFactory<>("NodeID"));
     moveDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
-    moveLongName.setCellValueFactory(new PropertyValueFactory<>("Long-Name"));
+    moveLongName.setCellValueFactory(new PropertyValueFactory<>("LongName"));
 
-    locLongName.setCellValueFactory(new PropertyValueFactory<>("Long-Name"));
-    locShortName.setCellValueFactory(new PropertyValueFactory<>("Short-Name"));
-    locNodeType.setCellValueFactory(new PropertyValueFactory<>("Type"));
+    locLongName.setCellValueFactory(new PropertyValueFactory<>("LongName"));
+    locShortName.setCellValueFactory(new PropertyValueFactory<>("ShortName"));
+    locNodeType.setCellValueFactory(new PropertyValueFactory<>("NodeType"));
   }
 
   public void loadServiceRequestForm() {
@@ -278,9 +278,9 @@ public class SignageAdminController {
 
   public ArrayList<edu.wpi.teamg.ORMClasses.Edge> getEdge() throws SQLException {
     EdgeDAO edgeDAO = new EdgeDAO();
-    HashMap<String, edu.wpi.teamg.ORMClasses.Edge> edge = edgeDAO.getAll();
+    HashMap<String, Edge> edge = edgeDAO.getAll();
 
-    ArrayList<edu.wpi.teamg.ORMClasses.Edge> edgeList = new ArrayList<>(edge.values());
+    ArrayList<Edge> edgeList = new ArrayList<>(edge.values());
 
     return edgeList;
   }
