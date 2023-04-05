@@ -188,5 +188,4 @@ public class LocationNameDAO implements LocationDAO {
       System.err.println("File IO error");
     }
   }
-  }
 }
