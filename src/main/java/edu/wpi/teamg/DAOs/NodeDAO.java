@@ -14,8 +14,8 @@ public class NodeDAO implements LocationDAO {
 
   @Override
   public void importCSV(String path) throws SQLException {
+    db.setConnection();
     try {
-      db.setConnection();
 
       SQL = "INSERT INTO proto2.node (nodeid, xcoord, ycoord, floor, building) VALUES (?,?,?,?,?)";
       PreparedStatement ps = db.getConnection().prepareStatement(SQL);
@@ -53,6 +53,7 @@ public class NodeDAO implements LocationDAO {
     } catch (SQLException e) {
       e.printStackTrace();
     }
+    db.closeConnection();
   }
 
   @Override
