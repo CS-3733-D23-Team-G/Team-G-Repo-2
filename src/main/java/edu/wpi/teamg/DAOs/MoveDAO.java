@@ -3,6 +3,8 @@ package edu.wpi.teamg.DAOs;
 import edu.wpi.teamg.DBConnection;
 import edu.wpi.teamg.ORMClasses.Move;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -150,11 +152,36 @@ public class MoveDAO implements LocationMoveDao {
   }
 
   @Override
-  public void exportCSV() throws SQLException {}
+  public void exportCSV() throws SQLException {
+    String csvFilePath = "Move.csv";
 
-  public Date stringToDate(String input){
-    String[] data = input.split("/");
-    Date returnDate = new Date(Integer.parseInt(data[2]),Integer.parseInt(data[1]),Integer.parseInt(data[0]));
-    return returnDate;
+    try {
+      sql = "SELECT * FROM teamgdb.proto2.move";
+      PreparedStatement ps = db.getConnection().prepareStatement(sql);
+      ResultSet rs = ps.executeQuery(sql);
+
+      BufferedWriter fileWriter = new BufferedWriter(new FileWriter(csvFilePath));
+      fileWriter.write("nodeid, xcoord, ycoord, floor, building");
+      while (rs.next()) {
+        int nodeID = rs.getInt("nodeid");
+        int xCoord = rs.getInt("xcoord");
+        int yCoord = rs.getInt("ycoord");
+        String floor = rs.getString("floor");
+        String building = rs.getString("building");
+
+        String line =
+                String.format("\"%d\", %d, %d, %s, %s", nodeID, xCoord, yCoord, floor, building);
+
+        fileWriter.newLine();
+        fileWriter.write(line);
+      }
+      db.closeConnection();
+      fileWriter.close();
+
+    } catch (SQLException e) {
+      System.err.println("Database error");
+    } catch (IOException e) {
+      System.err.println("File IO error");
+    }
   }
 }
