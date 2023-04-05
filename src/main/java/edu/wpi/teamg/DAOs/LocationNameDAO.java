@@ -145,11 +145,11 @@ public class LocationNameDAO implements LocationDAO {
       BufferedWriter fileWriter = new BufferedWriter(new FileWriter(csvFilePath));
       fileWriter.write("longname, shortname, nodetype");
       while (rs.next()) {
-        String longname= rs.getString("longname");
+        String longname = rs.getString("longname");
         String shortname = rs.getString("shortname");
         String nodetype = rs.getString("nodetype");
-        //textron
-        String line = String.format( "%s, %s, %s", longname, shortname, nodetype);
+        // textron
+        String line = String.format("%s, %s, %s", longname, shortname, nodetype);
         fileWriter.newLine();
         fileWriter.write(line);
       }
@@ -162,7 +162,4 @@ public class LocationNameDAO implements LocationDAO {
       System.err.println("File IO error");
     }
   }
-
-
-  }
-
+}
