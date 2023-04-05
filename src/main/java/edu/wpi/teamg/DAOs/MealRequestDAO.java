@@ -30,6 +30,7 @@ public class MealRequestDAO implements DAO {
       rs = ps.executeQuery();
     } catch (SQLException e) {
       System.err.println("SQL exception");
+      e.printStackTrace();
       // printSQLException(e);
     }
 

@@ -1,14 +1,18 @@
 package edu.wpi.teamg.controllers;
 
+import edu.wpi.teamg.DAOs.ConferenceRoomRequestDAO;
 import edu.wpi.teamg.DAOs.MealRequestDAO;
+import edu.wpi.teamg.DAOs.RequestDAO;
 import edu.wpi.teamg.ORMClasses.ConferenceRoomRequest;
 import edu.wpi.teamg.ORMClasses.MealRequest;
+import edu.wpi.teamg.ORMClasses.Request;
 import edu.wpi.teamg.navigation.Navigation;
 import edu.wpi.teamg.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.HashMap;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -29,25 +33,26 @@ public class FormStatusController {
   @FXML MFXButton exitButton;
 
   // Tables
-  @FXML TableView<MealRequest> mainTable;
+  @FXML TableView<Request> mainTable;
   @FXML TableView<MealRequest> mealTable;
   @FXML TableView<ConferenceRoomRequest> roomTable;
 
   // Main Table
-  @FXML TableColumn<MealRequest, Integer> empID;
-  @FXML TableColumn<MealRequest, Integer> location1;
-  @FXML TableColumn<MealRequest, Integer> reqID;
-  @FXML TableColumn<MealRequest, Integer> serveBy;
-  @FXML TableColumn<MealRequest, String> status;
-  @FXML TableColumn<MealRequest, String> recipient;
-  @FXML TableColumn<MealRequest, String> order;
-  @FXML TableColumn<MealRequest, String> note;
-  @FXML TableColumn<MealRequest, Date> date;
-  @FXML TableColumn<MealRequest, Time> time;
+  @FXML TableColumn<Request, Integer> empID;
+  @FXML TableColumn<Request, Integer> location1;
+  @FXML TableColumn<Request, Integer> reqID;
+  @FXML TableColumn<Request, Integer> serveBy;
+  @FXML TableColumn<Request, String> status;
 
-  //  @FXML TableColumn<ConferenceRoomRequest, Date> mainRoomDate;
-  //  @FXML TableColumn<ConferenceRoomRequest, Time> mainRoomTime;
-  //  @FXML TableColumn<ConferenceRoomRequest, String> mainRoomPurpose;
+  @FXML TableColumn<Request, String> recipient;
+  @FXML TableColumn<Request, String> order;
+  @FXML TableColumn<Request, String> note;
+  @FXML TableColumn<Request, Date> date;
+  @FXML TableColumn<Request, Time> time;
+
+  @FXML TableColumn<Request, Date> mainRoomDate;
+  @FXML TableColumn<Request, Time> mainRoomTime;
+  @FXML TableColumn<Request, String> mainRoomPurpose;
 
   // Meal Table
   @FXML TableColumn<MealRequest, Integer> mealEmpID;
@@ -83,11 +88,14 @@ public class FormStatusController {
           "Meal Request Form",
           "Office Supplies Request Form");
 
-  ObservableList<MealRequest> testList;
+  ObservableList<Request> testList;
   ObservableList<MealRequest> testMealList;
   ObservableList<ConferenceRoomRequest> testRoomList;
 
   MealRequestDAO mealRequests = new MealRequestDAO();
+  ConferenceRoomRequestDAO conferenceRoom = new ConferenceRoomRequestDAO();
+
+  RequestDAO requests = new RequestDAO();
 
   @FXML
   public void initialize() throws SQLException {
@@ -101,9 +109,24 @@ public class FormStatusController {
     mealTableButton.setOnMouseClicked(event -> loadMealTable());
     roomTableButton.setOnMouseClicked(event -> loadRoomTable());
 
+    ArrayList<Request> request1 = new ArrayList<>();
+    HashMap<Integer, Request> testingRequest = this.getHashMapRequest();
+    testingRequest.forEach(
+        (i, m) -> {
+          request1.add(m);
+
+          System.out.println("Request ID:" + m.getReqid());
+          System.out.println("Employee ID:" + m.getEmpid());
+          System.out.println("meal:" + m.getEmpid());
+          System.out.println();
+        });
+
+    ArrayList<MealRequest> mealRequests1 = new ArrayList<>();
     HashMap<Integer, MealRequest> testingMealHash = this.getHashMapMeal();
     testingMealHash.forEach(
         (i, m) -> {
+          request1.add(m);
+          mealRequests1.add(m);
           System.out.println("Request ID:" + m.getReqid());
           System.out.println("Employee ID:" + m.getEmpid());
           System.out.println("Delivery date:" + m.getDeliveryDate());
@@ -111,6 +134,17 @@ public class FormStatusController {
           System.out.println("note:" + m.getNote());
           System.out.println("meal:" + m.getEmpid());
           System.out.println();
+        });
+    ArrayList<ConferenceRoomRequest> confroom = new ArrayList<>();
+    HashMap<Integer, ConferenceRoomRequest> testingConfRoom = this.getHashConfRoom();
+    testingConfRoom.forEach(
+        (i, m) -> {
+          request1.add(m);
+          confroom.add(m);
+          System.out.println("Reqid: " + m.getReqid());
+          System.out.println("Meeting Date: " + m.getMeeting_date());
+          System.out.println("Meeting time: " + m.getMeeting_time());
+          System.out.println("Purpose: " + m.getPurpose());
         });
 
     MealRequest testItem1 = new MealRequest();
@@ -148,9 +182,9 @@ public class FormStatusController {
     testItem3.setMeeting_time(new Time(1, 2, 3));
     testItem3.setPurpose("To Work Please");
 
-    testList = FXCollections.observableArrayList(testItem1, testItem1);
-    testMealList = FXCollections.observableArrayList(testItem2);
-    testRoomList = FXCollections.observableArrayList(testItem3);
+    testList = FXCollections.observableArrayList(request1);
+    testMealList = FXCollections.observableArrayList(mealRequests1);
+    testRoomList = FXCollections.observableArrayList(confroom);
     mainTable.setItems(testList);
     mealTable.setItems(testMealList);
     roomTable.setItems(testRoomList);
@@ -165,6 +199,9 @@ public class FormStatusController {
     note.setCellValueFactory(new PropertyValueFactory<>("note"));
     date.setCellValueFactory(new PropertyValueFactory<>("deliveryDate"));
     time.setCellValueFactory(new PropertyValueFactory<>("deliveryTime"));
+    mainRoomDate.setCellValueFactory(new PropertyValueFactory<>("meeting_date"));
+    mainRoomTime.setCellValueFactory(new PropertyValueFactory<>("meeting_time"));
+    mainRoomPurpose.setCellValueFactory(new PropertyValueFactory<>("purpose"));
 
     mealReqID.setCellValueFactory(new PropertyValueFactory<>("reqid"));
     mealEmpID.setCellValueFactory(new PropertyValueFactory<>("empid"));
@@ -203,6 +240,19 @@ public class FormStatusController {
     }
   }
 
+  public HashMap getHashMapRequest() throws SQLException {
+
+    HashMap<Integer, Request> requestHashMap = new HashMap<Integer, Request>();
+
+    try {
+      requestHashMap = requests.getAll();
+    } catch (SQLException e) {
+      System.err.print(e.getErrorCode());
+    }
+
+    return requestHashMap;
+  }
+
   public HashMap getHashMapMeal() throws SQLException {
 
     HashMap<Integer, MealRequest> mealRequestHashMap = new HashMap<Integer, MealRequest>();
@@ -214,6 +264,20 @@ public class FormStatusController {
     }
 
     return mealRequestHashMap;
+  }
+
+  public HashMap getHashConfRoom() throws SQLException {
+
+    HashMap<Integer, ConferenceRoomRequest> confRoomHash =
+        new HashMap<Integer, ConferenceRoomRequest>();
+
+    try {
+      confRoomHash = conferenceRoom.getAll();
+    } catch (SQLException e) {
+      System.err.print(e.getErrorCode());
+    }
+
+    return confRoomHash;
   }
 
   public void loadAllRequestTable() {

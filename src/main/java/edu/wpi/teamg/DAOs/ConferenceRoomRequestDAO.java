@@ -2,11 +2,7 @@ package edu.wpi.teamg.DAOs;
 
 import edu.wpi.teamg.DBConnection;
 import edu.wpi.teamg.ORMClasses.ConferenceRoomRequest;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Time;
-import java.util.Date;
+import java.sql.*;
 import java.util.HashMap;
 
 public class ConferenceRoomRequestDAO implements DAO {
@@ -21,18 +17,21 @@ public class ConferenceRoomRequestDAO implements DAO {
   @Override
   public HashMap<Integer, ConferenceRoomRequest> getAll() throws SQLException {
     db.setConnection();
+
+    System.out.println("Connection Set");
+
     PreparedStatement ps;
     ResultSet rs = null;
 
     SQL_confRoomRequest =
-        "select * from teamgdb.proto2.request join "
-            + "teamgdb.proto2.conferenceroomrequest on teamgdb.proto2.request.reqid = "
-            + "teamgdb.proto2.conferenceroomrequest.reqid";
+        "select * from proto2.request join proto2.conferenceroomrequest "
+            + "on proto2.request.reqid = proto2.conferenceroomrequest.reqid";
 
     try {
       ps = db.getConnection().prepareStatement(SQL_confRoomRequest);
       rs = ps.executeQuery();
     } catch (SQLException e) {
+      e.printStackTrace();
       System.err.println("SQL Exception");
     }
 
@@ -43,10 +42,11 @@ public class ConferenceRoomRequestDAO implements DAO {
       int location = rs.getInt("location");
       int serv_by = rs.getInt("serv_by");
       String status = rs.getString("status");
-      Date reqDate = rs.getDate("meetingdate");
-      Time reqTime = rs.getTime("meetingtime");
+      Date reqDate = rs.getDate("meeting_date");
+      Time reqTime = rs.getTime("meeting_time");
       String confPurpose = rs.getString("purpose");
 
+      cReq.setReqid(reqID);
       cReq.setLocation(location);
       cReq.setEmpid(empID);
       cReq.setServ_by(serv_by);
