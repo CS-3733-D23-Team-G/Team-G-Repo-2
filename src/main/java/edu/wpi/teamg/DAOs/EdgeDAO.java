@@ -137,16 +137,14 @@ public class EdgeDAO implements LocationDAO {
       ResultSet rs = ps.executeQuery(sql);
 
       BufferedWriter fileWriter = new BufferedWriter(new FileWriter(csvFilePath));
-      fileWriter.write("nodeid, xcoord, ycoord, floor, building");
+      fileWriter.write("startnode, endnode");
       while (rs.next()) {
-        int nodeID = rs.getInt("nodeid");
-        int xCoord = rs.getInt("xcoord");
-        int yCoord = rs.getInt("ycoord");
-        String floor = rs.getString("floor");
-        String building = rs.getString("building");
+        String startNode = rs.getString("startnode");
+        String endNode = rs.getString("endnode");
 
         String line =
-                String.format("\"%d\", %d, %d, %s, %s", nodeID, xCoord, yCoord, floor, building);
+                String.format("\"%s\", %s",
+                        startNode,endNode);
 
         fileWriter.newLine();
         fileWriter.write(line);

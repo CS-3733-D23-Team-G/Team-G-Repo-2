@@ -167,16 +167,14 @@ public class MoveDAO implements LocationMoveDao {
       ResultSet rs = ps.executeQuery(sql);
 
       BufferedWriter fileWriter = new BufferedWriter(new FileWriter(csvFilePath));
-      fileWriter.write("nodeid, xcoord, ycoord, floor, building");
+      fileWriter.write("nodeid, longname, date");
       while (rs.next()) {
         int nodeID = rs.getInt("nodeid");
-        int xCoord = rs.getInt("xcoord");
-        int yCoord = rs.getInt("ycoord");
-        String floor = rs.getString("floor");
-        String building = rs.getString("building");
-
+        String longName = rs.getString("longname");
+        Date date = rs.getDate("date");
         String line =
-                String.format("\"%d\", %d, %d, %s, %s", nodeID, xCoord, yCoord, floor, building);
+                String.format("\"%d\", %s, %t",
+                        nodeID,longName,date);
 
         fileWriter.newLine();
         fileWriter.write(line);

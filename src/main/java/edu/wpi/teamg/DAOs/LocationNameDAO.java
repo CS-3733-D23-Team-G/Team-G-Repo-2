@@ -21,7 +21,7 @@ public class LocationNameDAO implements LocationDAO {
     PreparedStatement ps;
     ResultSet rs = null;
 
-    SQL = "select * from proto2.locationname";
+    SQL = "select * from teamgdb.proto2.locationname";
 
     try {
       ps = connection.getConnection().prepareStatement(SQL);
@@ -79,7 +79,7 @@ public class LocationNameDAO implements LocationDAO {
     connection.setConnection();
     PreparedStatement ps;
     LocationName l1 = (LocationName) obj;
-    SQL = "INSERT INTO proto2.locationname (longname, shortname, nodetype) VALUES (?,?,?)";
+    SQL = "INSERT INTO teamgdb.proto2.locationname (longname, shortname, nodetype) VALUES (?,?,?)";
 
     try {
       ps = connection.getConnection().prepareStatement(SQL);
@@ -165,16 +165,16 @@ public class LocationNameDAO implements LocationDAO {
       ResultSet rs = ps.executeQuery(SQL);
 
       BufferedWriter fileWriter = new BufferedWriter(new FileWriter(csvFilePath));
-      fileWriter.write("nodeid, xcoord, ycoord, floor, building");
+      fileWriter.write("longname, shortname, nodetype");
       while (rs.next()) {
-        int nodeID = rs.getInt("nodeid");
-        int xCoord = rs.getInt("xcoord");
-        int yCoord = rs.getInt("ycoord");
-        String floor = rs.getString("floor");
-        String building = rs.getString("building");
+        String longname = rs.getString("longname");
+        String shortname = rs.getString("shortname");
+        String nodetype = rs.getString("nodetype");
+
 
         String line =
-                String.format("\"%d\", %d, %d, %s, %s", nodeID, xCoord, yCoord, floor, building);
+                String.format("\"%s\", %s, %s,",
+                       longname, shortname, nodetype);
 
         fileWriter.newLine();
         fileWriter.write(line);
