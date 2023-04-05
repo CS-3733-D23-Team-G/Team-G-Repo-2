@@ -91,7 +91,11 @@ VALUES
     (1, 'John', 'Doe', 'johndoe@example.com', 'Coffee'),
     (2, 'Jane', 'Doe', 'janedoe@example.com', 'Lunch'),
     (3, 'Bob', 'Smith', 'bobsmith@example.com', 'Dinner'),
-    (4, 'Alice', 'Johnson', 'alicejohnson@example.com', 'All');
+    (4, 'Alice', 'Johnson', 'alicejohnson@example.com', 'All'),
+    (5,'Bruce','Wanyne' ,'batman@example.com' , 'Dinner'),
+    (6,'Itta','Patell','Ipatell@example.com','Lunch'),
+    (7, 'Diana','Wells','Dwells@example.com','All'),
+    (8,'Mark', 'Specter', 'moonknight@example.com', 'Coffee');
 
 -- Table: proto2.Account
 INSERT INTO proto2.Account (empID, password, is_admin)
