@@ -5,6 +5,9 @@ import edu.wpi.teamg.ORMClasses.Edge;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -87,7 +90,42 @@ public class EdgeDAO implements LocationDAO {
   }
 
   @Override
-  public void importCSV(String filename) throws SQLException {}
+  public void importCSV(String filename) throws SQLException {
+    connection.setConnection();
+    sql="";
+    sql="insert into teamgdb.proto2.edge (startnode, endnode) values (?,?)";
+    PreparedStatement ps = connection.getConnection().prepareStatement(sql);
+    try{
+      BufferedReader br = new BufferedReader(new FileReader(filename));
+      String line = null;
+      br.readLine();
+
+      while((line= br.readLine())!=null){
+        String data[] = line.split(",");
+
+        int sNode = Integer.parseInt(data[0]);
+        int eNode = Integer.parseInt(data[1]);
+
+        ps.setInt(1,sNode);
+        ps.setInt(2,eNode);
+
+        ps.addBatch();
+      }
+      br.close();
+      ps.executeUpdate();
+
+    } catch (FileNotFoundException e) {
+      System.err.println("File Not Found Exception");
+      e.printStackTrace();
+    } catch (IOException e) {
+      System.err.println("IO Exception");
+      e.printStackTrace();
+    }catch (SQLException e){
+      System.err.println("SQL Exception");
+      e.printStackTrace();
+    }
+    connection.closeConnection();
+  }
 
   @Override
   public void exportCSV() throws SQLException {
