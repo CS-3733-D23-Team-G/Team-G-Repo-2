@@ -151,6 +151,12 @@ public class MoveDAO implements LocationMoveDao {
     db.closeConnection();
   }
 
+  public Date stringToDate(String input){
+    String[] data = input.split("/");
+    Date returnDate = new Date(Integer.parseInt(data[2]),Integer.parseInt(data[1]),Integer.parseInt(data[0]));
+    return returnDate;
+  }
+
   @Override
   public void exportCSV() throws SQLException {
     String csvFilePath = "Move.csv";
