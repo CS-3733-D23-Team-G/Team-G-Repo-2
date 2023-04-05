@@ -49,8 +49,7 @@ public class MealRequestConfirmationController {
     }
   }
 
-  
-
   public void exit() {
     Platform.exit();
-  }}
+  }
+}

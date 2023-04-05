@@ -75,8 +75,7 @@ public class NodeDAO implements LocationDAO {
         String building = rs.getString("building");
 
         String line =
-            String.format("\"%d\", %d, %d, %s, %s",
-                    nodeID, xCoord, yCoord, floor, building);
+            String.format("\"%d\", %d, %d, %s, %s", nodeID, xCoord, yCoord, floor, building);
 
         fileWriter.newLine();
         fileWriter.write(line);
