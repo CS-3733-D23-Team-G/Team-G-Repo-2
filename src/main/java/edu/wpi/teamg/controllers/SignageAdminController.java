@@ -18,7 +18,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -31,9 +30,12 @@ public class SignageAdminController {
   @FXML MFXButton signagePageButton;
   @FXML MFXButton exitButton;
   @FXML MFXButton pathFindButton;
-  @FXML MFXButton importButton;
+  // @FXML MFXButton importButton;
 
-  @FXML Label fileLabel;
+  // @FXML Label fileLabel;
+
+  @FXML ChoiceBox<String> importDrop;
+  @FXML ChoiceBox<String> exportDrop;
 
   @FXML MFXTextField startLoc;
 
@@ -51,15 +53,26 @@ public class SignageAdminController {
           "Meal Request Form",
           "Office Supplies Request Form");
 
+  ObservableList<String> importList =
+      FXCollections.observableArrayList("Nodes", "Edges", "LocationName", "Moves");
+
+  ObservableList<String> exportList =
+      FXCollections.observableArrayList("Nodes", "Edges", "LocationName", "Moves");
+
   @FXML
   public void initialize() {
     serviceRequestChoiceBox.setItems(list);
+    importDrop.setItems(importList);
+    exportDrop.setItems(exportList);
     signagePageButton.setOnMouseClicked(event -> Navigation.navigate(Screen.SIGNAGE_PAGE));
     backToHomeButton.setOnMouseClicked(event -> Navigation.navigate(Screen.HOME));
     exitButton.setOnMouseClicked(event -> exit());
-    importButton.setOnAction(event -> fileChooser());
-    fileLabel.getText();
+    // importButton.setOnAction(event -> fileChooser());
+    // fileLabel.getText();
     serviceRequestChoiceBox.setOnAction(event -> loadServiceRequestForm());
+    importDrop.setOnAction(event -> fileChooser());
+    exportDrop.setOnAction(
+        event -> fileChooser()); // TODO change to an export method that pushes to downloads
     pathFindButton.setOnMouseClicked(
         event -> {
           try {
@@ -150,20 +163,41 @@ public class SignageAdminController {
   */
   @FXML
   void fileChooser() {
-    FileChooser fc = new FileChooser();
 
-    NodeDAO nodeDAO = new NodeDAO();
+    if (importDrop.getValue().equals("Node")) {
+      FileChooser fc = new FileChooser();
 
-    fc.getExtensionFilters()
-        .add(new FileChooser.ExtensionFilter("Comma Separated Values", "*.csv"));
-    File f = fc.showOpenDialog(null);
+      NodeDAO nodeDAO = new NodeDAO();
 
-    if (f != null) {
-      fileLabel.setText("Selected File::" + f.getAbsolutePath());
-      try {
-        nodeDAO.importCSV(f.getAbsolutePath());
-      } catch (SQLException e) {
-        e.printStackTrace();
+      fc.getExtensionFilters()
+          .add(new FileChooser.ExtensionFilter("Comma Separated Values", "*.csv"));
+      File f = fc.showOpenDialog(null);
+
+      if (f != null) {
+        // fileLabel.setText("Selected File::" + f.getAbsolutePath());
+        try {
+          nodeDAO.importCSV(f.getAbsolutePath());
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+      }
+    } else if (importDrop.getValue().equals("Edge")) {
+
+      FileChooser fc = new FileChooser();
+
+      NodeDAO nodeDAO = new NodeDAO();
+
+      fc.getExtensionFilters()
+          .add(new FileChooser.ExtensionFilter("Comma Separated Values", "*.csv"));
+      File f = fc.showOpenDialog(null);
+
+      if (f != null) {
+        // fileLabel.setText("Selected File::" + f.getAbsolutePath());
+        try {
+          nodeDAO.importCSV(f.getAbsolutePath());
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
       }
     }
   }
