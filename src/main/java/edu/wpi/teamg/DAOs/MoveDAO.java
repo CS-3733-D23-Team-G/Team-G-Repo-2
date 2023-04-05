@@ -118,7 +118,7 @@ public class MoveDAO implements LocationDAO {
 
   ArrayList<Node> nodes = new ArrayList<>();
   @Override
-  public void importCSV(String filep) throws SQLException, FileNotFoundException {
+  public void importCSV(String file) throws SQLException, FileNotFoundException {
     Scanner scanner = new Scanner(file);
     scanner.useDelimiter("\n");
 
