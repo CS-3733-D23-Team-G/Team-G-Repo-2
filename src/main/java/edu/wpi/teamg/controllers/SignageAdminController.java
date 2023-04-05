@@ -96,7 +96,7 @@ public class SignageAdminController {
   }
 
   public void loadServiceRequestForm() {
-    switch(serviceRequestChoiceBox.getValue()){
+    switch (serviceRequestChoiceBox.getValue()) {
       case "Meal Request Form":
         Navigation.navigate(Screen.MEAL_REQUEST);
         break;

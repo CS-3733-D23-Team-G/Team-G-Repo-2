@@ -27,7 +27,7 @@ create table proto2.Edge(
 
 create table proto2.LocationName(
                                     longName varchar(100) primary key,
-                                    shortName varchar(40),
+                                    shortName varchar(55),
                                     nodeType char(4)
 );
 
