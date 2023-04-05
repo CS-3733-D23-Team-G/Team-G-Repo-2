@@ -2,6 +2,11 @@ package edu.wpi.teamg.DAOs;
 
 import edu.wpi.teamg.DBConnection;
 import edu.wpi.teamg.ORMClasses.Move;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -103,10 +108,53 @@ public class MoveDAO implements LocationMoveDao {
 
   @Override
   public void importCSV(String filePath) throws SQLException {
-
     db.setConnection();
+    sql="insert into teamgdb.proto2.move (nodeid, longname, date) values (?,?,?)";
+    PreparedStatement ps = db.getConnection().prepareStatement(sql);
+    try {
+      BufferedReader br = new BufferedReader(new FileReader(filePath));
+      String line = null;
+
+      br.readLine();
+      while((line= br.readLine())!=null){
+        String[] data = line.split(",");
+
+        String nodeID = data[0];
+        String longname = data[1];
+        String dateString = data[2];
+
+        int inodeid = Integer.parseInt(nodeID);
+        ps.setInt(1,inodeid);
+
+        ps.setString(2,longname);
+
+        ps.setDate(3,stringToDate(dateString));
+
+        ps.addBatch();
+
+      }
+      br.close();
+      ps.executeBatch();
+
+    } catch (FileNotFoundException e) {
+      System.err.println("File not found");
+      e.printStackTrace();
+    } catch (IOException e) {
+      System.err.println("Input output exception");
+      e.printStackTrace();
+    }catch(SQLException e){
+      System.err.println("SQL exception");
+      e.printStackTrace();
+    }
+    db.closeConnection();
   }
 
   @Override
   public void exportCSV() throws SQLException {}
+
+  public Date stringToDate(String input){
+    String[] data = input.split("/");
+    Date returnDate = new Date(Integer.parseInt(data[2]),Integer.parseInt(data[1]),Integer.parseInt(data[0]));
+    return returnDate;
+  }
 }

@@ -2,6 +2,7 @@ package edu.wpi.teamg.DAOs;
 
 import edu.wpi.teamg.DBConnection;
 import edu.wpi.teamg.ORMClasses.LocationName;
+
 import java.io.*;
 import java.sql.*;
 import java.sql.SQLException;
@@ -116,22 +117,42 @@ public class LocationNameDAO implements LocationDAO {
 
   @Override
   public void importCSV(String filename) throws SQLException {
-    LocationName l1 = new LocationName();
-    String line = "";
-    String split = ",";
-    try {
+    connection.setConnection();
+    SQL = "insert into teamgdb.proto2.locationname (longname,shortname,nodetype) values (?,?,?)";
+    PreparedStatement ps = connection.getConnection().prepareStatement(SQL);
+    try{
       BufferedReader br = new BufferedReader(new FileReader(filename));
-      while ((line = br.readLine()) != null) {
-        String[] loca = line.split(split);
-        LocationName loc = new LocationName(loca[0], loca[1], loca[2]);
-        this.insert(loc);
+      String line = null;
+      br.readLine();
+
+      while((line= br.readLine())!=null){
+        String[] data = line.split(",");
+
+        String longname = data[0];
+        String shortname = data[1];
+        String nodetype = data[2];
+
+        ps.setString(1,longname);
+        ps.setString(2,shortname);
+        ps.setString(3,nodetype);
+
+        ps.addBatch();
+
       }
       br.close();
-    } catch (SQLException c) {
-      System.err.println("SQL Exception");
+      ps.executeUpdate();
+
+    } catch (FileNotFoundException e) {
+      System.err.println("File Not Found Exception");
+      e.printStackTrace();
     } catch (IOException e) {
-      System.err.println("IO exception");
+      System.err.println("IO Exception");
+      e.printStackTrace();
+    }catch (SQLException e){
+      System.err.println("SQL Exception");
+      e.printStackTrace();
     }
+    connection.closeConnection();
   }
 
   @Override
