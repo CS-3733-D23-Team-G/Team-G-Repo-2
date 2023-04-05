@@ -2,6 +2,9 @@ package edu.wpi.teamg.controllers;
 
 import edu.wpi.teamg.DAOs.NodeDAO;
 import edu.wpi.teamg.Main;
+import edu.wpi.teamg.ORMClasses.LocationName;
+import edu.wpi.teamg.ORMClasses.Move;
+import edu.wpi.teamg.ORMClasses.Node;
 import edu.wpi.teamg.navigation.Navigation;
 import edu.wpi.teamg.navigation.Screen;
 import edu.wpi.teamg.pathFinding.Edge;
@@ -19,6 +22,9 @@ import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -31,16 +37,49 @@ public class SignageAdminController {
   @FXML MFXButton signagePageButton;
   @FXML MFXButton exitButton;
   @FXML MFXButton pathFindButton;
-  @FXML MFXButton importButton;
   @FXML Label fileLabel;
-
   @FXML MFXTextField startLoc;
-
   @FXML MFXTextField endLoc;
-
   @FXML MFXTextField results;
-
   @FXML GesturePane pane;
+
+  @FXML MFXButton imp;
+  // @FXML MFXButton export;
+
+  @FXML MFXButton nodes;
+  @FXML MFXButton edges;
+
+  @FXML MFXButton nodeLoc;
+  @FXML MFXButton move;
+
+  @FXML TableView<Node> nodeTable;
+  @FXML TableView<Edge> edgeTable;
+  @FXML TableView<Move> moveTable;
+  @FXML TableView<LocationName> nodeLocTable;
+
+  // Nodes
+  @FXML TableColumn<Node, Integer> nodeNodeID;
+  @FXML TableColumn<Node, Integer> nodeXcoord;
+  @FXML TableColumn<Node, Integer> nodeYcoord;
+  @FXML TableColumn<Node, String> nodeFloor;
+  @FXML TableColumn<Node, String> nodeBuilding;
+
+  // Edges
+  @FXML TableColumn<Edge, String> edgeEdgeID;
+  @FXML TableColumn<Edge, Integer> edgeEndNode;
+  @FXML TableColumn<Edge, Integer> edgeStartNode;
+
+  // Move
+
+  @FXML TableColumn<Move, String> moveNodeID;
+  @FXML TableColumn<Move, Integer> moveDate;
+  @FXML TableColumn<Move, Integer> moveLongName;
+
+  // NodeLoc
+
+  @FXML TableColumn<LocationName, String> locLongName;
+  @FXML TableColumn<LocationName, Integer> locShortName;
+  @FXML TableColumn<LocationName, Integer> locNodeType;
 
   ObservableList<String> list =
       FXCollections.observableArrayList(
@@ -56,7 +95,7 @@ public class SignageAdminController {
     signagePageButton.setOnMouseClicked(event -> Navigation.navigate(Screen.SIGNAGE_PAGE));
     backToHomeButton.setOnMouseClicked(event -> Navigation.navigate(Screen.HOME));
     exitButton.setOnMouseClicked(event -> exit());
-    importButton.setOnAction(event -> fileChooser());
+    imp.setOnAction(event -> fileChooser());
     fileLabel.getText();
     serviceRequestChoiceBox.setOnAction(event -> loadServiceRequestForm());
     pathFindButton.setOnMouseClicked(
@@ -78,6 +117,28 @@ public class SignageAdminController {
     pane.setMinScale(.001);
     pane.zoomTo(.000001, new Point2D(2500, 1700));
     pane.zoomTo(.000001, new Point2D(2500, 1700));
+
+
+    move.setOnMouseClicked(event -> loadMoveTable());
+    nodeLoc.setOnMouseClicked(event -> loadLocTable());
+
+    nodeNodeID.setCellValueFactory(new PropertyValueFactory<>("Node ID"));
+    nodeXcoord.setCellValueFactory(new PropertyValueFactory<>("X-Coord"));
+    nodeYcoord.setCellValueFactory(new PropertyValueFactory<>("Y-Coord"));
+    nodeFloor.setCellValueFactory(new PropertyValueFactory<>("Floor"));
+    nodeBuilding.setCellValueFactory(new PropertyValueFactory<>("Building"));
+
+    edgeEdgeID.setCellValueFactory(new PropertyValueFactory<>("Edge ID"));
+    edgeStartNode.setCellValueFactory(new PropertyValueFactory<>("Start Loc"));
+    edgeEndNode.setCellValueFactory(new PropertyValueFactory<>("End Loc"));
+
+    moveNodeID.setCellValueFactory(new PropertyValueFactory<>("Node ID"));
+    moveDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
+    moveLongName.setCellValueFactory(new PropertyValueFactory<>("Long-Name"));
+
+    locLongName.setCellValueFactory(new PropertyValueFactory<>("Long-Name"));
+    locShortName.setCellValueFactory(new PropertyValueFactory<>("Short-Name"));
+    locNodeType.setCellValueFactory(new PropertyValueFactory<>("Type"));
   }
 
   public void loadServiceRequestForm() {
@@ -158,6 +219,34 @@ public class SignageAdminController {
         e.printStackTrace();
       }
     }
+  }
+
+  public void loadNodeTable() {
+    nodeTable.setVisible(true);
+    edgeTable.setVisible(false);
+    moveTable.setVisible(false);
+    nodeLocTable.setVisible(false);
+  }
+
+  public void loadEdgeTable() {
+    nodeTable.setVisible(false);
+    edgeTable.setVisible(true);
+    moveTable.setVisible(false);
+    nodeLocTable.setVisible(false);
+  }
+
+  public void loadMoveTable() {
+    nodeTable.setVisible(false);
+    edgeTable.setVisible(false);
+    moveTable.setVisible(true);
+    nodeLocTable.setVisible(false);
+  }
+
+  public void loadLocTable() {
+    nodeTable.setVisible(false);
+    edgeTable.setVisible(false);
+    moveTable.setVisible(false);
+    nodeLocTable.setVisible(true);
   }
 
   public void setPath(ArrayList<String> path) {
