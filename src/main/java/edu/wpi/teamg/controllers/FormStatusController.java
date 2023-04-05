@@ -24,6 +24,8 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.util.converter.IntegerStringConverter;
 
 public class FormStatusController {
 
@@ -189,10 +191,25 @@ public class FormStatusController {
     roomTable.setItems(testRoomList);
 
     reqID.setCellValueFactory(new PropertyValueFactory<>("reqid"));
+    // reqID.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+    // reqID.setCellFactory(reqID.getCellFactory());
+
     empID.setCellValueFactory(new PropertyValueFactory<>("empid"));
+    // empID.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+    // empID.setCellFactory(empID.getCellFactory());
+
     location1.setCellValueFactory(new PropertyValueFactory<>("location"));
+    location1.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+    location1.setCellFactory(location1.getCellFactory());
+
     serveBy.setCellValueFactory(new PropertyValueFactory<>("serv_by"));
+    serveBy.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+    serveBy.setCellValueFactory(serveBy.getCellValueFactory());
+
     status.setCellValueFactory(new PropertyValueFactory<>("status"));
+    // status.setCellFactory(TextFieldTableCell.forTableColumn(new EnumStringConverter(new
+    // StatusTypeEnum()))); TODO Get this Working
+
     //    recipient.setCellValueFactory(new PropertyValueFactory<>("recipient"));
     //    order.setCellValueFactory(new PropertyValueFactory<>("order"));
     //    note.setCellValueFactory(new PropertyValueFactory<>("note"));
@@ -203,24 +220,73 @@ public class FormStatusController {
     //    mainRoomPurpose.setCellValueFactory(new PropertyValueFactory<>("purpose"));
 
     mealReqID.setCellValueFactory(new PropertyValueFactory<>("reqid"));
+    // mealReqID.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+    // mealReqID.setCellValueFactory(mealReqID.getCellValueFactory());
+
     mealEmpID.setCellValueFactory(new PropertyValueFactory<>("empid"));
+    // mealEmpID.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+    // mealEmpID.setCellValueFactory(mealEmpID.getCellValueFactory());
+
     mealLocation1.setCellValueFactory(new PropertyValueFactory<>("location"));
+    mealLocation1.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+    mealLocation1.setCellValueFactory(mealLocation1.getCellValueFactory());
+
     mealServeBy.setCellValueFactory(new PropertyValueFactory<>("serv_by"));
+    mealServeBy.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+    mealServeBy.setCellValueFactory(mealServeBy.getCellValueFactory());
+
     mealStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+    // mealStatus.setCellFactory(TextFieldTableCell.forTableColumn(new EnumStringConverter<>));
+    // //TODO Fix ENUM String Converter
+
     mealRecipient.setCellValueFactory(new PropertyValueFactory<>("recipient"));
+    mealRecipient.setCellFactory(TextFieldTableCell.forTableColumn());
+    mealRecipient.setCellValueFactory(mealRecipient.getCellValueFactory());
+
     mealOrder.setCellValueFactory(new PropertyValueFactory<>("order"));
+    mealOrder.setCellFactory(TextFieldTableCell.forTableColumn());
+    mealOrder.setCellValueFactory(mealOrder.getCellValueFactory());
+
     mealNote.setCellValueFactory(new PropertyValueFactory<>("note"));
+    mealNote.setCellFactory(TextFieldTableCell.forTableColumn());
+    mealNote.setCellValueFactory(mealNote.getCellValueFactory());
+
     mealDate.setCellValueFactory(new PropertyValueFactory<>("deliveryDate"));
+    // mealDate.setCellFactory(TextFieldTableCell.forTableColumn(new DateStringConverter())); //TODO
+    // Get Date String Converter Working
     mealTime.setCellValueFactory(new PropertyValueFactory<>("deliveryTime"));
+    // mealTime.setCellFactory(TextFieldTableCell.forTableColumn()); //TODO Get Time String
+    // Converter Working
 
     roomReqID.setCellValueFactory(new PropertyValueFactory<>("reqid"));
+    // roomReqID.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+    // roomReqID.setCellValueFactory(roomReqID.getCellValueFactory());
+
     roomEmpID.setCellValueFactory(new PropertyValueFactory<>("empid"));
+    // roomEmpID.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+    // roomEmpID.setCellValueFactory(roomEmpID.getCellValueFactory());
+
     roomLocation1.setCellValueFactory(new PropertyValueFactory<>("location"));
+    roomLocation1.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+    roomLocation1.setCellFactory(roomLocation1.getCellFactory());
+
     roomServeBy.setCellValueFactory(new PropertyValueFactory<>("serv_by"));
+    roomServeBy.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+    roomServeBy.setCellFactory(roomServeBy.getCellFactory());
+
     roomStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+    // roomStatus.setCellFactory(TextFieldTableCell.forTableColumn(new EnumStringConverter<>()));
+    // //TODO Get Enum String Converter Working
     roomDate.setCellValueFactory(new PropertyValueFactory<>("meeting_date"));
+    // roomDate.setCellFactory(TextFieldTableCell.forTableColumn(new DateStringConverter())); //TODO
+    // Get Date String Converter Working
     roomTime.setCellValueFactory(new PropertyValueFactory<>("meeting_time"));
+    // roomTime.setCellFactory(TextFieldTableCell.forTableColumn(new TimeStringConverter())); //TODO
+    // Get Time String Converter Working
+
     roomPurpose.setCellValueFactory(new PropertyValueFactory<>("purpose"));
+    roomPurpose.setCellFactory(TextFieldTableCell.forTableColumn());
+    roomPurpose.setCellFactory(roomPurpose.getCellFactory());
   }
 
   public void loadServiceRequestForm() {
