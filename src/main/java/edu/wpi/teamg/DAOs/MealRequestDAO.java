@@ -2,6 +2,7 @@ package edu.wpi.teamg.DAOs;
 
 import edu.wpi.teamg.DBConnection;
 import edu.wpi.teamg.ORMClasses.MealRequest;
+import edu.wpi.teamg.ORMClasses.StatusTypeEnum;
 import java.sql.*;
 import java.util.HashMap;
 
@@ -49,7 +50,7 @@ public class MealRequestDAO implements DAO {
       int serv_by = rs.getInt("serv_by");
       mealReq.setServ_by(serv_by);
 
-      String status = rs.getString("status");
+      StatusTypeEnum status = StatusTypeEnum.valueOf(rs.getString("status"));
       mealReq.setStatus(status);
 
       String recipient = rs.getString("recipient");

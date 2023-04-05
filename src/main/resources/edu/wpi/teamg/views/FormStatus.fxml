@@ -53,22 +53,6 @@
             <TableColumn fx:id="location1" prefWidth="60.0" text="Location" />
             <TableColumn fx:id="serveBy" prefWidth="50.0" text="Serve-By" />
             <TableColumn fx:id="status" prefWidth="55.0" text="Status" />
-            <TableColumn prefWidth="75.0" text="Meal Request">
-               <columns>
-                  <TableColumn fx:id="recipient" prefWidth="60.0" text="recipient" />
-                  <TableColumn fx:id="order" prefWidth="75.0" text="order" />
-                  <TableColumn fx:id="time" prefWidth="50.0" text="time" />
-                  <TableColumn fx:id="date" minWidth="0.0" prefWidth="50.0" text="date" />
-                  <TableColumn fx:id="note" minWidth="0.0" prefWidth="100.0" text="note" />
-               </columns>
-            </TableColumn>
-            <TableColumn prefWidth="75.0" text="Conference Room Request">
-               <columns>
-                  <TableColumn fx:id="mainRoomDate" prefWidth="75.0" text="Meeting Date" />
-                  <TableColumn fx:id="mainRoomTime" prefWidth="75.0" text="Meeting Time" />
-                  <TableColumn fx:id="mainRoomPurpose" prefWidth="75.0" text="Purpose" />
-               </columns>
-            </TableColumn>
          </columns>
       </TableView>
       <TableView fx:id="roomTable" layoutX="146.0" layoutY="104.0" prefHeight="297.0" prefWidth="455.0">

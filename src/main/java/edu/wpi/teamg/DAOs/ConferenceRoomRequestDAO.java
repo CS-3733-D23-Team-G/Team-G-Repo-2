@@ -2,6 +2,7 @@ package edu.wpi.teamg.DAOs;
 
 import edu.wpi.teamg.DBConnection;
 import edu.wpi.teamg.ORMClasses.ConferenceRoomRequest;
+import edu.wpi.teamg.ORMClasses.StatusTypeEnum;
 import java.sql.*;
 import java.util.HashMap;
 
@@ -41,7 +42,7 @@ public class ConferenceRoomRequestDAO implements DAO {
       int empID = rs.getInt("empid");
       int location = rs.getInt("location");
       int serv_by = rs.getInt("serv_by");
-      String status = rs.getString("status");
+      StatusTypeEnum status = StatusTypeEnum.valueOf(rs.getString("status"));
       Date reqDate = rs.getDate("meeting_date");
       Time reqTime = rs.getTime("meeting_time");
       String confPurpose = rs.getString("purpose");

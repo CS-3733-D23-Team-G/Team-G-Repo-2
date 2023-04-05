@@ -1,6 +1,6 @@
 package edu.wpi.teamg.ORMClasses;
 
-public enum RequestTypeEnum {
+public enum StatusTypeEnum {
   blank,
   processing,
   done;
