@@ -8,61 +8,98 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamg.controllers.SignageAdminController">
-   <children>
-      <Rectangle arcHeight="5.0" fill="#f1f1f1" height="400.0" stroke="TRANSPARENT" strokeType="INSIDE" width="600.0" />
-      <Rectangle arcHeight="5.0" fill="#012d5a" height="64.0" layoutY="40.0" stroke="TRANSPARENT" strokeType="INSIDE" width="600.0" />
-      <MFXButton fx:id="backToHomeButton" layoutY="39.0" opacity="0.0" prefHeight="64.0" prefWidth="184.0" text="Return to Home Button" />
-      <MFXButton fx:id="signagePageButton" layoutX="416.0" layoutY="40.0" opacity="0.0" prefHeight="64.0" prefWidth="184.0" text="Signage Page Button" />
-      <MFXButton fx:id="exitButton" layoutX="476.0" layoutY="7.0" opacity="0.0" prefHeight="27.0" prefWidth="97.0" text="Exit Application" />
-      <Line endX="48.0" endY="-163.5" layoutX="139.0" layoutY="215.0" startX="48.0" startY="-120.5" stroke="#345871" strokeWidth="2.0" />
-      <Line endX="48.0" endY="-163.5" layoutX="362.0" layoutY="213.0" startX="48.0" startY="-119.5" stroke="#345871" strokeWidth="2.0" />
-      <Text disable="true" fill="WHITE" layoutX="49.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Return to Home" />
-      <Text disable="true" fill="WHITE" layoutX="474.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Signage Page" />
-      <Text disable="true" layoutX="482.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exit Application" />
-      <ChoiceBox fx:id="serviceRequestChoiceBox" layoutX="192.0" layoutY="40.0" opacity="0.0" prefHeight="64.0" prefWidth="214.0" />
-      <Text disable="true" fill="WHITE" layoutX="237.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service Request Forms" />
-      <Button fx:id="nodes" layoutY="112.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="97.0" text="Nodes" />
-      <Button fx:id="edges" layoutY="138.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="97.0" text="Edges" />
-      <Button fx:id="nodeLoc" layoutY="164.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="97.0" text="NodeLoc" />
-      <Button fx:id="move" layoutY="187.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="97.0" text="Move" />
-      <Button fx:id="imp" layoutY="213.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="97.0" text="Import" />
-      <Label fx:id="fileLabel" layoutX="106.0" layoutY="218.0" text="file" />
-      <Button fx:id="export" layoutX="1.0" layoutY="240.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="97.0" text="Export" />
-      <TextArea fx:id="areaInfo" layoutX="5.0" layoutY="305.0" prefHeight="87.0" prefWidth="134.0" />
-      <TableView fx:id="moveTable" layoutX="163.0" layoutY="107.0" prefHeight="291.0" prefWidth="437.0">
-         <columns>
-            <TableColumn fx:id="moveNodeID" prefWidth="55.0" text="NodeID" />
-            <TableColumn fx:id="moveDate" prefWidth="55.0" text="Date" />
-            <TableColumn fx:id="moveLongName" prefWidth="55.0" text="LongName" />
-         </columns>
-      </TableView>
-      <TableView fx:id="edgeTable" layoutX="163.0" layoutY="107.0" prefHeight="291.0" prefWidth="437.0">
-         <columns>
-            <TableColumn fx:id="edgeEdgeID" prefWidth="55.0" text="EdgeID" />
-            <TableColumn fx:id="edgeEndNode" prefWidth="55.0" text="EndNode" />
-            <TableColumn fx:id="edgeStartNode" prefWidth="55.0" text="StartNode" />
-         </columns>
-      </TableView>
-      <TableView fx:id="nodeLocTable" layoutX="163.0" layoutY="108.0" prefHeight="291.0" prefWidth="437.0">
-         <columns>
-            <TableColumn fx:id="locLongName" prefWidth="55.0" text="LongName" />
-            <TableColumn fx:id="locShortName" prefWidth="55.0" text="ShortName" />
-            <TableColumn fx:id="locNodeType" prefWidth="60.0" text="NodeType" />
-         </columns>
-      </TableView>
-      <TableView fx:id="nodeTable" layoutX="163.0" layoutY="107.0" prefHeight="291.0" prefWidth="437.0">
-         <columns>
-            <TableColumn fx:id="nodeNodeID" prefWidth="55.0" text="NodeID" />
-            <TableColumn fx:id="nodeXcoord" prefWidth="55.0" text="x-coord" />
-            <TableColumn fx:id="nodeYcoord" prefWidth="60.0" text="y-coord" />
-            <TableColumn fx:id="nodeFloor" prefWidth="50.0" text="floor" />
-            <TableColumn fx:id="nodeBuilding" prefWidth="55.0" text="building" />
-         </columns>
-      </TableView>
-   </children>
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <TableView fx:id="moveTable" prefHeight="291.0" prefWidth="437.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+               <columns>
+                  <TableColumn fx:id="moveNodeID" prefWidth="55.0" text="NodeID" />
+                  <TableColumn fx:id="moveDate" prefWidth="55.0" text="Date" />
+                  <TableColumn fx:id="moveLongName" prefWidth="55.0" text="LongName" />
+               </columns>
+            </TableView>
+            <TableView fx:id="edgeTable" prefHeight="291.0" prefWidth="437.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+               <columns>
+                  <TableColumn fx:id="edgeEdgeID" prefWidth="55.0" text="EdgeID" />
+                  <TableColumn fx:id="edgeEndNode" prefWidth="55.0" text="EndNode" />
+                  <TableColumn fx:id="edgeStartNode" prefWidth="55.0" text="StartNode" />
+               </columns>
+            </TableView>
+            <TableView fx:id="nodeLocTable" prefHeight="291.0" prefWidth="437.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+               <columns>
+                  <TableColumn fx:id="locLongName" prefWidth="55.0" text="LongName" />
+                  <TableColumn fx:id="locShortName" prefWidth="55.0" text="ShortName" />
+                  <TableColumn fx:id="locNodeType" prefWidth="60.0" text="NodeType" />
+               </columns>
+            </TableView>
+            <TableView fx:id="nodeTable" prefHeight="291.0" prefWidth="437.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+               <columns>
+                  <TableColumn fx:id="nodeNodeID" prefWidth="55.0" text="NodeID" />
+                  <TableColumn fx:id="nodeXcoord" prefWidth="55.0" text="x-coord" />
+                  <TableColumn fx:id="nodeYcoord" prefWidth="60.0" text="y-coord" />
+                  <TableColumn fx:id="nodeFloor" prefWidth="50.0" text="floor" />
+                  <TableColumn fx:id="nodeBuilding" prefWidth="55.0" text="building" />
+               </columns>
+            </TableView>
+         </children>
+      </GridPane>
+   </center>
+   <left>
+      <AnchorPane prefHeight="200.0" prefWidth="130.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="nodes" layoutX="15.0" layoutY="51.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="100.0" text="Nodes" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="50.0" />
+            <Button fx:id="edges" layoutX="15.0" layoutY="91.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="97.0" text="Edges" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="85.0" />
+            <Button fx:id="nodeLoc" layoutX="15.0" layoutY="117.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="97.0" text="NodeLoc" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="120.0" />
+            <Button fx:id="move" layoutX="17.0" layoutY="14.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="97.0" text="Move" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0" />
+            <Button fx:id="imp" layoutX="25.0" layoutY="165.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="97.0" text="Import" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="185.0" />
+            <Label fx:id="fileLabel" layoutX="57.0" layoutY="227.0" text="file" AnchorPane.leftAnchor="57.0" AnchorPane.rightAnchor="57.0" AnchorPane.topAnchor="227.0" />
+            <Button fx:id="export" layoutX="18.0" layoutY="139.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="97.0" text="Export" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="155.0" />
+            <TextArea fx:id="areaInfo" layoutY="259.0" prefHeight="37.0" prefWidth="100.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="259.0" />
+         </children>
+      </AnchorPane>
+   </left>
+   <top>
+      <VBox style="-fx-background-color: #F1F1F1;" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="top_banner">
+               <children>
+                  <Text disable="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Exit Application" />
+                  <MFXButton fx:id="exitButton" opacity="0.0" prefHeight="27.0" prefWidth="97.0" text="Exit Application" />
+               </children>
+            </AnchorPane>
+            <GridPane alignment="CENTER" gridLinesVisible="true" styleClass="banner" VBox.vgrow="ALWAYS">
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <MFXButton fx:id="backToHomeButton" opacity="0.0" prefHeight="50.0" prefWidth="199.0" text="Return to Home Button" />
+                  <MFXButton fx:id="signagePageButton" opacity="0.0" prefHeight="50.0" prefWidth="198.0" text="Signage Page Button" GridPane.columnIndex="2" />
+                  <ChoiceBox fx:id="serviceRequestChoiceBox" opacity="0.0" prefHeight="64.0" prefWidth="214.0" GridPane.columnIndex="1" />
+                  <Text disable="true" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Return to Home" />
+                  <Text disable="true" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Signage Page" GridPane.columnIndex="2" />
+                  <Text disable="true" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Service Request Forms" GridPane.columnIndex="1" />
+               </children>
+            </GridPane>
+         </children>
+      </VBox>
+   </top>
+</BorderPane>
