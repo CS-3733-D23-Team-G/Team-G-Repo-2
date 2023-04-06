@@ -112,40 +112,40 @@ public class FormStatusController {
     ArrayList<Request> request1 = new ArrayList<>();
 
     HashMap<Integer, Request> testingRequest = this.getHashMapRequest();
-    testingRequest.forEach(
-        (i, m) -> {
-          request1.add(m);
-          //          System.out.println("Request ID:" + m.getReqid());
-          //          System.out.println("Employee ID:" + m.getEmpid());
-          //          System.out.println("Status:" + m.getStatus());
-          //          System.out.println("Location:" + m.getLocation());
-          //          System.out.println("Serve By:" + m.getServ_by());
-          //          System.out.println();
-        });
+    //    testingRequest.forEach(
+    //        (i, m) -> {
+    //          request1.add(m);
+    //          //          System.out.println("Request ID:" + m.getReqid());
+    //          //          System.out.println("Employee ID:" + m.getEmpid());
+    //          //          System.out.println("Status:" + m.getStatus());
+    //          //          System.out.println("Location:" + m.getLocation());
+    //          //          System.out.println("Serve By:" + m.getServ_by());
+    //          //          System.out.println();
+    //        });
 
     ArrayList<MealRequest> mealRequests1 = new ArrayList<>();
-    HashMap<Integer, MealRequest> testingMealHash = this.getHashMapMeal();
-    testingMealHash.forEach(
-        (i, m) -> {
-          mealRequests1.add(m);
-          System.out.println("Request ID:" + m.getReqid());
-          System.out.println("Employee ID:" + m.getEmpid());
-          System.out.println("Delivery date:" + m.getDeliveryDate());
-          System.out.println("Delivery time:" + m.getDeliveryTime());
-          System.out.println("note:" + m.getNote());
-          System.out.println("meal:" + m.getEmpid());
-          System.out.println();
-        });
-    ArrayList<ConferenceRoomRequest> confroom = new ArrayList<>();
-    HashMap<Integer, ConferenceRoomRequest> testingConfRoom = this.getHashConfRoom();
-    testingConfRoom.forEach(
-        (i, m) -> {
-          confroom.add(m);
-          System.out.println("Reqid: " + m.getReqid());
-          System.out.println("Meeting Date: " + m.getMeeting_date());
-          System.out.println("Meeting time: " + m.getMeeting_time());
-          System.out.println("Purpose: " + m.getPurpose());
-        });
+    //    HashMap<Integer, MealRequest> testingMealHash = this.getHashMapMeal();
+    //    testingMealHash.forEach(
+    //        (i, m) -> {
+    //          mealRequests1.add(m);
+    //          System.out.println("Request ID:" + m.getReqid());
+    //          System.out.println("Employee ID:" + m.getEmpid());
+    //          System.out.println("Delivery date:" + m.getDeliveryDate());
+    //          System.out.println("Delivery time:" + m.getDeliveryTime());
+    //          System.out.println("note:" + m.getNote());
+    //          System.out.println("meal:" + m.getEmpid());
+    //          System.out.println();
+    //        });
+    //    ArrayList<ConferenceRoomRequest> confroom = new ArrayList<>();
+    //    HashMap<Integer, ConferenceRoomRequest> testingConfRoom = this.getHashConfRoom();
+    //    testingConfRoom.forEach(
+    //        (i, m) -> {
+    //          confroom.add(m);
+    //          System.out.println("Reqid: " + m.getReqid());
+    //          System.out.println("Meeting Date: " + m.getMeeting_date());
+    //          System.out.println("Meeting time: " + m.getMeeting_time());
+    //          System.out.println("Purpose: " + m.getPurpose());
+    //        });
 
     //    MealRequest testItem1 = new MealRequest();
     //    testItem1.setEmpid(2);
@@ -186,12 +186,12 @@ public class FormStatusController {
     //    testItem3.setMeeting_time(new Time(1, 2, 3));
     //    testItem3.setPurpose("To Work Please");
 
-    testList = FXCollections.observableArrayList(request1);
-    testMealList = FXCollections.observableArrayList(mealRequests1);
-    testRoomList = FXCollections.observableArrayList(confroom);
-    mainTable.setItems(testList);
-    mealTable.setItems(testMealList);
-    roomTable.setItems(testRoomList);
+    //    testList = FXCollections.observableArrayList(request1);
+    //    testMealList = FXCollections.observableArrayList(mealRequests1);
+    //    testRoomList = FXCollections.observableArrayList(confroom);
+    //    mainTable.setItems(testList);
+    //    mealTable.setItems(testMealList);
+    //    roomTable.setItems(testRoomList);
 
     reqID.setCellValueFactory(new PropertyValueFactory<>("reqid"));
     empID.setCellValueFactory(new PropertyValueFactory<>("empid"));
