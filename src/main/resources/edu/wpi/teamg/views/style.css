@@ -42,6 +42,6 @@
     -fx-text-fill: #FFFFFF;
 }
 .button_banner{
-    -fx-max-height: 50;
+    -fx-max-height: 30;
     -fx-opacity: 0;
 }

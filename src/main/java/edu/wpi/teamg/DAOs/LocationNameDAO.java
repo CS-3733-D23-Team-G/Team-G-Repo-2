@@ -159,6 +159,7 @@ public class LocationNameDAO implements LocationDAO {
 
   @Override
   public void exportCSV() throws SQLException {
+
     connection.setConnection();
     ResultSet rs = null;
     FileWriter fw = null;
@@ -203,5 +204,6 @@ public class LocationNameDAO implements LocationDAO {
     }
 
     connection.closeConnection();
+
   }
 }
