@@ -1,7 +1,7 @@
 package edu.wpi.teamg.ORMClasses;
 
+import java.sql.Date;
 import java.sql.Time;
-import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 

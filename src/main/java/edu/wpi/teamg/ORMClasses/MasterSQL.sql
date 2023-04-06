@@ -91,7 +91,11 @@ VALUES
     (1, 'John', 'Doe', 'johndoe@example.com', 'Coffee'),
     (2, 'Jane', 'Doe', 'janedoe@example.com', 'Lunch'),
     (3, 'Bob', 'Smith', 'bobsmith@example.com', 'Dinner'),
-    (4, 'Alice', 'Johnson', 'alicejohnson@example.com', 'All');
+    (4, 'Alice', 'Johnson', 'alicejohnson@example.com', 'All'),
+    (5,'Bruce','Wanyne' ,'batman@example.com' , 'Dinner'),
+    (6,'Itta','Patell','Ipatell@example.com','Lunch'),
+    (7, 'Diana','Wells','Dwells@example.com','All'),
+    (8,'Mark', 'Specter', 'moonknight@example.com', 'Coffee');
 
 -- Table: proto2.Account
 INSERT INTO proto2.Account (empID, password, is_admin)
@@ -102,7 +106,7 @@ VALUES
     (4, '456password', true);
 
 -- Table: proto2.Request
-INSERT INTO proto2.Request (reqID, empID, location, serv_by, status)
+INSERT INTO proto2.request (reqID, empID, location, serv_by, status)
 VALUES
     (1, 1, 105, 1, 'blank'),
     (2, 2, 110, 2, 'processing'),
@@ -122,9 +126,10 @@ VALUES
     (8, '2023-04-18', '15:00:00', 'Training session');
 
 -- Table: proto2.MealRequest
-INSERT INTO proto2.MealRequest (reqID, deliveryDate, deliveryTime, recipient, mealOrder, note)
+INSERT INTO proto2.mealrequest (reqID, deliveryDate, deliveryTime, recipient, mealOrder, note)
 VALUES
     (1, '2023-04-15', '13:00:00','John Doe', 'Grilled chicken sandwich', 'No onions'),
     (2, '2023-04-15', '13:00:00','Jane Doe', 'Vegetarian pizza', 'Extra cheese'),
     (3, '2023-04-15', '13:00:00','Bob Smith', 'Fish and chips', 'Tartar sauce on the side'),
     (4, '2023-04-15', '13:00:00', 'Alice Johnson', 'Caesar salad', 'No croutons');
+

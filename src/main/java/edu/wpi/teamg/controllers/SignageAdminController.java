@@ -1,27 +1,35 @@
 package edu.wpi.teamg.controllers;
 
-import edu.wpi.teamg.DAOs.*;
+
+import edu.wpi.teamg.DAOs.EdgeDAO;
+import edu.wpi.teamg.DAOs.LocationNameDAO;
+import edu.wpi.teamg.DAOs.MoveDAO;
+import edu.wpi.teamg.DAOs.NodeDAO;
+import edu.wpi.teamg.ORMClasses.*;
+
 import edu.wpi.teamg.Main;
+
 import edu.wpi.teamg.navigation.Navigation;
 import edu.wpi.teamg.navigation.Screen;
-import edu.wpi.teamg.pathFinding.Edge;
-import edu.wpi.teamg.pathFinding.Graph;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.io.File;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.*;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+
 import javafx.geometry.Point2D;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
 import javafx.stage.FileChooser;
-import net.kurobako.gesturefx.GesturePane;
 
 public class SignageAdminController {
 
@@ -29,21 +37,56 @@ public class SignageAdminController {
   @FXML ChoiceBox<String> serviceRequestChoiceBox;
   @FXML MFXButton signagePageButton;
   @FXML MFXButton exitButton;
-  @FXML MFXButton pathFindButton;
-  // @FXML MFXButton importButton;
 
-  // @FXML Label fileLabel;
+  // @FXML MFXButton pathFindButton;
+  @FXML Label fileLabel;
+  // @FXML MFXTextField startLoc;
+  // @FXML MFXTextField endLoc;
+  @FXML MFXTextField results;
+  //  @FXML GesturePane pane;
+
 
   @FXML ChoiceBox<String> importDrop;
   @FXML ChoiceBox<String> exportDrop;
 
-  @FXML MFXTextField startLoc;
 
-  @FXML MFXTextField endLoc;
+  @FXML Button imp;
+  // @FXML MFXButton export;
 
-  @FXML MFXTextField results;
+  @FXML Button nodes;
+  @FXML Button edges;
 
-  @FXML GesturePane pane;
+  @FXML Button nodeLoc;
+  @FXML Button move;
+
+  @FXML TableView<Node> nodeTable;
+  @FXML TableView<Edge> edgeTable;
+  @FXML TableView<Move> moveTable;
+  @FXML TableView<LocationName> nodeLocTable;
+
+  // Nodes
+  @FXML TableColumn<Node, Integer> nodeNodeID;
+  @FXML TableColumn<Node, Integer> nodeXcoord;
+  @FXML TableColumn<Node, Integer> nodeYcoord;
+  @FXML TableColumn<Node, String> nodeFloor;
+  @FXML TableColumn<Node, String> nodeBuilding;
+
+  // Edges
+  @FXML TableColumn<Edge, String> edgeEdgeID;
+  @FXML TableColumn<Edge, Integer> edgeEndNode;
+  @FXML TableColumn<Edge, Integer> edgeStartNode;
+
+  // Move
+
+  @FXML TableColumn<Move, String> moveNodeID;
+  @FXML TableColumn<Move, Date> moveDate;
+  @FXML TableColumn<Move, Integer> moveLongName;
+
+  // NodeLoc
+
+  @FXML TableColumn<LocationName, String> locLongName;
+  @FXML TableColumn<LocationName, Integer> locShortName;
+  @FXML TableColumn<LocationName, Integer> locNodeType;
 
   ObservableList<String> list =
       FXCollections.observableArrayList(
@@ -60,13 +103,14 @@ public class SignageAdminController {
       FXCollections.observableArrayList("Nodes", "Edges", "LocationName", "Moves");
 
   @FXML
-  public void initialize() {
+  public void initialize() throws SQLException {
     serviceRequestChoiceBox.setItems(list);
     importDrop.setItems(importList);
     exportDrop.setItems(exportList);
     signagePageButton.setOnMouseClicked(event -> Navigation.navigate(Screen.SIGNAGE_PAGE));
     backToHomeButton.setOnMouseClicked(event -> Navigation.navigate(Screen.HOME));
     exitButton.setOnMouseClicked(event -> exit());
+
     // importButton.setOnAction(event -> fileChooser());
 
     serviceRequestChoiceBox.setOnAction(event -> loadServiceRequestForm());
@@ -80,6 +124,7 @@ public class SignageAdminController {
           }
         });
     // fileLabel.getText();
+
     pathFindButton.setOnMouseClicked(
         event -> {
           try {
@@ -89,16 +134,60 @@ public class SignageAdminController {
           }
         });
 
-    startLoc.getText();
-    endLoc.getText();
-    String imgPath = Main.class.getResource("images/00_thelowerlevel1.png").toString();
-    ImageView image = new ImageView(new Image(imgPath));
-    pane.setContent(image);
+     */
+
+    // startLoc.getText();
+    // endLoc.getText();
+    //  String imgPath = Main.class.getResource("images/00_thelowerlevel1.png").toString();
+    //  ImageView image = new ImageView(new Image(imgPath));
+    //  pane.setContent(image);
+    nodes.setOnMouseClicked(event -> loadNodeTable());
+    edges.setOnMouseClicked(event -> loadEdgeTable());
+    move.setOnMouseClicked(event -> loadMoveTable());
+    nodeLoc.setOnMouseClicked(event -> loadLocTable());
     // pane.setMaxScale();
 
-    pane.setMinScale(.001);
-    pane.zoomTo(.000001, new Point2D(2500, 1700));
-    pane.zoomTo(.000001, new Point2D(2500, 1700));
+    //  pane.setMinScale(.001);
+    //  pane.zoomTo(.000001, new Point2D(2500, 1700));
+    //  pane.zoomTo(.000001, new Point2D(2500, 1700));
+
+    ObservableList<Node> nodeList;
+    ObservableList<Edge> edgeList;
+    ObservableList<Move> moveList;
+    ObservableList<LocationName> locList;
+
+    ArrayList<Node> nodes1 = getNodes();
+    ArrayList<Edge> edges1 = getEdge();
+    ArrayList<Move> move1 = getMove();
+    ArrayList<LocationName> loc1 = getLoc();
+
+    nodeList = FXCollections.observableArrayList(nodes1);
+    edgeList = FXCollections.observableArrayList(edges1);
+    moveList = FXCollections.observableArrayList(move1);
+    locList = FXCollections.observableArrayList(loc1);
+
+    nodeTable.setItems(nodeList);
+    edgeTable.setItems(edgeList);
+    moveTable.setItems(moveList);
+    nodeLocTable.setItems(locList);
+
+    nodeNodeID.setCellValueFactory(new PropertyValueFactory<>("NodeID"));
+    nodeXcoord.setCellValueFactory(new PropertyValueFactory<>("xcoord"));
+    nodeYcoord.setCellValueFactory(new PropertyValueFactory<>("ycoord"));
+    nodeFloor.setCellValueFactory(new PropertyValueFactory<>("floor"));
+    nodeBuilding.setCellValueFactory(new PropertyValueFactory<>("building"));
+
+    edgeEdgeID.setCellValueFactory(new PropertyValueFactory<>("EdgeID"));
+    edgeStartNode.setCellValueFactory(new PropertyValueFactory<>("startNode"));
+    edgeEndNode.setCellValueFactory(new PropertyValueFactory<>("endNode"));
+
+    moveNodeID.setCellValueFactory(new PropertyValueFactory<>("NodeID"));
+    moveDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
+    moveLongName.setCellValueFactory(new PropertyValueFactory<>("LongName"));
+
+    locLongName.setCellValueFactory(new PropertyValueFactory<>("LongName"));
+    locShortName.setCellValueFactory(new PropertyValueFactory<>("ShortName"));
+    locNodeType.setCellValueFactory(new PropertyValueFactory<>("NodeType"));
   }
 
   public void loadServiceRequestForm() {
@@ -122,6 +211,8 @@ public class SignageAdminController {
         return;
     }
   }
+
+  /*
 
   public void processAStarAlg() throws SQLException {
     ArrayList<String> path = new ArrayList<>();
@@ -166,6 +257,7 @@ public class SignageAdminController {
 
     setPath(path);
   }
+
   /*ObservableList<String>  =
             FXCollections.observableArrayList(
                     "Conference Room Request Form",
@@ -174,6 +266,7 @@ public class SignageAdminController {
                     "Meal Request Form",
                     "Office Supplies Request Form");
   */
+
   @FXML
   void fileChooser() {
     switch (importDrop.getValue()) {
@@ -231,9 +324,76 @@ public class SignageAdminController {
     }
   }
 
+  public void loadNodeTable() {
+    nodeTable.setVisible(true);
+    edgeTable.setVisible(false);
+    moveTable.setVisible(false);
+    nodeLocTable.setVisible(false);
+  }
+
+  public void loadEdgeTable() {
+    nodeTable.setVisible(false);
+    edgeTable.setVisible(true);
+    moveTable.setVisible(false);
+    nodeLocTable.setVisible(false);
+  }
+
+  public void loadMoveTable() {
+    nodeTable.setVisible(false);
+    edgeTable.setVisible(false);
+    moveTable.setVisible(true);
+    nodeLocTable.setVisible(false);
+  }
+
+  public void loadLocTable() {
+    nodeTable.setVisible(false);
+    edgeTable.setVisible(false);
+    moveTable.setVisible(false);
+    nodeLocTable.setVisible(true);
+  }
+
+  public ArrayList<Node> getNodes() throws SQLException {
+    NodeDAO nodeDAO = new NodeDAO();
+    HashMap<Integer, Node> nodes = nodeDAO.getAll();
+
+    ArrayList<Node> nodesList = new ArrayList<>(nodes.values());
+
+    return nodesList;
+  }
+
+  public ArrayList<edu.wpi.teamg.ORMClasses.Edge> getEdge() throws SQLException {
+    EdgeDAO edgeDAO = new EdgeDAO();
+    HashMap<String, Edge> edge = edgeDAO.getAll();
+
+    ArrayList<Edge> edgeList = new ArrayList<>(edge.values());
+
+    return edgeList;
+  }
+
+  public ArrayList<Move> getMove() throws SQLException {
+    MoveDAO moveDAO = new MoveDAO();
+    List<Move> moveL = moveDAO.getAll();
+
+    ArrayList<Move> moveAl = (ArrayList<Move>) moveL;
+
+    return moveAl;
+  }
+
+  public ArrayList<LocationName> getLoc() throws SQLException {
+    LocationNameDAO locationNameDAO = new LocationNameDAO();
+    HashMap<String, LocationName> locNames = locationNameDAO.getAll();
+
+    ArrayList<LocationName> locList = new ArrayList<>(locNames.values());
+
+    return locList;
+  }
+
+  /*
   public void setPath(ArrayList<String> path) {
     results.setText(String.valueOf(path));
   }
+
+   */
 
   public void exit() {
     Platform.exit();

@@ -31,6 +31,7 @@ public class MealRequestDAO implements DAO {
       rs = ps.executeQuery();
     } catch (SQLException e) {
       System.err.println("SQL exception");
+      e.printStackTrace();
       // printSQLException(e);
     }
 
@@ -60,11 +61,12 @@ public class MealRequestDAO implements DAO {
 
       Time deliveryTime = rs.getTime("deliveryTime");
       mealReq.setDeliveryTime(deliveryTime);
+
       String order = rs.getString("mealOrder");
       mealReq.setOrder(order);
 
       String note = rs.getString("note");
-      mealReq.setOrder(note);
+      mealReq.setNote(note); // check when merge
 
       mealRequestHash.put(reqID, mealReq);
     }
