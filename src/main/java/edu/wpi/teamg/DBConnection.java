@@ -15,7 +15,6 @@ public class DBConnection {
   static Connection connection;
 
   public void setConnection() {
-
     try {
       Class.forName("org.postgresql.Driver");
       connection =

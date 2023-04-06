@@ -22,7 +22,7 @@ public class RequestDAO implements DAO {
     sql = "select * from proto2.request";
 
     try {
-      ps = DBConnection.getConnection().prepareStatement(sql);
+      ps = db.getConnection().prepareStatement(sql);
       rs = ps.executeQuery();
     } catch (SQLException e) {
       e.printStackTrace();
