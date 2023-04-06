@@ -20,9 +20,8 @@ public class FlowersRequestController {
   @FXML ChoiceBox<String> flowerTypeChoiceBox;
   @FXML MFXButton submit;
   @FXML MFXButton clearAll;
-  @FXML TextField flowerRequestEmployeeID;
   @FXML TextField deliveryLocation;
-  @FXML TextField orderingfor;
+  @FXML TextField orderingFor;
   @FXML TextArea notes;
   ObservableList<String> listFlowers =
       FXCollections.observableArrayList(
@@ -38,14 +37,32 @@ public class FlowersRequestController {
   @FXML
   public void initialize() {
     serviceRequestChoiceBox.setItems(list);
+    serviceRequestChoiceBox.setOnAction(event -> loadServiceRequestForm());
+
     flowerTypeChoiceBox.setItems(listFlowers);
 
-    signagePageButton.setOnMouseClicked(event -> Navigation.navigate(Screen.SIGNAGE_PAGE));
-    returnHomeButton.setOnMouseClicked(event -> Navigation.navigate(Screen.HOME));
+    signagePageButton.setOnMouseClicked(
+        event -> {
+          Navigation.navigate(Screen.SIGNAGE_PAGE);
+        });
+    returnHomeButton.setOnMouseClicked(
+        event -> {
+          Navigation.navigate(Screen.HOME);
+        });
     exitButton.setOnMouseClicked(event -> exit());
-    serviceRequestChoiceBox.setOnAction(event -> loadServiceRequestForm());
-    submit.setOnMouseClicked(event -> Navigation.navigate(Screen.FLOWERS_REQUEST_SUBMIT));
+    //    serviceRequestChoiceBox.setOnMouseClicked(
+    //        event -> {
+    //          loadServiceRequestForm();
+    //        });
+    //    submit.setOnMouseClicked(event -> Navigation.navigate(Screen.FLOWERS_REQUEST_SUBMIT));
     clearAll.setOnAction(event -> clearFlowers());
+    submit.setOnAction(
+        event -> {
+          Navigation.navigate(Screen.FLOWERS_REQUEST_SUBMIT);
+        });
+    //    deliveryLocation.getText();
+    //    orderingFor.getText();
+    //    notes.setText("");
   }
 
   public void loadServiceRequestForm() {
@@ -67,9 +84,8 @@ public class FlowersRequestController {
   public void clearFlowers() {
     flowerTypeChoiceBox.setValue("");
     deliveryLocation.setText("");
-    orderingfor.setText("");
+    orderingFor.setText("");
     notes.setText("");
-    flowerRequestEmployeeID.setText("");
   }
 
   public void exit() {

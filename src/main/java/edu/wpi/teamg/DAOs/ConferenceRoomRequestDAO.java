@@ -3,7 +3,15 @@ package edu.wpi.teamg.DAOs;
 import edu.wpi.teamg.DBConnection;
 import edu.wpi.teamg.ORMClasses.ConferenceRoomRequest;
 import edu.wpi.teamg.ORMClasses.StatusTypeEnum;
+
 import java.sql.*;
+
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Time;
+
 import java.util.HashMap;
 
 public class ConferenceRoomRequestDAO implements DAO {
@@ -42,7 +50,9 @@ public class ConferenceRoomRequestDAO implements DAO {
       int empID = rs.getInt("empid");
       int location = rs.getInt("location");
       int serv_by = rs.getInt("serv_by");
+
       StatusTypeEnum status = StatusTypeEnum.valueOf(rs.getString("status"));
+
       Date reqDate = rs.getDate("meeting_date");
       Time reqTime = rs.getTime("meeting_time");
       String confPurpose = rs.getString("purpose");
@@ -51,7 +61,7 @@ public class ConferenceRoomRequestDAO implements DAO {
       cReq.setLocation(location);
       cReq.setEmpid(empID);
       cReq.setServ_by(serv_by);
-      cReq.setStatus(status);
+      cReq.setStatus(StatusTypeEnum.done);
       cReq.setPurpose(confPurpose);
       cReq.setMeeting_time(reqTime);
       cReq.setMeeting_date(reqDate);
@@ -89,7 +99,7 @@ public class ConferenceRoomRequestDAO implements DAO {
       maxID++;
     }
     SQL_confRoomRequest =
-        "insert  into teamgdb.proto2.conferenceroomrequest(reqid,meetingdate,meetingtime,purpose) values (?,?,?,?)";
+        "insert  into teamgdb.proto2.conferenceroomrequest(reqid,meeting_date,meeting_time,purpose) values (?,?,?,?)";
     SQL_Request =
         "insert into teamgdb.proto2.request(reqid,empid,location,serv_by,status) values (?,?,?,?,?)";
 

@@ -50,7 +50,9 @@ public class MealRequestDAO implements DAO {
       int serv_by = rs.getInt("serv_by");
       mealReq.setServ_by(serv_by);
 
+
       StatusTypeEnum status = StatusTypeEnum.valueOf(rs.getString("status"));
+
       mealReq.setStatus(status);
 
       String recipient = rs.getString("recipient");
@@ -108,7 +110,7 @@ public class MealRequestDAO implements DAO {
     }
 
     SQL_mealRequest =
-        "insert into proto2.mealrequest(reqid, recipient, mealOrder, note) values (?, ?, ?, ?, ?, ?)";
+        "insert into proto2.mealrequest(reqid, deliverydate, deliverytime, recipient, mealOrder, note) values (?, ?, ?, ?, ?, ?)";
     SQL_Request =
         "insert into proto2.request(reqid, empid, location, serv_by, status) values (?, ?, ?, ?, ?)";
 

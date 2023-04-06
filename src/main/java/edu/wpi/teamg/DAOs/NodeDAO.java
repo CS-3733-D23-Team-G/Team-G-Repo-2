@@ -5,6 +5,8 @@ import edu.wpi.teamg.ORMClasses.Node;
 import java.io.*;
 import java.sql.*;
 import java.util.HashMap;
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class NodeDAO implements LocationDAO {
   private HashMap<Integer, Node> nodeHash = new HashMap<Integer, Node>();
@@ -14,8 +16,8 @@ public class NodeDAO implements LocationDAO {
 
   @Override
   public void importCSV(String path) throws SQLException {
+    db.setConnection();
     try {
-      db.setConnection();
 
       SQL = "INSERT INTO proto2.node (nodeid, xcoord, ycoord, floor, building) VALUES (?,?,?,?,?)";
       PreparedStatement ps = db.getConnection().prepareStatement(SQL);
@@ -53,40 +55,55 @@ public class NodeDAO implements LocationDAO {
     } catch (SQLException e) {
       e.printStackTrace();
     }
+    db.closeConnection();
   }
 
   @Override
   public void exportCSV() throws SQLException {
-    String csvFilePath = "Node.csv";
+    db.setConnection();
+    ResultSet rs = null;
+    FileWriter fw = null;
 
     try {
-      SQL = "SELECT * FROM node";
-      PreparedStatement ps = db.getConnection().prepareStatement(SQL);
-      ResultSet rs = ps.executeQuery(SQL);
+      Statement statement = db.getConnection().createStatement();
+      rs = statement.executeQuery("select * from teamgdb.proto2.node");
 
-      BufferedWriter fileWriter = new BufferedWriter(new FileWriter(csvFilePath));
-      fileWriter.write("nodeid, xcoord, ycoord, floor, building");
-      while (rs.next()) {
-        int nodeID = rs.getInt("nodeid");
-        int xCoord = rs.getInt("xcoord");
-        int yCoord = rs.getInt("ycoord");
-        String floor = rs.getString("floor");
-        String building = rs.getString("building");
+      JFileChooser chooser = new JFileChooser();
+      FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV file", ".csv");
+      chooser.setFileFilter(filter);
 
-        String line =
-            String.format("\"%d\", %d, %d, %s, %s", nodeID, xCoord, yCoord, floor, building);
+      int result = chooser.showSaveDialog(null);
+      if (result == JFileChooser.APPROVE_OPTION) {
+        File savedFile = chooser.getSelectedFile();
+        String path = savedFile.getAbsolutePath();
+        fw = new FileWriter(path);
 
-        fileWriter.newLine();
-        fileWriter.write(line);
+        int colCount = rs.getMetaData().getColumnCount();
+        for (int i = 1; i <= colCount; i++) {
+          String colLabel = rs.getMetaData().getColumnLabel(i);
+          fw.append(colLabel);
+          if (i < colCount) fw.append(",");
+        }
+        fw.append("\n");
+
+        while (rs.next()) {
+          for (int j = 1; j <= colCount; j++) {
+            String cellVal = rs.getString(j);
+            fw.append(cellVal);
+            if (j < colCount) fw.append(",");
+          }
+          fw.append("\n");
+        }
       }
-      db.closeConnection();
-      fileWriter.close();
 
-    } catch (SQLException e) {
-      System.err.println("Database error");
+      rs.close();
+      statement.close();
+      fw.close();
     } catch (IOException e) {
-      System.err.println("File IO error");
+      throw new RuntimeException(e);
     }
+
+    db.closeConnection();
   }
 
   @Override
@@ -168,7 +185,7 @@ public class NodeDAO implements LocationDAO {
       node.setXcoord(xcoord);
 
       int ycoord = rs.getInt("ycoord");
-      node.setXcoord(ycoord);
+      node.setYcoord(ycoord);
 
       String floor = rs.getString("floor");
       node.setFloor(floor);

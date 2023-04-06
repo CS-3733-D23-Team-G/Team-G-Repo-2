@@ -110,6 +110,7 @@ public class FormStatusController {
     roomTableButton.setOnMouseClicked(event -> loadRoomTable());
 
     ArrayList<Request> request1 = new ArrayList<>();
+
     HashMap<Integer, Request> testingRequest = this.getHashMapRequest();
     testingRequest.forEach(
         (i, m) -> {
@@ -146,18 +147,22 @@ public class FormStatusController {
           System.out.println("Purpose: " + m.getPurpose());
         });
 
+
     //    MealRequest testItem1 = new MealRequest();
     //    testItem1.setEmpid(2);
     //    testItem1.setReqid(1);
     //    testItem1.setLocation(3);
     //    testItem1.setServ_by(2);
+
     //    testItem1.setStatus("Status");
+
     //    testItem1.setRecipient("Andrew");
     //    testItem1.setOrder("Food");
     //    testItem1.setNote("Please Let This Work");
     //    testItem1.setDeliveryDate(new Date(3, 2, 1));
     //    testItem1.setDeliveryTime(new Time(1, 2, 3));
     //
+
     //    MealRequest testItem2 = new MealRequest();
     //    testItem2.setEmpid(2);
     //    testItem2.setReqid(1);
@@ -167,6 +172,7 @@ public class FormStatusController {
     //    testItem2.setRecipient("Andrew");
     //    testItem2.setOrder("Food");
     //    testItem2.setNote("Please Let This Work");
+
     //
     //    testItem2.setDeliveryDate(new Date(3, 2, 1));
     //    testItem2.setDeliveryTime(new Time(1, 2, 3));
@@ -181,12 +187,14 @@ public class FormStatusController {
     //    testItem3.setMeeting_time(new Time(1, 2, 3));
     //    testItem3.setPurpose("To Work Please");
 
+
     testList = FXCollections.observableArrayList(request1);
     testMealList = FXCollections.observableArrayList(mealRequests1);
     testRoomList = FXCollections.observableArrayList(confroom);
     mainTable.setItems(testList);
     mealTable.setItems(testMealList);
     roomTable.setItems(testRoomList);
+
 
     reqID.setCellValueFactory(new PropertyValueFactory<>("reqid"));
     empID.setCellValueFactory(new PropertyValueFactory<>("empid"));

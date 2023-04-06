@@ -3,6 +3,7 @@ package edu.wpi.teamg.DAOs;
 import edu.wpi.teamg.DBConnection;
 import edu.wpi.teamg.ORMClasses.Request;
 import edu.wpi.teamg.ORMClasses.StatusTypeEnum;
+
 import java.sql.*;
 import java.util.HashMap;
 
@@ -32,11 +33,13 @@ public class RequestDAO implements DAO {
     while (rs.next()) {
       Request cReq = new Request();
 
+
       int reqID = rs.getInt("reqid");
       int empID = rs.getInt("empid");
       int location = rs.getInt("location");
       int serv_by = rs.getInt("serv_by");
       StatusTypeEnum status = StatusTypeEnum.valueOf(rs.getString("status"));
+
 
       cReq.setReqid(reqID);
       cReq.setLocation(location);
@@ -44,6 +47,7 @@ public class RequestDAO implements DAO {
       cReq.setServ_by(serv_by);
 
       cReq.setStatus(status);
+
 
       requestHash.put(reqID, cReq);
     }
