@@ -69,7 +69,7 @@ public class NodeDAO implements LocationDAO {
       rs = statement.executeQuery("select * from teamgdb.proto2.node");
 
       JFileChooser chooser = new JFileChooser();
-      FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV file", "*.csv");
+      FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV file", ".csv");
       chooser.setFileFilter(filter);
 
       int result = chooser.showSaveDialog(null);

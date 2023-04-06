@@ -215,6 +215,17 @@ public class SignageAdminController {
         NodeDAO nodeDao = new NodeDAO();
         nodeDao.exportCSV();
         break;
+      case "Edges":
+        EdgeDAO edgeDao = new EdgeDAO();
+        edgeDao.exportCSV();
+        break;
+      case "LocationName":
+        LocationNameDAO lNameDao = new LocationNameDAO();
+        lNameDao.exportCSV();
+        break;
+      case "Moves":
+        MoveDAO moveDao = new MoveDAO();
+        moveDao.exportCSV();
       default:
         break;
     }

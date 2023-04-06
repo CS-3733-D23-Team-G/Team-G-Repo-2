@@ -32,12 +32,12 @@ create table proto2.LocationName(
 );
 
 create table proto2.Move(
-                            nodeID int,
-                            longName varchar(100),
-                            date date,
-                            PRIMARY KEY (nodeID, longName, date),
-                            foreign key (nodeID) references proto2.Node(nodeID),
-                            foreign key (longName) references proto2.LocationName(longName)
+                                nodeID int,
+                                longName varchar(100),
+                                date date,
+                                PRIMARY KEY (nodeID, longName, date),
+                                foreign key (nodeID) references proto2.Node(nodeID),
+                                foreign key (longName) references proto2.LocationName(longName)
 );
 
 create type proto2.enum1 as enum('blank', 'processing', 'done');

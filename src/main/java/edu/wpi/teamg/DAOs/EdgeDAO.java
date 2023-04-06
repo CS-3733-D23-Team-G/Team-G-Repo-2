@@ -2,16 +2,14 @@ package edu.wpi.teamg.DAOs;
 
 import edu.wpi.teamg.DBConnection;
 import edu.wpi.teamg.ORMClasses.Edge;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashMap;
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class EdgeDAO implements LocationDAO {
   static DBConnection connection = new DBConnection();
@@ -128,31 +126,49 @@ public class EdgeDAO implements LocationDAO {
 
   @Override
   public void exportCSV() throws SQLException {
-    String csvFilePath = "Edge.csv";
+    connection.setConnection();
+    ResultSet rs = null;
+    FileWriter fw = null;
 
     try {
-      sql = "SELECT * FROM teamgdb.proto2.edge";
-      PreparedStatement ps = connection.getConnection().prepareStatement(sql);
-      ResultSet rs = ps.executeQuery(sql);
+      Statement statement = connection.getConnection().createStatement();
+      rs = statement.executeQuery("select * from teamgdb.proto2.edge");
 
-      BufferedWriter fileWriter = new BufferedWriter(new FileWriter(csvFilePath));
-      fileWriter.write("startnode, endnode");
-      while (rs.next()) {
-        String startNode = rs.getString("startnode");
-        String endNode = rs.getString("endnode");
+      JFileChooser chooser = new JFileChooser();
+      FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV file", ".csv");
+      chooser.setFileFilter(filter);
 
-        String line = String.format("\"%s\", %s", startNode, endNode);
+      int result = chooser.showSaveDialog(null);
+      if (result == JFileChooser.APPROVE_OPTION) {
+        File savedFile = chooser.getSelectedFile();
+        String path = savedFile.getAbsolutePath();
+        fw = new FileWriter(path);
 
-        fileWriter.newLine();
-        fileWriter.write(line);
+        int colCount = rs.getMetaData().getColumnCount();
+        for (int i = 1; i <= colCount; i++) {
+          String colLabel = rs.getMetaData().getColumnLabel(i);
+          fw.append(colLabel);
+          if (i < colCount) fw.append(",");
+        }
+        fw.append("\n");
+
+        while (rs.next()) {
+          for (int j = 1; j <= colCount; j++) {
+            String cellVal = rs.getString(j);
+            fw.append(cellVal);
+            if (j < colCount) fw.append(",");
+          }
+          fw.append("\n");
+        }
       }
-      connection.closeConnection();
-      fileWriter.close();
 
-    } catch (SQLException e) {
-      System.err.println("Database error");
+      rs.close();
+      statement.close();
+      fw.close();
     } catch (IOException e) {
-      System.err.println("File IO error");
+      throw new RuntimeException(e);
     }
+
+    connection.closeConnection();
   }
 }

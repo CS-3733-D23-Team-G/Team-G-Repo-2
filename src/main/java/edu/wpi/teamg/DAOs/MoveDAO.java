@@ -2,18 +2,12 @@ package edu.wpi.teamg.DAOs;
 
 import edu.wpi.teamg.DBConnection;
 import edu.wpi.teamg.ORMClasses.Move;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.io.*;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class MoveDAO implements LocationMoveDao {
   static DBConnection db = new DBConnection();
@@ -158,31 +152,49 @@ public class MoveDAO implements LocationMoveDao {
 
   @Override
   public void exportCSV() throws SQLException {
-    String csvFilePath = "Move.csv";
+    db.setConnection();
+    ResultSet rs = null;
+    FileWriter fw = null;
 
     try {
-      sql = "SELECT * FROM teamgdb.proto2.move";
-      PreparedStatement ps = db.getConnection().prepareStatement(sql);
-      ResultSet rs = ps.executeQuery(sql);
+      Statement statement = db.getConnection().createStatement();
+      rs = statement.executeQuery("select * from teamgdb.proto2.move");
 
-      BufferedWriter fileWriter = new BufferedWriter(new FileWriter(csvFilePath));
-      fileWriter.write("nodeid, longname, date");
-      while (rs.next()) {
-        int nodeID = rs.getInt("nodeid");
-        String longName = rs.getString("longname");
-        Date date = rs.getDate("date");
-        String line = String.format("\"%d\", %s, %t", nodeID, longName, date);
+      JFileChooser chooser = new JFileChooser();
+      FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV file", ".csv");
+      chooser.setFileFilter(filter);
 
-        fileWriter.newLine();
-        fileWriter.write(line);
+      int result = chooser.showSaveDialog(null);
+      if (result == JFileChooser.APPROVE_OPTION) {
+        File savedFile = chooser.getSelectedFile();
+        String path = savedFile.getAbsolutePath();
+        fw = new FileWriter(path);
+
+        int colCount = rs.getMetaData().getColumnCount();
+        for (int i = 1; i <= colCount; i++) {
+          String colLabel = rs.getMetaData().getColumnLabel(i);
+          fw.append(colLabel);
+          if (i < colCount) fw.append(",");
+        }
+        fw.append("\n");
+
+        while (rs.next()) {
+          for (int j = 1; j <= colCount; j++) {
+            String cellVal = rs.getString(j);
+            fw.append(cellVal);
+            if (j < colCount) fw.append(",");
+          }
+          fw.append("\n");
+        }
       }
-      db.closeConnection();
-      fileWriter.close();
 
-    } catch (SQLException e) {
-      System.err.println("Database error");
+      rs.close();
+      statement.close();
+      fw.close();
     } catch (IOException e) {
-      System.err.println("File IO error");
+      throw new RuntimeException(e);
     }
+
+    db.closeConnection();
   }
 }
