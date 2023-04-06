@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamg.controllers.SignageAdminController">
    <center>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -79,6 +79,9 @@
 
                   <Text disable="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Exit Application" />
                   <MFXButton fx:id="exitButton" opacity="0.0" prefHeight="27.0" prefWidth="97.0" text="Exit Application" />
+                  <Text disable="true" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Return to Home" />
+                  <Text disable="true" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Signage Page" />
+                  <Text disable="true" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Service Request Forms" />
 
                </children>
             </AnchorPane>
@@ -92,9 +95,6 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Text disable="true" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Return to Home" />
-                  <Text disable="true" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Signage Page" GridPane.columnIndex="2" />
-                  <Text disable="true" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Service Request Forms" GridPane.columnIndex="1" />
                   <MFXButton fx:id="backToHomeButton" opacity="0.45" prefHeight="50.0" prefWidth="199.0" text="Return to Home Button" />
                   <MFXButton fx:id="signagePageButton" opacity="0.31" prefHeight="50.0" prefWidth="198.0" text="Signage Page Button" GridPane.columnIndex="2" />
                   <ChoiceBox fx:id="serviceRequestChoiceBox" opacity="0.5" prefHeight="64.0" prefWidth="214.0" GridPane.columnIndex="1" />
