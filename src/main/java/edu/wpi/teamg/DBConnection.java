@@ -20,7 +20,7 @@ public class DBConnection {
       Class.forName("org.postgresql.Driver");
       connection =
           DriverManager.getConnection(
-              getDBCreds().get(0), getDBCreds().get(1), getDBCreds().get(2));
+              "jdbc:postgresql://database.cs.wpi.edu:5432/teamgdb", "teamg", "teamg70");
     } catch (SQLException e) {
       System.err.println("SQL Exception");
     } catch (ClassNotFoundException e) {
