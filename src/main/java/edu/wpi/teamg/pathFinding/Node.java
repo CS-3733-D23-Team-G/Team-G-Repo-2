@@ -30,6 +30,14 @@ public class Node {
     this.shortName = shortName;
   }
 
+  public Node(String NodeID, int nodeX, int nodeY, String floor, String building) {
+    this.NodeID = NodeID;
+    this.nodeX = nodeX;
+    this.nodeY = nodeY;
+    this.floor = floor;
+    this.building = building;
+  }
+
   public int getNodeX() {
     return nodeX;
   }

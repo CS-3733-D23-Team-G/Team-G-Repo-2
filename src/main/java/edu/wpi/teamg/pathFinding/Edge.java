@@ -27,4 +27,8 @@ public class Edge {
   public Node getStartNode() {
     return startNode;
   }
+
+  public String getEdgeID() {
+    return edgeID;
+  }
 }

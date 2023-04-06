@@ -19,7 +19,6 @@ public class EdgeDAO implements LocationDAO {
   @Override
   public HashMap<String, Edge> getAll() throws SQLException {
     connection.setConnection();
-    sql = "";
     PreparedStatement ps;
     ResultSet rs = null;
     sql = "Select * from teamgdb.proto2.edge";
@@ -40,9 +39,11 @@ public class EdgeDAO implements LocationDAO {
       int endNode = rs.getInt("endnode");
       edge.setEndNode(endNode);
 
+
       String edgeID = startNode + "_" + endNode;
 
       edge.setEdgeID(edgeID);
+
 
       edgeHash.put(edge.getEdgeID(), edge);
     }

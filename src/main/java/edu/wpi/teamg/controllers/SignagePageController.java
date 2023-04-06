@@ -1,5 +1,7 @@
 package edu.wpi.teamg.controllers;
 
+import edu.wpi.teamg.DAOs.EdgeDAO;
+import edu.wpi.teamg.DAOs.NodeDAO;
 import edu.wpi.teamg.Main;
 import edu.wpi.teamg.navigation.Navigation;
 import edu.wpi.teamg.navigation.Screen;
@@ -10,13 +12,14 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.HashMap;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import net.kurobako.gesturefx.GesturePane;
@@ -35,7 +38,7 @@ public class SignagePageController {
 
   @FXML MFXTextField endLoc;
 
-  @FXML MFXTextField results;
+  @FXML TextArea results;
 
   @FXML GesturePane pane;
 
@@ -93,60 +96,107 @@ public class SignagePageController {
 
   public void processAStarAlg() throws SQLException {
     ArrayList<String> path = new ArrayList<>();
-    //
-    //    NodeDAO nodeDAO = new NodeDAO();
-    //
-    //    List<edu.wpi.teamname.ORMClasses.Node> nodeList = nodeDAO.getAll();
-    /*
-    ArrayList<edu.wpi.teamname.ORMClass.Node> L1 = new ArrayList<>();
 
-    System.out.println(nodeList.get(0).getNodeID());
+    // ArrayList<edu.wpi.teamg.ORMClasses.Node> L1nodeKeys = new ArrayList<>();
+    // ArrayList<edu.wpi.teamg.ORMClasses.Node> L1edgeKeys = new ArrayList<>();
 
-    for (int i = 0; i < nodeList.size(); i++) {
-      if (Objects.equals(nodeList.get(i).getFloor(), "L1")) {
-        L1.add(nodeList.get(i));
+    NodeDAO nodeDAO = new NodeDAO();
+    EdgeDAO edgeDAO = new EdgeDAO();
+
+    HashMap<Integer, edu.wpi.teamg.ORMClasses.Node> nodeMap = nodeDAO.getAll();
+    HashMap<String, edu.wpi.teamg.ORMClasses.Edge> edgeMap = edgeDAO.getAll();
+
+    ArrayList<edu.wpi.teamg.ORMClasses.Node> L1nodes = new ArrayList<>(nodeMap.values());
+    ArrayList<edu.wpi.teamg.ORMClasses.Edge> L1edges = new ArrayList<>(edgeMap.values());
+
+    ArrayList<Node> L1NodeFinal = new ArrayList<>();
+    ArrayList<Edge> L1EdgeFinal = new ArrayList<>();
+
+    // L1nodes = (ArrayList<edu.wpi.teamg.ORMClasses.Node>) nodeMap.values();
+
+    for (int i = 0; i < L1nodes.size(); i++) {
+      if (L1nodes.get(i).getFloor().equals("L1")) {
+        L1NodeFinal.add(
+            new Node(
+                Integer.toString(L1nodes.get(i).getNodeID()),
+                L1nodes.get(i).getNodeX(),
+                L1nodes.get(i).getNodeY(),
+                L1nodes.get(i).getFloor(),
+                L1nodes.get(i).getBuilding()));
       }
     }
 
-    for (int i = 0; i < L1.size(); i++) {
-      System.out.println(L1.get(i).getFloor());
+    for (int i = 0; i < L1edges.size(); i++) {
+      // For each edge
+      // If the start and end node are both on floor 1
+      // Add edge to final edge array
+      // If only start and end node are on floor 1
+      // print out "error"
+
+      if ((nodeMap.get(L1edges.get(i).getStartNode())).getFloor().equals("L1")
+          && ((nodeMap.get(L1edges.get(i).getEndNode())).getFloor().equals("L1"))) {
+        edu.wpi.teamg.ORMClasses.Node currentS = new edu.wpi.teamg.ORMClasses.Node();
+        edu.wpi.teamg.ORMClasses.Node currentE = new edu.wpi.teamg.ORMClasses.Node();
+        currentS = nodeMap.get(L1edges.get(i).getStartNode());
+        currentE = nodeMap.get(L1edges.get(i).getEndNode());
+        L1EdgeFinal.add(
+            new Edge(
+                L1edges.get(i).getEdgeID(),
+                new Node(
+                    (Integer.toString(currentS.getNodeID())),
+                    currentS.getNodeX(),
+                    currentS.getNodeY(),
+                    currentS.getFloor(),
+                    currentS.getBuilding()),
+                new Node(
+                    (Integer.toString(currentE.getNodeID())),
+                    currentE.getNodeX(),
+                    currentE.getNodeY(),
+                    currentE.getFloor(),
+                    currentE.getBuilding())));
+      }
+      /*
+      CONDITIONALS FOR CONNECTING FLOORS
+      if (!Objects.equals(nodeMap.get(L1edges.get(i).getStartNode()).getFloor(), "L1")
+          && (nodeMap.get(L1edges.get(i).getEndNode()).getFloor()).equals("L1")) {
+        System.out.println("ERROR1234");
+      }
+      if ((nodeMap.get(L1edges.get(i).getStartNode()).getFloor()).equals("L1")
+          && !Objects.equals(nodeMap.get(L1edges.get(i).getEndNode()).getFloor(), "L1")) {
+        System.out.println("ERROR1234");
+      }
+
+       */
     }
 
-     */
+    String start = startLoc.getText();
+    String end = endLoc.getText();
 
-    int startNode = Integer.parseInt(startLoc.getText());
-    int endNode = Integer.parseInt(endLoc.getText());
-
-    Node[] N1 = new Node[10];
-    Random r = new Random(5591);
-    for (int i = 0; i < 10; i++) {
-      N1[i] =
-          new Node(
-              String.valueOf(i),
-              (int) r.nextInt(100) + i,
-              (int) r.nextInt(100) + i,
-              "L1",
-              "fsadfasd",
-              "dsfajd;",
-              "jk;ldsjf",
-              "dsfaj;sldk");
+    Node[] nodeArray = new Node[L1NodeFinal.size()];
+    for (int i = 0; i < L1NodeFinal.size(); i++) {
+      nodeArray[i] = L1NodeFinal.get(i);
     }
-    Edge[] E1 = new Edge[10];
-    E1[0] = new Edge("e1", N1[0], N1[1]);
-    E1[1] = new Edge("e2", N1[1], N1[2]);
-    E1[2] = new Edge("e3", N1[1], N1[3]);
-    E1[3] = new Edge("e4", N1[2], N1[4]);
-    E1[4] = new Edge("e5", N1[3], N1[4]);
-    E1[5] = new Edge("e6", N1[4], N1[5]);
-    E1[6] = new Edge("e7", N1[5], N1[6]);
-    E1[7] = new Edge("e8", N1[6], N1[7]);
-    E1[8] = new Edge("e9", N1[5], N1[8]);
-    E1[9] = new Edge("e10", N1[8], N1[9]);
-    Graph G1 = new Graph(N1, E1);
+    Edge[] edgeArray = new Edge[L1EdgeFinal.size()];
+    for (int i = 0; i < L1EdgeFinal.size(); i++) {
+      edgeArray[i] = L1EdgeFinal.get(i);
+    }
+
+    int startNode = 0;
+    int endNode = 0;
+    for (int i = 0; i < L1NodeFinal.size(); i++) {
+
+      if (nodeArray[i].getNodeID().equals(start)) {
+        startNode = i;
+      }
+      if (nodeArray[i].getNodeID().equals(end)) {
+        endNode = i;
+      }
+    }
+
+    Graph G1 = new Graph(nodeArray, edgeArray);
     int[][] Adj = G1.createWeightedAdj();
-    // new int[10][10];
 
-    path = G1.aStarAlg(G1.createWeightedAdj(), startNode, endNode);
+    path = G1.aStarAlg(Adj, startNode, endNode);
 
     setPath(path);
   }

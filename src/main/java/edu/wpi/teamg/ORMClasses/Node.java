@@ -12,4 +12,20 @@ public class Node extends LocationName {
   @Getter @Setter private String building;
 
   public Node() {}
+
+  public int getNodeX() {
+    return xcoord;
+  }
+
+  public int getNodeY() {
+    return ycoord;
+  }
+
+  public int getNodeID() {
+    return nodeID;
+  }
+
+  public String getFloor() {
+    return floor;
+  }
 }
