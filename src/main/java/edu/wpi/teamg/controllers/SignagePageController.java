@@ -18,6 +18,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import net.kurobako.gesturefx.GesturePane;
 
 public class SignagePageController {
@@ -68,6 +70,9 @@ public class SignagePageController {
     //    String imgPath = "/00_thelowerlevel1.png";
     //    Image map = new Image(getClass().getResourceAsStream(imgPath));
     //    ImageView image = new ImageView(map);
+    Image map = new Image("/edu/wpi/teamg/Images/00_thelowerlevel1.png");
+    ImageView mapView = new ImageView(map);
+    pane.setContent(mapView);
     // pane.setContent(image);
     // pane.setMaxScale();
     //  pane.setMinScale(.001);
