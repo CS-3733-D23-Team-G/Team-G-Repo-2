@@ -204,6 +204,5 @@ public class LocationNameDAO implements LocationDAO {
     }
 
     connection.closeConnection();
-
   }
 }

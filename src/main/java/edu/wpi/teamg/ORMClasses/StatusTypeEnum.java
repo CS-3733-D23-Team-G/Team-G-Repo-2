@@ -5,5 +5,4 @@ public enum StatusTypeEnum {
   processing,
 
   done;
-
 }

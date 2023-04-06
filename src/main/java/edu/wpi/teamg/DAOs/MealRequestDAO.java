@@ -50,7 +50,6 @@ public class MealRequestDAO implements DAO {
       int serv_by = rs.getInt("serv_by");
       mealReq.setServ_by(serv_by);
 
-
       StatusTypeEnum status = StatusTypeEnum.valueOf(rs.getString("status"));
 
       mealReq.setStatus(status);

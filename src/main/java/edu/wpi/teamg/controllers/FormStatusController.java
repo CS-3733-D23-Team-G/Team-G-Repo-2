@@ -147,7 +147,6 @@ public class FormStatusController {
           System.out.println("Purpose: " + m.getPurpose());
         });
 
-
     //    MealRequest testItem1 = new MealRequest();
     //    testItem1.setEmpid(2);
     //    testItem1.setReqid(1);
@@ -187,14 +186,12 @@ public class FormStatusController {
     //    testItem3.setMeeting_time(new Time(1, 2, 3));
     //    testItem3.setPurpose("To Work Please");
 
-
     testList = FXCollections.observableArrayList(request1);
     testMealList = FXCollections.observableArrayList(mealRequests1);
     testRoomList = FXCollections.observableArrayList(confroom);
     mainTable.setItems(testList);
     mealTable.setItems(testMealList);
     roomTable.setItems(testRoomList);
-
 
     reqID.setCellValueFactory(new PropertyValueFactory<>("reqid"));
     empID.setCellValueFactory(new PropertyValueFactory<>("empid"));
