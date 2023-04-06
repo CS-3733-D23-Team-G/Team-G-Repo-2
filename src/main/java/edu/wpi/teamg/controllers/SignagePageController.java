@@ -2,7 +2,6 @@ package edu.wpi.teamg.controllers;
 
 import edu.wpi.teamg.DAOs.EdgeDAO;
 import edu.wpi.teamg.DAOs.NodeDAO;
-import edu.wpi.teamg.Main;
 import edu.wpi.teamg.navigation.Navigation;
 import edu.wpi.teamg.navigation.Screen;
 import edu.wpi.teamg.pathFinding.Edge;
@@ -17,11 +16,8 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.geometry.Point2D;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import net.kurobako.gesturefx.GesturePane;
 
 public class SignagePageController {
@@ -69,13 +65,14 @@ public class SignagePageController {
 
     startLoc.getText();
     endLoc.getText();
-    String imgPath = Main.class.getResource("images/00_thelowerlevel1.png").toString();
-    ImageView image = new ImageView(new Image(imgPath));
-    pane.setContent(image);
+    //    String imgPath = "/00_thelowerlevel1.png";
+    //    Image map = new Image(getClass().getResourceAsStream(imgPath));
+    //    ImageView image = new ImageView(map);
+    // pane.setContent(image);
     // pane.setMaxScale();
-    pane.setMinScale(.001);
-    pane.zoomTo(.000001, new Point2D(2500, 1700));
-    pane.zoomTo(.000001, new Point2D(2500, 1700));
+    //  pane.setMinScale(.001);
+    // pane.zoomTo(.000001, new Point2D(2500, 1700));
+    //  pane.zoomTo(.000001, new Point2D(2500, 1700));
   }
 
   public void loadServiceRequestForm() {
