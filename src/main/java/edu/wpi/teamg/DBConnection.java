@@ -15,19 +15,23 @@ public class DBConnection {
   static Connection connection;
 
   public void setConnection() {
+
     try {
+      Class.forName("org.postgresql.Driver");
       connection =
           DriverManager.getConnection(
-              getDBCreds().get(0), getDBCreds().get(1), getDBCreds().get(2));
+              "jdbc:postgresql://database.cs.wpi.edu:5432/teamgdb", "teamg", "teamg70");
     } catch (SQLException e) {
       System.err.println("SQL Exception");
+    } catch (ClassNotFoundException e) {
+      throw new RuntimeException(e);
     }
   }
 
   private List<String> getDBCreds() {
     List<String> creds = new LinkedList<>();
     try {
-      InputStream is = new FileInputStream("creds.yml");
+      InputStream is = new FileInputStream(getClass().getResource("creds.yml").getFile());
       Yaml yaml = new Yaml();
       Map<String, Object> data = yaml.load(is);
       creds.add(data.get("url").toString());
