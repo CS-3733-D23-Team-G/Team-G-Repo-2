@@ -13,7 +13,6 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Random;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -170,9 +169,8 @@ public class SignagePageController {
        */
     }
 
-    int startNode = Integer.parseInt(startLoc.getText());
-    int endNode = Integer.parseInt(endLoc.getText());
-
+    String start = startLoc.getText();
+    String end = endLoc.getText();
 
     Node[] nodeArray = new Node[L1NodeFinal.size()];
     for (int i = 0; i < L1NodeFinal.size(); i++) {
@@ -183,9 +181,20 @@ public class SignagePageController {
       edgeArray[i] = L1EdgeFinal.get(i);
     }
 
+    int startNode = 0;
+    int endNode = 0;
+    for (int i = 0; i < L1NodeFinal.size(); i++) {
+
+      if (nodeArray[i].getNodeID().equals(start)) {
+        startNode = i;
+      }
+      if (nodeArray[i].getNodeID().equals(end)) {
+        endNode = i;
+      }
+    }
+
     Graph G1 = new Graph(nodeArray, edgeArray);
     int[][] Adj = G1.createWeightedAdj();
-
 
     path = G1.aStarAlg(Adj, startNode, endNode);
 
