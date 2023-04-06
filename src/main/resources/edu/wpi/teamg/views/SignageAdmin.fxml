@@ -1,66 +1,112 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
-<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
-<?import net.kurobako.gesturefx.GesturePane?>
 
-<VBox xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamg.controllers.SignageAdminController">
-   <children>
-      <HBox alignment="TOP_CENTER" maxHeight="-Infinity" prefHeight="25.0" prefWidth="600.0" style="-fx-background-color: #f1f1f1;" VBox.vgrow="ALWAYS">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
          <children>
-            <AnchorPane prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: #f1f1f1;">
+            <TableView fx:id="moveTable" prefHeight="291.0" prefWidth="437.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+               <columns>
+                  <TableColumn fx:id="moveNodeID" prefWidth="55.0" text="NodeID" />
+                  <TableColumn fx:id="moveDate" prefWidth="55.0" text="Date" />
+                  <TableColumn fx:id="moveLongName" prefWidth="55.0" text="LongName" />
+               </columns>
+            </TableView>
+            <TableView fx:id="edgeTable" prefHeight="291.0" prefWidth="437.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+               <columns>
+                  <TableColumn fx:id="edgeEdgeID" prefWidth="55.0" text="EdgeID" />
+                  <TableColumn fx:id="edgeEndNode" prefWidth="55.0" text="EndNode" />
+                  <TableColumn fx:id="edgeStartNode" prefWidth="55.0" text="StartNode" />
+               </columns>
+            </TableView>
+            <TableView fx:id="nodeLocTable" prefHeight="291.0" prefWidth="437.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+               <columns>
+                  <TableColumn fx:id="locLongName" prefWidth="55.0" text="LongName" />
+                  <TableColumn fx:id="locShortName" prefWidth="55.0" text="ShortName" />
+                  <TableColumn fx:id="locNodeType" prefWidth="60.0" text="NodeType" />
+               </columns>
+            </TableView>
+            <TableView fx:id="nodeTable" prefHeight="291.0" prefWidth="437.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+               <columns>
+                  <TableColumn fx:id="nodeNodeID" prefWidth="55.0" text="NodeID" />
+                  <TableColumn fx:id="nodeXcoord" prefWidth="55.0" text="x-coord" />
+                  <TableColumn fx:id="nodeYcoord" prefWidth="60.0" text="y-coord" />
+                  <TableColumn fx:id="nodeFloor" prefWidth="50.0" text="floor" />
+                  <TableColumn fx:id="nodeBuilding" prefWidth="55.0" text="building" />
+               </columns>
+            </TableView>
+         </children>
+      </GridPane>
+   </center>
+   <left>
+      <AnchorPane prefHeight="200.0" prefWidth="130.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="nodes" layoutX="15.0" layoutY="51.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="100.0" text="Nodes" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="50.0" />
+            <Button fx:id="edges" layoutX="15.0" layoutY="91.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="97.0" text="Edges" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="85.0" />
+            <Button fx:id="nodeLoc" layoutX="15.0" layoutY="117.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="97.0" text="NodeLoc" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="120.0" />
+            <Button fx:id="move" layoutX="17.0" layoutY="14.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="97.0" text="Move" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0" />
+            <Button fx:id="imp" layoutX="25.0" layoutY="165.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="97.0" text="Import" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="185.0" />
+            <Label fx:id="fileLabel" layoutX="57.0" layoutY="227.0" text="file" AnchorPane.leftAnchor="57.0" AnchorPane.rightAnchor="57.0" AnchorPane.topAnchor="227.0" />
+            <Button fx:id="export" layoutX="18.0" layoutY="139.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="97.0" text="Export" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="155.0" />
+            <TextArea fx:id="areaInfo" layoutY="259.0" prefHeight="37.0" prefWidth="100.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="259.0" />
+         </children>
+      </AnchorPane>
+   </left>
+   <top>
+      <VBox style="-fx-background-color: #F1F1F1;" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="top_banner">
                <children>
-                  <Text disable="true" layoutX="504.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exit Application" />
-                  <MFXButton fx:id="exitButton" contentDisplay="RIGHT" layoutX="496.0" opacity="0.0" prefHeight="27.0" prefWidth="97.0" text="Exit Application" />
+
+                  <Text disable="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Exit Application" />
+                  <MFXButton fx:id="exitButton" opacity="0.0" prefHeight="27.0" prefWidth="97.0" text="Exit Application" />
+
+                  <ChoiceBox fx:id="importDrop" layoutX="34.0" layoutY="305.0" prefHeight="26.0" prefWidth="84.0" />
+                  <ChoiceBox fx:id="exportDrop" layoutX="124.0" layoutY="305.0" prefHeight="26.0" prefWidth="75.0" />
+
                </children>
             </AnchorPane>
-         </children>
-      </HBox>
-      <HBox alignment="CENTER" maxHeight="-Infinity" prefHeight="50.0" prefWidth="600.0" style="-fx-background-color: #012d5a;" VBox.vgrow="ALWAYS">
-         <children>
-            <AnchorPane prefHeight="300.0" prefWidth="600.0">
+            <GridPane alignment="CENTER" gridLinesVisible="true" styleClass="banner" VBox.vgrow="ALWAYS">
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
                <children>
-                  <MFXButton fx:id="backToHomeButton" opacity="0.0" prefHeight="64.0" prefWidth="167.0" text="Return to Home Button" />
-                  <MFXButton fx:id="signagePageButton" layoutX="433.0" opacity="0.0" prefHeight="64.0" prefWidth="167.0" text="Signage Page Button" />
-                  <Line endX="48.0" endY="-163.5" layoutX="126.0" layoutY="173.0" startX="48.0" startY="-119.5" stroke="#345871" strokeWidth="2.0" />
-                  <Line endX="48.0" endY="-163.5" layoutX="379.0" layoutY="173.0" startX="48.0" startY="-120.5" stroke="#345871" strokeWidth="2.0" />
-                  <Text disable="true" fill="WHITE" layoutX="479.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Signage Page" />
-                  <Text disable="true" fill="WHITE" layoutX="24.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Return to Home" />
-                  <Text disable="true" fill="WHITE" layoutX="240.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service Request Forms" />
-                  <ChoiceBox fx:id="serviceRequestChoiceBox" layoutX="193.0" opacity="0.0" prefHeight="64.0" prefWidth="214.0" />
+                  <MFXButton fx:id="backToHomeButton" opacity="0.0" prefHeight="50.0" prefWidth="199.0" text="Return to Home Button" />
+                  <MFXButton fx:id="signagePageButton" opacity="0.0" prefHeight="50.0" prefWidth="198.0" text="Signage Page Button" GridPane.columnIndex="2" />
+                  <ChoiceBox fx:id="serviceRequestChoiceBox" opacity="0.0" prefHeight="64.0" prefWidth="214.0" GridPane.columnIndex="1" />
+                  <Text disable="true" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Return to Home" />
+                  <Text disable="true" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Signage Page" GridPane.columnIndex="2" />
+                  <Text disable="true" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Service Request Forms" GridPane.columnIndex="1" />
                </children>
-            </AnchorPane>
+            </GridPane>
          </children>
-      </HBox>
-      <HBox alignment="BOTTOM_CENTER" style="-fx-background-color: #f1f1f1;" VBox.vgrow="ALWAYS">
-         <children>
-            <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #f1f1f1;">
-               <children>
-                  <GesturePane fx:id="pane" layoutX="280.0" layoutY="55.0" prefHeight="566.0" prefWidth="832.0" />
-                  <MFXTextField fx:id="startLoc" layoutX="28.0" layoutY="49.0" maxHeight="45.0" minHeight="30.0" prefHeight="30.0" prefWidth="167.0" />
-                  <Text layoutX="28.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Starting Location:" />
-                  <TextArea editable="false" layoutX="46.0" layoutY="382.0" prefHeight="77.0" prefWidth="131.0" text="&lt;-- Information Desk&#10;&lt;-- Emergency Room&#10;--&gt; Ultrasound Labs&#10;--&gt; Restrooms" />
-                  <MFXTextField fx:id="endLoc" layoutX="28.0" layoutY="120.0" maxHeight="45.0" minHeight="30.0" prefHeight="30.0" prefWidth="167.0" />
-                  <Text layoutX="30.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ending Location:" />
-                  <MFXButton fx:id="pathFindButton" layoutX="28.0" layoutY="180.0" prefHeight="25.0" prefWidth="167.0" style="-fx-background-color: White;" text="Get Path" />
-                  <MFXButton layoutX="483.0" layoutY="31.0" prefHeight="25.0" prefWidth="167.0" style="-fx-background-color: White;" text="Floor 2" />
-                  <MFXButton layoutX="280.0" layoutY="31.0" prefHeight="25.0" prefWidth="167.0" style="-fx-background-color: White;" text="Floor 1" />
-                  <MFXButton layoutX="706.0" layoutY="31.0" prefHeight="25.0" prefWidth="167.0" style="-fx-background-color: White;" text="Floor 3" />
-                  <MFXButton layoutX="914.0" layoutY="31.0" prefHeight="25.0" prefWidth="167.0" style="-fx-background-color: White;" text="Floor 4" />
-                  <MFXTextField fx:id="results" layoutX="32.0" layoutY="239.0" prefHeight="37.0" prefWidth="167.0" />
-                  <MFXButton fx:id="importButton" layoutX="28.0" layoutY="311.0" prefHeight="25.0" prefWidth="131.0" text="Import Button" />
-                  <Label fx:id="fileLabel" layoutX="29.0" layoutY="341.0" prefHeight="17.0" prefWidth="144.0" />
-               </children>
-            </AnchorPane>
-         </children>
-      </HBox>
-   </children>
-</VBox>
+      </VBox>
+   </top>
+</BorderPane>
