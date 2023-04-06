@@ -2,6 +2,8 @@ package edu.wpi.teamg.DAOs;
 
 import edu.wpi.teamg.DBConnection;
 import edu.wpi.teamg.ORMClasses.Request;
+import edu.wpi.teamg.ORMClasses.StatusTypeEnum;
+
 import java.sql.*;
 import java.util.HashMap;
 
@@ -53,8 +55,7 @@ public class RequestDAO implements DAO {
       int empID = rs_meal.getInt("empid");
       int location = rs_meal.getInt("location");
       int serv_by = rs_meal.getInt("serv_by");
-      String status = rs_meal.getString("status");
-
+      StatusTypeEnum status = StatusTypeEnum.valueOf(rs_meal.getString("status"));
       Date deliverydate = rs_meal.getDate("deliverydate");
       Time deliverytime = rs_meal.getTime("deliverytime");
 
@@ -71,15 +72,7 @@ public class RequestDAO implements DAO {
       cReq.setEmpid(empID);
       cReq.setServ_by(serv_by);
       cReq.setStatus(status);
-      cReq.setDeliveryDate(deliverydate);
-      cReq.setDeliveryTime(deliverytime);
-      cReq.setOrder(mealorder);
-      cReq.setRecipient(recipient);
-      cReq.setNote(note);
 
-      cReq.setMeeting_date(meetingdate);
-      cReq.setMeeting_time(meetingtime);
-      cReq.setPurpose(purpose);
 
       requestHash.put(reqID, cReq);
     }

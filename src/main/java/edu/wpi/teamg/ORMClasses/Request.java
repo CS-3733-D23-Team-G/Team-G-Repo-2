@@ -1,7 +1,5 @@
 package edu.wpi.teamg.ORMClasses;
 
-import java.sql.Date;
-import java.sql.Time;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,5 +11,4 @@ public class Request {
   @Getter @Setter private int serv_by;
 
   @Getter @Setter private StatusTypeEnum status;
-
 }

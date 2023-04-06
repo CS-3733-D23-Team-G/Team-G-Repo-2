@@ -1,14 +1,7 @@
 package edu.wpi.teamg.controllers;
 
-
-import edu.wpi.teamg.DAOs.EdgeDAO;
-import edu.wpi.teamg.DAOs.LocationNameDAO;
-import edu.wpi.teamg.DAOs.MoveDAO;
-import edu.wpi.teamg.DAOs.NodeDAO;
+import edu.wpi.teamg.DAOs.*;
 import edu.wpi.teamg.ORMClasses.*;
-
-import edu.wpi.teamg.Main;
-
 import edu.wpi.teamg.navigation.Navigation;
 import edu.wpi.teamg.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
@@ -20,15 +13,9 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-
-import javafx.geometry.Point2D;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 
 public class SignageAdminController {
@@ -45,10 +32,8 @@ public class SignageAdminController {
   @FXML MFXTextField results;
   //  @FXML GesturePane pane;
 
-
   @FXML ChoiceBox<String> importDrop;
   @FXML ChoiceBox<String> exportDrop;
-
 
   @FXML Button imp;
   // @FXML MFXButton export;
@@ -125,16 +110,16 @@ public class SignageAdminController {
         });
     // fileLabel.getText();
 
-    pathFindButton.setOnMouseClicked(
-        event -> {
-          try {
-            processAStarAlg();
-          } catch (SQLException e) {
-            throw new RuntimeException(e);
-          }
-        });
+    /*pathFindButton.setOnMouseClicked(
+       event -> {
+         try {
+           processAStarAlg();
+         } catch (SQLException e) {
+           throw new RuntimeException(e);
+         }
+       });
 
-     */
+    */
 
     // startLoc.getText();
     // endLoc.getText();
