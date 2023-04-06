@@ -72,7 +72,13 @@ public class SignageAdminController {
     serviceRequestChoiceBox.setOnAction(event -> loadServiceRequestForm());
     importDrop.setOnAction(event -> fileChooser());
     exportDrop.setOnAction(
-        event -> fileChooser()); // TODO change to an export method that pushes to downloads
+        event -> {
+          try {
+            fileExporter();
+          } catch (SQLException e) {
+            throw new RuntimeException(e);
+          }
+        });
     // fileLabel.getText();
     pathFindButton.setOnMouseClicked(
         event -> {
@@ -196,6 +202,18 @@ public class SignageAdminController {
             throw new RuntimeException(e);
           }
         }
+        break;
+      default:
+        break;
+    }
+  }
+
+  @FXML
+  void fileExporter() throws SQLException {
+    switch (exportDrop.getValue()) {
+      case "Nodes":
+        NodeDAO nodeDao = new NodeDAO();
+        nodeDao.exportCSV();
         break;
       default:
         break;
