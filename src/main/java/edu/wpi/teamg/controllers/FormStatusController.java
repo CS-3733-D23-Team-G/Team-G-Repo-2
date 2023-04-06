@@ -5,7 +5,11 @@ import edu.wpi.teamg.DAOs.MealRequestDAO;
 import edu.wpi.teamg.DAOs.RequestDAO;
 import edu.wpi.teamg.ORMClasses.ConferenceRoomRequest;
 import edu.wpi.teamg.ORMClasses.MealRequest;
+
 import edu.wpi.teamg.ORMClasses.Request;
+
+import edu.wpi.teamg.ORMClasses.StatusTypeEnum;
+
 import edu.wpi.teamg.navigation.Navigation;
 import edu.wpi.teamg.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
@@ -152,7 +156,7 @@ public class FormStatusController {
     testItem1.setReqid(1);
     testItem1.setLocation(3);
     testItem1.setServ_by(2);
-    testItem1.setStatus("Status");
+    testItem1.setStatus(StatusTypeEnum.blank);
     testItem1.setRecipient("Andrew");
     testItem1.setOrder("Food");
     testItem1.setNote("Please Let This Work");

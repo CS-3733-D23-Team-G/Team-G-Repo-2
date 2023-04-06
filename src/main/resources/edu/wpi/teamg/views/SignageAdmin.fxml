@@ -3,9 +3,11 @@
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -77,8 +79,13 @@
          <children>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="top_banner">
                <children>
+
                   <Text disable="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Exit Application" />
                   <MFXButton fx:id="exitButton" opacity="0.0" prefHeight="27.0" prefWidth="97.0" text="Exit Application" />
+
+                  <ChoiceBox fx:id="importDrop" layoutX="34.0" layoutY="305.0" prefHeight="26.0" prefWidth="84.0" />
+                  <ChoiceBox fx:id="exportDrop" layoutX="124.0" layoutY="305.0" prefHeight="26.0" prefWidth="75.0" />
+
                </children>
             </AnchorPane>
             <GridPane alignment="CENTER" gridLinesVisible="true" styleClass="banner" VBox.vgrow="ALWAYS">

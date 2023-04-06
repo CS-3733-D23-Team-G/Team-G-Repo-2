@@ -2,12 +2,12 @@ package edu.wpi.teamg.DAOs;
 
 import edu.wpi.teamg.DBConnection;
 import edu.wpi.teamg.ORMClasses.Move;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.io.*;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class MoveDAO implements LocationMoveDao {
   static DBConnection db = new DBConnection();
@@ -103,10 +103,98 @@ public class MoveDAO implements LocationMoveDao {
 
   @Override
   public void importCSV(String filePath) throws SQLException {
-
     db.setConnection();
+    sql = "insert into teamgdb.proto2.move (nodeid, longname, date) values (?,?,?)";
+    PreparedStatement ps = db.getConnection().prepareStatement(sql);
+    try {
+      BufferedReader br = new BufferedReader(new FileReader(filePath));
+      String line = null;
+
+      br.readLine();
+      while ((line = br.readLine()) != null) {
+        String[] data = line.split(",");
+
+        String nodeID = data[0];
+        String longname = data[1];
+        String dateString = data[2];
+
+        int inodeid = Integer.parseInt(nodeID);
+        ps.setInt(1, inodeid);
+
+        ps.setString(2, longname);
+
+        ps.setDate(3, stringToDate(dateString));
+
+        ps.addBatch();
+      }
+      br.close();
+      ps.executeBatch();
+
+    } catch (FileNotFoundException e) {
+      System.err.println("File not found");
+      e.printStackTrace();
+    } catch (IOException e) {
+      System.err.println("Input output exception");
+      e.printStackTrace();
+    } catch (SQLException e) {
+      System.err.println("SQL exception");
+      e.printStackTrace();
+    }
+    db.closeConnection();
+  }
+
+  public Date stringToDate(String input) {
+    String[] data = input.split("/");
+    Date returnDate =
+        new Date(Integer.parseInt(data[2]), Integer.parseInt(data[1]), Integer.parseInt(data[0]));
+    return returnDate;
   }
 
   @Override
-  public void exportCSV() throws SQLException {}
+  public void exportCSV() throws SQLException {
+    db.setConnection();
+    ResultSet rs = null;
+    FileWriter fw = null;
+
+    try {
+      Statement statement = db.getConnection().createStatement();
+      rs = statement.executeQuery("select * from teamgdb.proto2.move");
+
+      JFileChooser chooser = new JFileChooser();
+      FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV file", ".csv");
+      chooser.setFileFilter(filter);
+
+      int result = chooser.showSaveDialog(null);
+      if (result == JFileChooser.APPROVE_OPTION) {
+        File savedFile = chooser.getSelectedFile();
+        String path = savedFile.getAbsolutePath();
+        fw = new FileWriter(path);
+
+        int colCount = rs.getMetaData().getColumnCount();
+        for (int i = 1; i <= colCount; i++) {
+          String colLabel = rs.getMetaData().getColumnLabel(i);
+          fw.append(colLabel);
+          if (i < colCount) fw.append(",");
+        }
+        fw.append("\n");
+
+        while (rs.next()) {
+          for (int j = 1; j <= colCount; j++) {
+            String cellVal = rs.getString(j);
+            fw.append(cellVal);
+            if (j < colCount) fw.append(",");
+          }
+          fw.append("\n");
+        }
+      }
+
+      rs.close();
+      statement.close();
+      fw.close();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+
+    db.closeConnection();
+  }
 }

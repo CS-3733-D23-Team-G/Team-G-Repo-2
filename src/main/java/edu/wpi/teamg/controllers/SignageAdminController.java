@@ -1,10 +1,14 @@
 package edu.wpi.teamg.controllers;
 
+
 import edu.wpi.teamg.DAOs.EdgeDAO;
 import edu.wpi.teamg.DAOs.LocationNameDAO;
 import edu.wpi.teamg.DAOs.MoveDAO;
 import edu.wpi.teamg.DAOs.NodeDAO;
 import edu.wpi.teamg.ORMClasses.*;
+
+import edu.wpi.teamg.Main;
+
 import edu.wpi.teamg.navigation.Navigation;
 import edu.wpi.teamg.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
@@ -16,8 +20,15 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+
+import javafx.geometry.Point2D;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 import javafx.stage.FileChooser;
 
 public class SignageAdminController {
@@ -26,12 +37,18 @@ public class SignageAdminController {
   @FXML ChoiceBox<String> serviceRequestChoiceBox;
   @FXML MFXButton signagePageButton;
   @FXML MFXButton exitButton;
+
   // @FXML MFXButton pathFindButton;
   @FXML Label fileLabel;
   // @FXML MFXTextField startLoc;
   // @FXML MFXTextField endLoc;
   @FXML MFXTextField results;
   //  @FXML GesturePane pane;
+
+
+  @FXML ChoiceBox<String> importDrop;
+  @FXML ChoiceBox<String> exportDrop;
+
 
   @FXML Button imp;
   // @FXML MFXButton export;
@@ -79,17 +96,35 @@ public class SignageAdminController {
           "Meal Request Form",
           "Office Supplies Request Form");
 
+  ObservableList<String> importList =
+      FXCollections.observableArrayList("Nodes", "Edges", "LocationName", "Moves");
+
+  ObservableList<String> exportList =
+      FXCollections.observableArrayList("Nodes", "Edges", "LocationName", "Moves");
+
   @FXML
   public void initialize() throws SQLException {
     serviceRequestChoiceBox.setItems(list);
+    importDrop.setItems(importList);
+    exportDrop.setItems(exportList);
     signagePageButton.setOnMouseClicked(event -> Navigation.navigate(Screen.SIGNAGE_PAGE));
     backToHomeButton.setOnMouseClicked(event -> Navigation.navigate(Screen.HOME));
     exitButton.setOnMouseClicked(event -> exit());
-    imp.setOnAction(event -> fileChooser());
-    fileLabel.getText();
-    serviceRequestChoiceBox.setOnAction(event -> loadServiceRequestForm());
 
-    /*
+    // importButton.setOnAction(event -> fileChooser());
+
+    serviceRequestChoiceBox.setOnAction(event -> loadServiceRequestForm());
+    importDrop.setOnAction(event -> fileChooser());
+    exportDrop.setOnAction(
+        event -> {
+          try {
+            fileExporter();
+          } catch (SQLException e) {
+            throw new RuntimeException(e);
+          }
+        });
+    // fileLabel.getText();
+
     pathFindButton.setOnMouseClicked(
         event -> {
           try {
@@ -156,18 +191,24 @@ public class SignageAdminController {
   }
 
   public void loadServiceRequestForm() {
-    if (serviceRequestChoiceBox.getValue().equals("Meal Request Form")) {
-      Navigation.navigate(Screen.MEAL_REQUEST);
-    } else if (serviceRequestChoiceBox.getValue().equals("Furniture Request Form")) {
-      Navigation.navigate(Screen.FURNITURE_REQUEST);
-    } else if (serviceRequestChoiceBox.getValue().equals("Conference Room Request Form")) {
-      Navigation.navigate(Screen.ROOM_REQUEST);
-    } else if (serviceRequestChoiceBox.getValue().equals("Flowers Request Form")) {
-      Navigation.navigate(Screen.FLOWERS_REQUEST);
-    } else if (serviceRequestChoiceBox.getValue().equals("Office Supplies Request Form")) {
-      Navigation.navigate(Screen.SUPPLIES_REQUEST);
-    } else {
-      return;
+    switch (serviceRequestChoiceBox.getValue()) {
+      case "Meal Request Form":
+        Navigation.navigate(Screen.MEAL_REQUEST);
+        break;
+      case "Furniture Request Form":
+        Navigation.navigate(Screen.FURNITURE_REQUEST);
+        break;
+      case "Conference Room Request Form":
+        Navigation.navigate(Screen.ROOM_REQUEST);
+        break;
+      case "Flowers Request Form":
+        Navigation.navigate(Screen.FLOWERS_REQUEST);
+        break;
+      case "Office Supplies Request Form":
+        Navigation.navigate(Screen.SUPPLIES_REQUEST);
+        break;
+      default:
+        return;
     }
   }
 
@@ -217,25 +258,69 @@ public class SignageAdminController {
     setPath(path);
   }
 
-   */
+  /*ObservableList<String>  =
+            FXCollections.observableArrayList(
+                    "Conference Room Request Form",
+                    "Flowers Request Form",
+                    "Furniture Request Form",
+                    "Meal Request Form",
+                    "Office Supplies Request Form");
+  */
 
   @FXML
   void fileChooser() {
-    FileChooser fc = new FileChooser();
+    switch (importDrop.getValue()) {
+      case "Nodes":
+        NodeDAO nodeDAO = new NodeDAO();
+        chooserHelper(nodeDAO);
+        break;
+      case "Edges":
+        EdgeDAO edgeDAO = new EdgeDAO();
+        chooserHelper(edgeDAO);
+        break;
+      case "LocationName":
+        LocationNameDAO locationNameDAO = new LocationNameDAO();
+        chooserHelper(locationNameDAO);
+        break;
+      case "Moves":
+        MoveDAO moveDAO = new MoveDAO();
+        FileChooser fc = new FileChooser();
+        fc.getExtensionFilters()
+            .add(new FileChooser.ExtensionFilter("Comma Seperated Values", "*.csv"));
+        File f = fc.showOpenDialog(null);
+        if (f != null) {
+          try {
+            moveDAO.importCSV(f.getAbsolutePath());
+          } catch (SQLException e) {
+            throw new RuntimeException(e);
+          }
+        }
+        break;
+      default:
+        break;
+    }
+  }
 
-    NodeDAO nodeDAO = new NodeDAO();
-
-    fc.getExtensionFilters()
-        .add(new FileChooser.ExtensionFilter("Comma Separated Values", "*.csv"));
-    File f = fc.showOpenDialog(null);
-
-    if (f != null) {
-      fileLabel.setText("Selected File::" + f.getAbsolutePath());
-      try {
-        nodeDAO.importCSV(f.getAbsolutePath());
-      } catch (SQLException e) {
-        e.printStackTrace();
-      }
+  @FXML
+  void fileExporter() throws SQLException {
+    switch (exportDrop.getValue()) {
+      case "Nodes":
+        NodeDAO nodeDao = new NodeDAO();
+        nodeDao.exportCSV();
+        break;
+      case "Edges":
+        EdgeDAO edgeDao = new EdgeDAO();
+        edgeDao.exportCSV();
+        break;
+      case "LocationName":
+        LocationNameDAO lNameDao = new LocationNameDAO();
+        lNameDao.exportCSV();
+        break;
+      case "Moves":
+        MoveDAO moveDao = new MoveDAO();
+        moveDao.exportCSV();
+      default:
+        break;
     }
   }
 
@@ -312,5 +397,21 @@ public class SignageAdminController {
 
   public void exit() {
     Platform.exit();
+  }
+
+  void chooserHelper(
+      LocationDAO dao) { // note because of move dao's uniqueness, this won't use that
+    FileChooser fc = new FileChooser();
+    fc.getExtensionFilters()
+        .add(new FileChooser.ExtensionFilter("Comma Seperated Values", "*.csv"));
+    File f = fc.showOpenDialog(null);
+    if (f != null) {
+      // fileLabel.setText("Selected File::" + f.getAbsolutePath());
+      try {
+        dao.importCSV(f.getAbsolutePath());
+      } catch (SQLException e) {
+        throw new RuntimeException(e);
+      }
+    }
   }
 }
